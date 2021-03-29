@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <!-- Base Define -->
+    <definition name="base.definition"
+                template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/templates/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/templates/menu.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/footer.jsp" />
+    </definition>
+
+    <!-- Home Page -->
+    <definition name="homePage" extends="base.definition">
+        <put-attribute name="title" value="Home Page" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/index.jsp" />
+    </definition>
+
+    <!-- ContactUs Page -->
+    <definition name="createBacSi" extends="base.definition">
+        <put-attribute name="title" value="Create" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/create.jsp" />
+    </definition>
+
+    <definition name="admin.definition" template="/WEB-INF/views/tiles/layouts/adminLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="navbar" value="/WEB-INF/views/tiles/templates/admin/navbar.jsp" />
+        <put-attribute name="sidebar" value="/WEB-INF/views/tiles/templates/admin/sidebar.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/admin/footer.jsp" />
+    </definition>
+
+    <definition name="admin.index" extends="admin.definition">
+        <put-attribute name="title" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/index.jsp" />
+    </definition>
+
+
+</tiles-definitions>
