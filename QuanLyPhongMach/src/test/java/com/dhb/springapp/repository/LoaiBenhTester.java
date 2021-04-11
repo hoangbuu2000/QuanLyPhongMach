@@ -2,7 +2,7 @@ package com.dhb.springapp.repository;
 
 import com.dhb.springapp.models.LoaiBenh;
 import com.dhb.springapp.repository.implement.LoaiBenhRepository;
-import com.dhb.springapp.repository.implement.Order;
+import com.dhb.springapp.enums.Order;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 

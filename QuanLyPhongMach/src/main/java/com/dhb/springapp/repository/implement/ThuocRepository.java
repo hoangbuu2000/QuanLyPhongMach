@@ -1,8 +1,10 @@
 package com.dhb.springapp.repository.implement;
 
 import com.dhb.springapp.models.Thuoc;
+import com.dhb.springapp.repository.IThuocRepository;
 import org.hibernate.HibernateError;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,8 +12,9 @@ import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
 
-
-public class ThuocRepository extends GenericRepository<Thuoc> {
+@Repository
+public class ThuocRepository extends GenericRepository<Thuoc> implements IThuocRepository {
+    @Override
     public List<Thuoc> getThuocTheoTen(String ten) {
         try {
             Query q = currentSession().createQuery("From Thuoc where tenThuoc like concat('%', :t, '%') ").setParameter("t", ten);
@@ -22,6 +25,7 @@ public class ThuocRepository extends GenericRepository<Thuoc> {
         }
     }
 
+    @Override
     public List<Thuoc> getThuocTheoDonGia(BigDecimal from, BigDecimal to) {
         try {
             CriteriaBuilder builder = currentSession().getCriteriaBuilder();
@@ -39,6 +43,7 @@ public class ThuocRepository extends GenericRepository<Thuoc> {
         }
     }
 
+    @Override
     public List<Thuoc> getThuocTheoMoTa(String description) {
         try {
             Query q = currentSession().createQuery("From Thuoc where moTa like concat('%', :des, '%')")
@@ -50,6 +55,7 @@ public class ThuocRepository extends GenericRepository<Thuoc> {
         }
     }
 
+    @Override
     public List<Thuoc> getThuocTheoDonVi(String unit) {
         try {
             Query q = currentSession().createQuery("From Thuoc where donVi like concat('%', :unit, '%')")

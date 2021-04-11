@@ -13,8 +13,11 @@ public class TaiKhoan implements Serializable {
     private String username;
     @Column(name = "MatKhau")
     private String password;
-    @Column(name = "ChucVu")
-    private String chucVu;
+    @Column(name = "Active")
+    private boolean active;
+    @ManyToOne
+    @JoinColumn(name = "MaRole")
+    private Role role;
     @OneToOne(mappedBy = "taiKhoan", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private BacSi bacSi;
@@ -49,12 +52,12 @@ public class TaiKhoan implements Serializable {
         this.password = password;
     }
 
-    public String getChucVu() {
-        return chucVu;
+    public Role getRole() {
+        return role;
     }
 
-    public void setChucVu(String chucVu) {
-        this.chucVu = chucVu;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public BacSi getBacSi() {
@@ -79,5 +82,13 @@ public class TaiKhoan implements Serializable {
 
     public void setAdmin(Admin admin) {
         this.admin = admin;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

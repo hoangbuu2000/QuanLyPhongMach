@@ -1,23 +1,24 @@
 package com.dhb.springapp.controllers;
 
 import com.dhb.springapp.models.BacSi;
-import com.dhb.springapp.repository.implement.Order;
 import com.dhb.springapp.service.IBacSiService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller("home")
 @RequestMapping("/")
 public class HomeController {
-    @Autowired
-    IBacSiService iBacSiService;
+//    @Autowired
+//    IBacSiService iBacSiService;
 
     @RequestMapping()
     public String index(ModelMap model) {
-        model.addAttribute("bacsi", iBacSiService.getAll(BacSi.class));
+//        model.addAttribute("bacsi", iBacSiService.getAll(BacSi.class));
 
 //            Query query = session.createSQLQuery(
 //                    "CALL getBacSiById(:id)")

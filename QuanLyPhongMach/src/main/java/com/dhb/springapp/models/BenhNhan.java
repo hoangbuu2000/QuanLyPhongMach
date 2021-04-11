@@ -1,5 +1,6 @@
 package com.dhb.springapp.models;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,12 +16,16 @@ public class BenhNhan implements Serializable {
     private String ho;
     @Column(name = "Ten", length = 45, nullable = false)
     private String ten;
+    @Column(name = "Tuoi")
+    private int tuoi;
     @Column(name = "GioiTinh", length = 10, nullable = false)
     private String gioiTinh;
     @Column(name = "NgaySinh", nullable = false)
     private Date ngaySinh;
     @Column(name = "DienThoai", length = 10, nullable = false)
     private String dienThoai;
+    @Column(name = "Email")
+    private String email;
     @OneToMany(mappedBy = "benhNhan", fetch = FetchType.LAZY)
     private Set<ToaThuoc> dsToaThuoc;
     @OneToMany(mappedBy = "benhNhan", fetch = FetchType.EAGER)
@@ -88,5 +93,21 @@ public class BenhNhan implements Serializable {
 
     public void setDsPhieuKhamBenh(Set<PhieuKhamBenh> dsPhieuKhamBenh) {
         this.dsPhieuKhamBenh = dsPhieuKhamBenh;
+    }
+
+    public int getTuoi() {
+        return tuoi;
+    }
+
+    public void setTuoi(int tuoi) {
+        this.tuoi = tuoi;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

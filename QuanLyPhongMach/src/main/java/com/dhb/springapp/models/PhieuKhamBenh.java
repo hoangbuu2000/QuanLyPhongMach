@@ -9,6 +9,7 @@ import java.util.Set;
 @Table(name = "phieukhambenh")
 public class PhieuKhamBenh implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "NgayKham")
@@ -20,6 +21,9 @@ public class PhieuKhamBenh implements Serializable {
     @ManyToOne
     @JoinColumn(name = "MaBenhNhan")
     private BenhNhan benhNhan;
+    @ManyToOne
+    @JoinColumn(name = "MaBacSi")
+    private BacSi bacSi;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "chitietphieukhambenh",
@@ -89,5 +93,13 @@ public class PhieuKhamBenh implements Serializable {
 
     public void setCaKhamBenh(CaKhamBenh caKhamBenh) {
         this.caKhamBenh = caKhamBenh;
+    }
+
+    public BacSi getBacSi() {
+        return bacSi;
+    }
+
+    public void setBacSi(BacSi bacSi) {
+        this.bacSi = bacSi;
     }
 }

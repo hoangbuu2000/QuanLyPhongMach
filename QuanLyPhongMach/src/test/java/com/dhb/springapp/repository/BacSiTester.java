@@ -3,22 +3,30 @@ package com.dhb.springapp.repository;
 import com.dhb.springapp.models.BacSi;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.repository.implement.BacSiRepository;
-import com.dhb.springapp.repository.implement.Order;
-import com.dhb.springapp.repository.implement.TaiKhoanRepository;
+import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.service.IBacSiService;
+import com.dhb.springapp.service.ITaiKhoanService;
 import com.dhb.springapp.service.implement.BacSiService;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BacSiTester {
     private BacSi bacSi;
+    @Mock
+    IBacSiRepository iBacSiRepository;
+    @InjectMocks
+    IBacSiService iBacSiService = new BacSiService(iBacSiRepository);
     @Autowired
-    IBacSiService iBacSiService;
+    ITaiKhoanService iTaiKhoanService;
 
     @Test
     public void testThemBacSi() throws ParseException {
@@ -31,7 +39,7 @@ public class BacSiTester {
         bacSi.setDienThoai("0768107113");
         bacSi.setImage("/resources/image/bacsi.png");
         bacSi.setNgaySinh(format.parse("04/02/2000"));
-        bacSi.setTaiKhoan(new TaiKhoanRepository().getById(TaiKhoan.class, "7b8cdfad-7538-471e-84ea-8241939d9076"));
+        bacSi.setTaiKhoan(iTaiKhoanService.getById(TaiKhoan.class, "7b8cdfad-7538-471e-84ea-8241939d9076"));
 
         Assertions.assertEquals(BacSi.class, iBacSiService.insert(bacSi).getClass());
     }
@@ -40,18 +48,18 @@ public class BacSiTester {
     public void testUpdateBacSi() {
         BacSi bacSi = new BacSiRepository().getById(BacSi.class,"68ac59ab-cc4a-4455-93ac-52db43391ac3");
         bacSi.setDienThoai("114");
-        Assertions.assertEquals(BacSi.class, new BacSiRepository().update(bacSi).getClass());
+        Assertions.assertEquals(BacSi.class, iBacSiService.update(bacSi).getClass());
     }
 
     @Test
     public void testDeleteBacSi() {
         BacSi bacSi = new BacSiRepository().getById(BacSi.class,"68ac59ab-cc4a-4455-93ac-52db43391ac3");
-        Assertions.assertEquals(1, new BacSiRepository().delete(bacSi));
+        Assertions.assertEquals(1, iBacSiService.delete(bacSi));
     }
 
     @Test
     public void testGetBacSiTheoId() {
-        Assertions.assertEquals(BacSi.class, new BacSiRepository().getById(BacSi.class, "68ac59ab-cc4a-4455-93ac-52db43391ac3").getClass());
+        Assertions.assertEquals(BacSi.class, iBacSiService.getById(BacSi.class, "68ac59ab-cc4a-4455-93ac-52db43391ac3").getClass());
     }
 
     @Test
@@ -61,23 +69,23 @@ public class BacSiTester {
 
     @Test
     public void testGetTopBacSi() {
-        Assertions.assertEquals(1, new BacSiRepository().getTop(BacSi.class, 1).size());
+        Assertions.assertEquals(1, iBacSiService.getTop(BacSi.class, 1).size());
     }
 
     @Test
     public void testGetTopBacSiTheoTen() {
-        Assertions.assertEquals(1, new BacSiRepository().getTopBacSiTheoTen(1, "Binh").size());
+        Assertions.assertEquals(1, iBacSiService.getTopBacSiTheoTen(1, "Binh").size());
     }
 
     @Test
     public void testGetTopBacSiASC() {
-        Assertions.assertEquals(2, new BacSiRepository()
+        Assertions.assertEquals(2, iBacSiService
                 .getTopOrderBy(BacSi.class,2, "ten", Order.asc).size());
     }
 
     @Test
     public void testGetTopBacSiDESC() {
-        Assertions.assertEquals(2, new BacSiRepository()
+        Assertions.assertEquals(2, iBacSiService
                 .getTopOrderBy(BacSi.class,2, "ten", Order.desc).size());
     }
 
@@ -88,25 +96,25 @@ public class BacSiTester {
 
     @Test
     public void testGelAllASC() {
-        Assertions.assertEquals(2, new BacSiRepository().getAllOrderBy(BacSi.class, "ten", Order.asc).size());
+        Assertions.assertEquals(2, iBacSiService.getAllOrderBy(BacSi.class, "ten", Order.asc).size());
     }
 
     @Test
     public void testGetAllDESC() {
-        Assertions.assertEquals(2, new BacSiRepository().getAllOrderBy(BacSi.class, "ten", Order.desc).size());
+        Assertions.assertEquals(2, iBacSiService.getAllOrderBy(BacSi.class, "ten", Order.desc).size());
     }
 
     @Test
     public void testGetDanhSachToaThuoc() {
-        BacSi bacSi = new BacSiRepository().getById(BacSi.class, "1851050169");
+        BacSi bacSi = iBacSiService.getById(BacSi.class, "1851050169");
 
-        Assertions.assertEquals(1, new BacSiRepository().getToaThuocTheoBacSi(bacSi).size());
+        Assertions.assertEquals(1, iBacSiService.getToaThuocTheoBacSi(bacSi).size());
     }
 
     @Test
     public void testGetDanhSachBenhNhan() {
-        BacSi bacSi = new BacSiRepository().getById(BacSi.class, "1851050169");
+        BacSi bacSi = iBacSiService.getById(BacSi.class, "1851050169");
 
-        Assertions.assertEquals(1, new BacSiRepository().getBenhNhanTheoBacSi(bacSi).size());
+        Assertions.assertEquals(1, iBacSiService.getBenhNhanTheoBacSi(bacSi).size());
     }
 }

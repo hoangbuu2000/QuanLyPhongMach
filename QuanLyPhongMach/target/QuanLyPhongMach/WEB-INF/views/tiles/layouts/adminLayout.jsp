@@ -9,10 +9,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="<c:url value="/resources/assets/img/favicon.ico" />">
-    <title>DHB</title>
+    <title><tiles:insertAttribute name="title" /></title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/bootstrap.min.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/font-awesome.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/select2.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/dataTables.bootstrap4.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/bootstrap-datetimepicker.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/fullcalendar.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/tagsinput.css" />">
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/style.css" />">
     <!--[if lt IE 9]>
 <%--    <script src="<c:url value="/resources/assets/js/html5shiv.min.js" />"></script>--%>
@@ -31,12 +36,19 @@
 <script src="<c:url value="/resources/assets/js/popper.min.js" />"></script>
 <script src="<c:url value="/resources/assets/js/bootstrap.min.js" />"></script>
 <script src="<c:url value="/resources/assets/js/jquery.slimscroll.js" />"></script>
+<script src="<c:url value="/resources/assets/js/select2.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/jquery.dataTables.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/dataTables.bootstrap4.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/moment.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/bootstrap-datetimepicker.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/app.js" />"></script>
 <script src="<c:url value="/resources/assets/js/Chart.bundle.js" />"></script>
 <script src="<c:url value="/resources/assets/js/chart.js" />"></script>
-<script src="<c:url value="/resources/assets/js/app.js" />"></script>
+<script src="<c:url value="/resources/assets/js/fullcalendar.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/jquery.fullcalendar.js" />"></script>
+<script src="<c:url value="/resources/assets/js/tagsinput.js" />"></script>
 
 </body>
 
 
-<!-- index22:59-->
 </html>

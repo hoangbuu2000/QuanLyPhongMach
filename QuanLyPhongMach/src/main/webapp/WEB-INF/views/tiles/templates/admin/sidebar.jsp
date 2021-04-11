@@ -6,22 +6,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="menu-title">Main</li>
-                <li class="active">
-                    <a href="index-2.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                <li class="${dashboard}">
+                    <a href="<c:url value="/admin" />"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>
-                <li>
-                    <a href="doctors.html"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
+                <li class="${doctorAct}">
+                    <a href="<c:url value="/doctor" />"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                 </li>
-                <li>
-                    <a href="patients.html"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                <li class="${patientAct}">
+                    <a href="<c:url value="/patient" />"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                 </li>
-                <li>
-                    <a href="appointments.html"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                <li class="${appointmentAct}">
+                    <a href="<c:url value="/appointment" />"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                 </li>
                 <li>
                     <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>

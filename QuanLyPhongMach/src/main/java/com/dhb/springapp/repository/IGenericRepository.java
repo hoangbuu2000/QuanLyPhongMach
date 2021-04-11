@@ -1,6 +1,6 @@
 package com.dhb.springapp.repository;
 
-import com.dhb.springapp.repository.implement.Order;
+import com.dhb.springapp.enums.Order;
 
 import java.util.List;
 

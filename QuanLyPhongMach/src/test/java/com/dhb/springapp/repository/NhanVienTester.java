@@ -3,7 +3,7 @@ package com.dhb.springapp.repository;
 import com.dhb.springapp.models.NhanVien;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.repository.implement.NhanVienRepository;
-import com.dhb.springapp.repository.implement.Order;
+import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.repository.implement.TaiKhoanRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

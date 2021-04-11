@@ -1,5 +1,6 @@
 package com.dhb.springapp.models;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,8 +22,14 @@ public class BacSi implements Serializable {
     private Date ngaySinh;
     @Column(name = "DienThoai", length = 10, nullable = false)
     private String dienThoai;
-    @Column(name = "Image", length = 100)
+    @Column(name = "Image", length = 200)
     private String image;
+    @Column(name = "QueQuan")
+    private String queQuan;
+    @Column(name = "Email")
+    private String email;
+    @OneToMany(mappedBy = "bacSi", fetch = FetchType.LAZY)
+    private Set<PhieuKhamBenh> dsPhieuKhamBenh;
     @OneToMany(mappedBy = "bacSi", fetch = FetchType.LAZY)
     private Set<ToaThuoc> dsToaThuoc;
     @OneToOne
@@ -31,6 +38,22 @@ public class BacSi implements Serializable {
     public TaiKhoan taiKhoan;
     @OneToMany(mappedBy = "bacSi", fetch = FetchType.LAZY)
     private Set<ChiTietCaKhamBenh> dsChiTietCaKhamBenh;
+
+    @Override
+    public String toString() {
+        return "BacSi{" +
+                "id='" + id + '\'' +
+                ", ho='" + ho + '\'' +
+                ", ten='" + ten + '\'' +
+                ", gioiTinh='" + gioiTinh + '\'' +
+                ", ngaySinh=" + ngaySinh +
+                ", dienThoai='" + dienThoai + '\'' +
+                ", image='" + image + '\'' +
+                ", queQuan='" + queQuan + '\'' +
+                ", email='" + email + '\'' +
+                ", taiKhoan=" + taiKhoan +
+                '}';
+    }
 
     public String getId() {
         return id;
@@ -110,5 +133,29 @@ public class BacSi implements Serializable {
 
     public void setDsChiTietCaKhamBenh(Set<ChiTietCaKhamBenh> dsChiTietCaKhamBenh) {
         this.dsChiTietCaKhamBenh = dsChiTietCaKhamBenh;
+    }
+
+    public String getQueQuan() {
+        return queQuan;
+    }
+
+    public void setQueQuan(String queQuan) {
+        this.queQuan = queQuan;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<PhieuKhamBenh> getDsPhieuKhamBenh() {
+        return dsPhieuKhamBenh;
+    }
+
+    public void setDsPhieuKhamBenh(Set<PhieuKhamBenh> dsPhieuKhamBenh) {
+        this.dsPhieuKhamBenh = dsPhieuKhamBenh;
     }
 }

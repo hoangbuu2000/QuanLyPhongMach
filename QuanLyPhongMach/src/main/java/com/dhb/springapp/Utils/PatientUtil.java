@@ -4,6 +4,7 @@ import com.dhb.springapp.models.BenhNhan;
 import com.dhb.springapp.modelview.NewPatient;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class PatientUtil {
@@ -14,10 +15,11 @@ public class PatientUtil {
             NewPatient newPatient = new NewPatient();
             newPatient.setTenBenhNhan(b.getTen());
             newPatient.setDienThoai(b.getDienThoai());
-            b.getDsPhieuKhamBenh().iterator().next().getDsLoaiBenh().forEach(l -> {
+            newPatient.setEmail(b.getEmail());
+            b.getDsPhieuKhamBenh().stream().reduce((first, second) -> second).get().getDsLoaiBenh().forEach(l -> {
                 loaiBenh.add(l.getTenBenh());
             });
-            newPatient.setLoaiBenh(loaiBenh.toArray());
+            newPatient.setLoaiBenh(new HashSet<>(loaiBenh));
             result.add(newPatient);
         });
         return result;

@@ -1,6 +1,7 @@
 package com.dhb.springapp.repository.implement;
 
 import com.dhb.springapp.models.BenhNhan;
+import com.dhb.springapp.models.PhieuKhamBenh;
 import com.dhb.springapp.repository.IBenhNhanRepository;
 import org.hibernate.HibernateError;
 import org.hibernate.query.Query;
@@ -58,18 +59,31 @@ public class BenhNhanRepository extends GenericRepository<BenhNhan> implements I
 
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
-    public List<BenhNhan> getNewBenhNhan() {
+    public List<BenhNhan> getTopNewBenhNhan(int limit) {
         try {
             List<BenhNhan> ds = new ArrayList<>();
-            Query q = currentSession().createQuery("From BenhNhan");
+
+            Query q = currentSession().createSQLQuery("CALL getTopNewPatients(:limit)")
+                    .addEntity(BenhNhan.class).setParameter("limit", limit);
             q.getResultList().forEach(b -> {
                 if (getSoLuongPhieuKhamBenhCuaBenhNhan((BenhNhan) b) == 1)
                     ds.add((BenhNhan) b);
             });
             return ds;
         }
-        catch (HibernateError e) {
+        catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public boolean themBenhNhanVaPhieuKhamBenh(BenhNhan benhNhan, PhieuKhamBenh phieuKhamBenh) {
+        BenhNhan b = insert(benhNhan);
+        currentSession().save(phieuKhamBenh);
+
+        if (b != null)
+            return true;
+        return false;
     }
 }

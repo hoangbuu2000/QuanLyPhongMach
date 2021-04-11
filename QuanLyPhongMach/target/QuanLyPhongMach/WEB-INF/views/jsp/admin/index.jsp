@@ -226,10 +226,9 @@
                                 <c:forEach items="${danhSachBenhNhanMoi}" var="newPatient">
                                     <tr>
                                         <td>
-                                            <img width="28" height="28" class="rounded-circle" src="assets/img/user.jpg" alt="">
                                             <h2>${newPatient.tenBenhNhan}</h2>
                                         </td>
-                                        <td>Johndoe21@gmail.com</td>
+                                        <td>${newPatient.email}</td>
                                         <td>${newPatient.dienThoai}</td>
                                         <td>
                                             <c:forEach items="${newPatient.loaiBenh}" var="benh">

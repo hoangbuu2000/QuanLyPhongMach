@@ -20,12 +20,7 @@
         <put-attribute name="body" value="/WEB-INF/views/jsp/index.jsp" />
     </definition>
 
-    <!-- ContactUs Page -->
-    <definition name="createBacSi" extends="base.definition">
-        <put-attribute name="title" value="Create" />
-        <put-attribute name="body" value="/WEB-INF/views/jsp/create.jsp" />
-    </definition>
-
+    <!-- Admin Layout -->
     <definition name="admin.definition" template="/WEB-INF/views/tiles/layouts/adminLayout.jsp">
         <put-attribute name="title" value="" />
         <put-attribute name="navbar" value="/WEB-INF/views/tiles/templates/admin/navbar.jsp" />
@@ -34,10 +29,208 @@
         <put-attribute name="footer" value="/WEB-INF/views/tiles/templates/admin/footer.jsp" />
     </definition>
 
+    <!-- Dashboard -->
     <definition name="admin.index" extends="admin.definition">
-        <put-attribute name="title" value="" />
+        <put-attribute name="title" value="Admin" />
         <put-attribute name="body" value="/WEB-INF/views/jsp/admin/index.jsp" />
     </definition>
 
+    <!-- Doctor -->
+    <definition name="doctor.index" extends="admin.definition">
+        <put-attribute name="title" value="List Doctors" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/doctor/index.jsp" />
+    </definition>
+
+    <definition name="doctor.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Doctor" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/doctor/add.jsp" />
+    </definition>
+
+    <definition name="doctor.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Doctor" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/doctor/edit.jsp" />
+    </definition>
+
+    <definition name="doctor.details" extends="admin.definition">
+        <put-attribute name="title" value="Doctor Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/doctor/details.jsp" />
+    </definition>
+    <!-- End Doctor -->
+
+    <!-- Patient -->
+    <definition name="patient.index" extends="admin.definition">
+        <put-attribute name="title" value="List Patients" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/patient/index.jsp" />
+    </definition>
+
+    <definition name="patient.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Patient" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/patient/add.jsp" />
+    </definition>
+
+    <definition name="patient.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Patient" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/patient/edit.jsp" />
+    </definition>
+
+    <definition name="patient.details" extends="admin.definition">
+        <put-attribute name="title" value="Patient Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/patient/details.jsp" />
+    </definition>
+    <!-- End Patient -->
+
+    <!-- Employee -->
+    <definition name="employee.index" extends="admin.definition">
+        <put-attribute name="title" value="List Employees" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/employee/index.jsp" />
+    </definition>
+
+    <definition name="employee.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Employee" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/employee/add.jsp" />
+    </definition>
+
+    <definition name="employee.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Employee" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/employee/edit.jsp" />
+    </definition>
+
+    <definition name="employee.details" extends="admin.definition">
+        <put-attribute name="title" value="Employee Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/employee/details.jsp" />
+    </definition>
+    <!-- End Employee -->
+
+    <!-- Schedule -->
+    <definition name="schedule.index" extends="admin.definition">
+        <put-attribute name="title" value="List Schedules" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/schedule/index.jsp" />
+    </definition>
+
+    <definition name="schedule.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Schedule" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/schedule/add.jsp" />
+    </definition>
+
+    <definition name="schedule.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Schedule" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/schedule/edit.jsp" />
+    </definition>
+
+    <definition name="schedule.details" extends="admin.definition">
+        <put-attribute name="title" value="Schedule Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/schedule/details.jsp" />
+    </definition>
+    <!-- End Schedule -->
+
+    <!-- Appointment -->
+    <definition name="appointment.index" extends="admin.definition">
+        <put-attribute name="title" value="List Appointments" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/appointment/index.jsp" />
+    </definition>
+
+    <definition name="appointment.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Appointment" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/appointment/add.jsp" />
+    </definition>
+
+    <definition name="appointment.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Appointment" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/appointment/edit.jsp" />
+    </definition>
+
+    <definition name="appointment.details" extends="admin.definition">
+        <put-attribute name="title" value="Appointment Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/appointment/details.jsp" />
+    </definition>
+    <!-- End Appointment -->
+
+    <!-- Medicine -->
+    <definition name="medicine.index" extends="admin.definition">
+        <put-attribute name="title" value="List Medicines" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/medicine/index.jsp" />
+    </definition>
+
+    <definition name="medicine.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Medicine" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/medicine/add.jsp" />
+    </definition>
+
+    <definition name="medicine.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Medicine" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/medicine/edit.jsp" />
+    </definition>
+
+    <definition name="medicine.details" extends="admin.definition">
+        <put-attribute name="title" value="Medicine Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/medicine/details.jsp" />
+    </definition>
+    <!-- End Medicine -->
+
+    <!-- Disease -->
+    <definition name="disease.index" extends="admin.definition">
+        <put-attribute name="title" value="List Disease" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/disease/index.jsp" />
+    </definition>
+
+    <definition name="disease.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Disease" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/disease/add.jsp" />
+    </definition>
+
+    <definition name="disease.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Disease" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/disease/edit.jsp" />
+    </definition>
+
+    <definition name="disease.details" extends="admin.definition">
+        <put-attribute name="title" value="Disease Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/disease/details.jsp" />
+    </definition>
+    <!-- End Disease -->
+
+    <!-- Prescription -->
+    <definition name="prescription.index" extends="admin.definition">
+        <put-attribute name="title" value="List Prescriptions" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/prescription/index.jsp" />
+    </definition>
+
+    <definition name="prescription.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Prescription" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/prescription/add.jsp" />
+    </definition>
+
+    <definition name="prescription.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Prescription" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/prescription/edit.jsp" />
+    </definition>
+
+    <definition name="prescription.details" extends="admin.definition">
+        <put-attribute name="title" value="Prescription Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/prescription/details.jsp" />
+    </definition>
+    <!-- End Prescription -->
+
+    <!-- Invoice -->
+    <definition name="invoice.index" extends="admin.definition">
+        <put-attribute name="title" value="List Invoices" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/invoice/index.jsp" />
+    </definition>
+
+    <definition name="invoice.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Invoice" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/invoice/add.jsp" />
+    </definition>
+
+    <definition name="invoice.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Invoice" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/invoice/edit.jsp" />
+    </definition>
+
+    <definition name="invoice.details" extends="admin.definition">
+        <put-attribute name="title" value="Invoice Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/invoice/details.jsp" />
+    </definition>
+    <!-- End Invoice -->
 
 </tiles-definitions>

@@ -1,13 +1,9 @@
 package com.dhb.springapp.service.implement;
 
 import com.dhb.springapp.repository.IGenericRepository;
-import com.dhb.springapp.repository.implement.Order;
+import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.service.IGenericService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;

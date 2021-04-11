@@ -1,7 +1,7 @@
 package com.dhb.springapp.repository;
 
 import com.dhb.springapp.models.Thuoc;
-import com.dhb.springapp.repository.implement.Order;
+import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.repository.implement.ThuocRepository;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;

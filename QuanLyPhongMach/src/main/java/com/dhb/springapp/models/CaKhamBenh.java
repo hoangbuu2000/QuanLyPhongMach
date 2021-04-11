@@ -1,11 +1,13 @@
 package com.dhb.springapp.models;
 
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "cakhambenh")
-public class CaKhamBenh {
+public class CaKhamBenh implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

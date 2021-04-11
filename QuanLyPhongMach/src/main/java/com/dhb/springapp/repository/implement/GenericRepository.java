@@ -1,5 +1,6 @@
 package com.dhb.springapp.repository.implement;
 
+import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.repository.IGenericRepository;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;

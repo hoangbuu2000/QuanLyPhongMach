@@ -1,5 +1,6 @@
 package com.dhb.springapp.models;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.util.Set;
 @Table(name = "thuoc")
 public class Thuoc implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Column(name = "TenThuoc", length = 45, nullable = false)
