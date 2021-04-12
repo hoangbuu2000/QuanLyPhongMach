@@ -84,6 +84,44 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
     }
 
     @Override
+    public void suaTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi, AddDoctor editedDoctor, HttpServletRequest request) throws Exception {
+        MultipartFile img = editedDoctor.getImage();
+        String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
+        String targetPath = request.getSession().getServletContext()
+                .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
+        if (img != null && !img.isEmpty()) {
+            try {
+                String oldPath = request.getSession().getServletContext()
+                        .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
+                File file = new File(oldPath);
+                file.delete();
+                img.transferTo(new File(targetPath));
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+                bacSi.setTen(editedDoctor.getTen());
+                bacSi.setHo(editedDoctor.getHo());
+                bacSi.setEmail(editedDoctor.getEmail());
+                bacSi.setGioiTinh(editedDoctor.getGioiTinh());
+                bacSi.setNgaySinh(format.parse(editedDoctor.getNgaySinh()));
+                bacSi.setQueQuan(editedDoctor.getQueQuan());
+                bacSi.setDienThoai(editedDoctor.getDienThoai());
+                bacSi.setImage(relativePath);
+
+                taiKhoan.setUsername(editedDoctor.getUsername());
+                taiKhoan.setPassword(editedDoctor.getPassword().isEmpty() ? taiKhoan.getPassword() : editedDoctor.getPassword());
+                taiKhoan.setActive(editedDoctor.isActive());
+
+                if (!taiKhoanRepository.suaTaiKhoanVaBacSi(taiKhoan, bacSi))
+                    throw new Exception("Giao tac them that bai");
+
+            }
+            catch (IllegalStateException | IOException | ParseException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    @Override
     public boolean checkPassword(AddDoctor addDoctor) {
         return addDoctor.getPassword().equals(addDoctor.getConfirmPassword());
     }

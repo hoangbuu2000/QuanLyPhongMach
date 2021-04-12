@@ -47,12 +47,14 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.pass" /></label>
+                                <form:hidden path="psw" />
                                 <form:password path="password" cssClass="form-control" placeholder="" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.confirm" /></label>
+                                <form:hidden path="cfpsw" />
                                 <form:password path="confirmPassword" cssClass="form-control" />
                             </div>
                         </div>

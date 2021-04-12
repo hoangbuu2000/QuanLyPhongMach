@@ -12,6 +12,7 @@ public interface ITaiKhoanService extends IGenericService<TaiKhoan> {
     TaiKhoan getTaiKhoanByUsername(String username);
     List<TaiKhoan> getTaiKhoanTheoChucVu(String kw);
     void themTaiKhoanVaBacSi(AddDoctor addDoctor, HttpServletRequest request) throws Exception;
+    void suaTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi, AddDoctor editedDoctor, HttpServletRequest request) throws Exception;
     boolean checkPassword(AddDoctor addDoctor);
     boolean checkExistedUsername(AddDoctor addDoctor);
 }

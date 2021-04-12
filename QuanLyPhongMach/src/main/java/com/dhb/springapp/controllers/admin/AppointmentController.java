@@ -54,8 +54,7 @@ public class AppointmentController {
 
     @PostMapping("/add")
     public String addProcess(@ModelAttribute("patient") @Valid AddPatient addPatient,
-                             ModelMap model,
-                             BindingResult result) throws ParseException {
+                             BindingResult result, ModelMap model) throws ParseException {
         if (!result.hasErrors()) {
             try {
                 iBenhNhanService.themBenhNhanVaPhieuKhamBenh(addPatient, format);

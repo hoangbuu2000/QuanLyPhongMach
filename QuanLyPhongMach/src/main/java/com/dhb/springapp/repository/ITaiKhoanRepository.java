@@ -9,4 +9,5 @@ public interface ITaiKhoanRepository extends IGenericRepository<TaiKhoan> {
     TaiKhoan getTaiKhoanByUsername(String username);
     List<TaiKhoan> getTaiKhoanTheoChucVu(String kw);
     boolean themTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi);
+    boolean suaTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi);
 }

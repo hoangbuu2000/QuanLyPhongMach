@@ -63,8 +63,8 @@ public class DoctorController {
     }
 
     @PostMapping("/add")
-    public String addProcess(@ModelAttribute("doctor") @Valid AddDoctor addDoctor, ModelMap model,
-                             BindingResult result,
+    public String addProcess(@ModelAttribute("doctor") @Valid AddDoctor addDoctor,
+                             BindingResult result, ModelMap model,
                              HttpServletRequest request) throws ParseException {
         if (!result.hasErrors()) {
             if(iTaiKhoanService.checkPassword(addDoctor)) {
@@ -105,60 +105,50 @@ public class DoctorController {
 
         model.addAttribute("doctor", doctor);
         model.addAttribute("id", id);
+        model.addAttribute("psw", doctor.getPassword());
+        model.addAttribute("cfpsw", doctor.getConfirmPassword());
         return "doctor.edit";
     }
 
     @PostMapping("/edit/{id}")
     public String editProcess(@PathVariable(name = "id") String id,
-                              @ModelAttribute("doctor") AddDoctor editedDoctor,
+                              @ModelAttribute("doctor") @Valid AddDoctor editedDoctor,
+                              BindingResult result,
+                              @ModelAttribute("psw") String psw, @ModelAttribute("cfpsw") String cfpsw,
+                              ModelMap model,
                               HttpServletRequest request) {
-        TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
-        BacSi bacSi = iBacSiService.getById(BacSi.class, id);
-        if (editedDoctor != null) {
-            if(editedDoctor.getPassword().equals(editedDoctor.getConfirmPassword())) {
-                if (taiKhoan.getUsername().equals(editedDoctor.getUsername())
-                        || (!taiKhoan.getUsername().equals(editedDoctor.getUsername())
-                        && iTaiKhoanService.getTaiKhoanByUsername(editedDoctor.getUsername()) == null)) {
+        //Can test lai
+        if (editedDoctor.getPassword().equals(psw) || editedDoctor.getPassword().isEmpty())
+            editedDoctor.setPassword(psw);
+        if (editedDoctor.getConfirmPassword().equals(cfpsw) || editedDoctor.getConfirmPassword().isEmpty())
+            editedDoctor.setConfirmPassword(cfpsw);
+        //
 
-                    MultipartFile img = editedDoctor.getImage();
-                    String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
-                    String targetPath = request.getSession().getServletContext()
-                            .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
-                    if (img != null && !img.isEmpty()) {
+        if (!result.hasErrors()) {
+            TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
+            BacSi bacSi = iBacSiService.getById(BacSi.class, id);
+
+                if(iTaiKhoanService.checkPassword(editedDoctor)) {
+                    if (taiKhoan.getUsername().equals(editedDoctor.getUsername())
+                            || (!taiKhoan.getUsername().equals(editedDoctor.getUsername())
+                            && iTaiKhoanService.checkExistedUsername(editedDoctor))) {
+
                         try {
-                            String oldPath = request.getSession().getServletContext()
-                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
-                            File file = new File(oldPath);
-                            file.delete();
-                            img.transferTo(new File(targetPath));
-                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-                            bacSi.setTen(editedDoctor.getTen());
-                            bacSi.setHo(editedDoctor.getHo());
-                            bacSi.setEmail(editedDoctor.getEmail());
-                            bacSi.setGioiTinh(editedDoctor.getGioiTinh());
-                            bacSi.setNgaySinh(format.parse(editedDoctor.getNgaySinh()));
-                            bacSi.setQueQuan(editedDoctor.getQueQuan());
-                            bacSi.setDienThoai(editedDoctor.getDienThoai());
-                            bacSi.setImage(relativePath);
-
-                            taiKhoan.setUsername(editedDoctor.getUsername());
-                            taiKhoan.setPassword(editedDoctor.getPassword().isEmpty() ? taiKhoan.getPassword() : editedDoctor.getPassword());
-                            taiKhoan.setActive(editedDoctor.isActive());
-
-                            iTaiKhoanService.update(taiKhoan);
-                            iBacSiService.update(bacSi);
-
-                            return "redirect:/doctor";
+                            iTaiKhoanService.suaTaiKhoanVaBacSi(taiKhoan, bacSi, editedDoctor, request);
                         }
-                        catch (IllegalStateException | IOException | ParseException ex) {
-                            System.err.println(ex.getMessage());
+                        catch (Exception e) {
+                            model.addAttribute("message", e.getMessage());
                         }
                     }
+                    else {
+                        model.addAttribute("messages", "Tai khoan da ton tai");
+                    }
                 }
-            }
+                else {
+                    model.addAttribute("message", "Xac nhan mat khau khong dung");
+                }
         }
-        return "redirect:/doctor/edit/" + id;
+        return "doctor.edit";
     }
 
     @PostMapping("/delete/{id}")

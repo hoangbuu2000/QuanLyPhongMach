@@ -1,5 +1,6 @@
 package com.dhb.springapp.modelview;
 
+import com.dhb.springapp.validators.ConfirmPassword;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,6 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+@ConfirmPassword(message = "passwords are not equal")
 public class AddDoctor {
     @Length(min = 6, max = 12)
     private String username;

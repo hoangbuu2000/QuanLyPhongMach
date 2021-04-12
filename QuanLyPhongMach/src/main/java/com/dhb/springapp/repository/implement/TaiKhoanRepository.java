@@ -38,4 +38,13 @@ public class TaiKhoanRepository extends GenericRepository<TaiKhoan> implements I
 
         return t != null;
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public boolean suaTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi) {
+        TaiKhoan t = update(taiKhoan);
+        currentSession().saveOrUpdate(bacSi);
+
+        return t != null;
+    }
 }
