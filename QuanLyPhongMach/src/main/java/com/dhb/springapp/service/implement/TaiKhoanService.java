@@ -8,14 +8,20 @@ import com.dhb.springapp.repository.IGenericRepository;
 import com.dhb.springapp.repository.ITaiKhoanRepository;
 import com.dhb.springapp.service.IRoleService;
 import com.dhb.springapp.service.ITaiKhoanService;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -84,11 +90,22 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
     }
 
     @Override
-    public void suaTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi, AddDoctor editedDoctor, HttpServletRequest request) throws Exception {
+    public void suaTaiKhoanVaBacSi(String id, AddDoctor editedDoctor, HttpServletRequest request) throws Exception {
+        TaiKhoan taiKhoan = getById(TaiKhoan.class, id);
+        BacSi bacSi = taiKhoan.getBacSi();
         MultipartFile img = editedDoctor.getImage();
         String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
         String targetPath = request.getSession().getServletContext()
                 .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
+        if (!checkNoChangeUsername(id, editedDoctor)) {
+            relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
+            targetPath = request.getSession().getServletContext()
+                    .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
+            String oldPath = request.getSession().getServletContext()
+                    .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
+            File file = new File(oldPath);
+            file.renameTo(new File(targetPath));
+        }
         if (img != null && !img.isEmpty()) {
             try {
                 String oldPath = request.getSession().getServletContext()
@@ -96,29 +113,31 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
                 File file = new File(oldPath);
                 file.delete();
                 img.transferTo(new File(targetPath));
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-                bacSi.setTen(editedDoctor.getTen());
-                bacSi.setHo(editedDoctor.getHo());
-                bacSi.setEmail(editedDoctor.getEmail());
-                bacSi.setGioiTinh(editedDoctor.getGioiTinh());
-                bacSi.setNgaySinh(format.parse(editedDoctor.getNgaySinh()));
-                bacSi.setQueQuan(editedDoctor.getQueQuan());
-                bacSi.setDienThoai(editedDoctor.getDienThoai());
-                bacSi.setImage(relativePath);
-
-                taiKhoan.setUsername(editedDoctor.getUsername());
-                taiKhoan.setPassword(editedDoctor.getPassword().isEmpty() ? taiKhoan.getPassword() : editedDoctor.getPassword());
-                taiKhoan.setActive(editedDoctor.isActive());
-
-                if (!taiKhoanRepository.suaTaiKhoanVaBacSi(taiKhoan, bacSi))
-                    throw new Exception("Giao tac them that bai");
-
             }
-            catch (IllegalStateException | IOException | ParseException ex) {
+            catch (IllegalStateException | IOException ex) {
                 System.err.println(ex.getMessage());
             }
         }
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        bacSi.setTen(editedDoctor.getTen());
+        bacSi.setHo(editedDoctor.getHo());
+        bacSi.setEmail(editedDoctor.getEmail());
+        bacSi.setGioiTinh(editedDoctor.getGioiTinh());
+        bacSi.setNgaySinh(format.parse(editedDoctor.getNgaySinh()));
+        bacSi.setQueQuan(editedDoctor.getQueQuan());
+        bacSi.setDienThoai(editedDoctor.getDienThoai());
+        bacSi.setImage(relativePath);
+
+        taiKhoan.setUsername(editedDoctor.getUsername());
+        taiKhoan.setPassword(editedDoctor.getPassword().isEmpty() ? taiKhoan.getPassword() : editedDoctor.getPassword());
+        taiKhoan.setActive(editedDoctor.isActive());
+
+        if (!taiKhoanRepository.suaTaiKhoanVaBacSi(taiKhoan, bacSi))
+            throw new Exception("Giao tac them that bai");
+
     }
 
     @Override
@@ -129,5 +148,10 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
     @Override
     public boolean checkExistedUsername(AddDoctor addDoctor) {
         return getTaiKhoanByUsername(addDoctor.getUsername()) == null;
+    }
+
+    @Override
+    public boolean checkNoChangeUsername(String id, AddDoctor addDoctor) {
+        return getById(TaiKhoan.class, id).getUsername().equals(addDoctor.getUsername());
     }
 }

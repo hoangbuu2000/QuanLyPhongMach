@@ -17,6 +17,7 @@
             </div>
         </div>
         <form:form method="post" action="/doctor/edit/${id}" modelAttribute="doctor" enctype="multipart/form-data">
+            <p class="text-danger">${message}</p>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
                     <div class="row">
@@ -24,38 +25,42 @@
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.first" /> <span class="text-danger">*</span></label>
                                 <form:input path="ten" cssClass="form-control" />
+                                <form:errors path="ten" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.last" /></label>
                                 <form:input path="ho" cssClass="form-control" />
+                                <form:errors path="ho" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.user" /> <span class="text-danger">*</span></label>
                                 <form:input path="username" cssClass="form-control" />
+                                <form:errors path="username" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.email" /> <span class="text-danger">*</span></label>
                                 <form:input path="email" type="email" cssClass="form-control" />
+                                <form:errors path="email" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.pass" /></label>
-                                <form:hidden path="psw" />
-                                <form:password path="password" cssClass="form-control" placeholder="" />
+                                <form:password path="password" cssClass="form-control" placeholder="" value="${doctor.password}" />
+                                <form:errors path="password" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.confirm" /></label>
-                                <form:hidden path="cfpsw" />
-                                <form:password path="confirmPassword" cssClass="form-control" />
+                                <form:password path="confirmPassword" cssClass="form-control" value="${doctor.confirmPassword}" />
+                                <form:errors path="confirmPassword" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -63,6 +68,7 @@
                                 <label><spring:message code="add.body.label.dob" /></label>
                                 <div class="clear-cal-icon">
                                     <form:input path="ngaySinh" cssClass="form-control" type="date" />
+                                    <form:errors path="ngaySinh" cssClass="text-danger" />
                                 </div>
                             </div>
                         </div>
@@ -81,12 +87,14 @@
                                         <spring:message code="add.body.label.female" />
                                     </label>
                                 </div>
+                                <form:errors path="gioiTinh" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.phone" /> </label>
                                 <form:input path="dienThoai" cssClass="form-control" />
+                                <form:errors path="dienThoai" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -100,6 +108,7 @@
                                         <form:input path="image" cssClass="form-control" type="file" />
                                     </div>
                                 </div>
+                                <form:errors path="image" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-12">
@@ -111,6 +120,7 @@
                                             <form:option value="Tien Giang" />
                                             <form:option value="Dong Thap" />
                                         </form:select>
+                                        <form:errors path="queQuan" cssClass="text-danger" />
                                     </div>
                                 </div>
                             </div>
@@ -132,6 +142,7 @@
                                 <spring:message code="add.body.label.inactive" />
                             </label>
                         </div>
+                        <form:errors path="active" cssClass="text-danger" />
                     </div>
                     <div class="m-t-20 text-center">
                         <button class="btn btn-primary submit-btn"><spring:message code="edit.body.submit" /></button>

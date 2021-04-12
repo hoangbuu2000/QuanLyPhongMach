@@ -37,9 +37,6 @@ public class DoctorController {
     private IBacSiService iBacSiService;
     @Autowired
     private ITaiKhoanService iTaiKhoanService;
-    @Autowired
-    @Qualifier("roleService")
-    private IGenericService roleService;
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
@@ -48,6 +45,7 @@ public class DoctorController {
         model.addAttribute("dashboard", "");
         model.addAttribute("employeeAct", "");
         model.addAttribute("scheduleAct", "");
+        model.addAttribute("appointment", "");
     }
 
     @GetMapping()
@@ -105,8 +103,6 @@ public class DoctorController {
 
         model.addAttribute("doctor", doctor);
         model.addAttribute("id", id);
-        model.addAttribute("psw", doctor.getPassword());
-        model.addAttribute("cfpsw", doctor.getConfirmPassword());
         return "doctor.edit";
     }
 
@@ -114,27 +110,17 @@ public class DoctorController {
     public String editProcess(@PathVariable(name = "id") String id,
                               @ModelAttribute("doctor") @Valid AddDoctor editedDoctor,
                               BindingResult result,
-                              @ModelAttribute("psw") String psw, @ModelAttribute("cfpsw") String cfpsw,
                               ModelMap model,
                               HttpServletRequest request) {
-        //Can test lai
-        if (editedDoctor.getPassword().equals(psw) || editedDoctor.getPassword().isEmpty())
-            editedDoctor.setPassword(psw);
-        if (editedDoctor.getConfirmPassword().equals(cfpsw) || editedDoctor.getConfirmPassword().isEmpty())
-            editedDoctor.setConfirmPassword(cfpsw);
-        //
-
         if (!result.hasErrors()) {
-            TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
-            BacSi bacSi = iBacSiService.getById(BacSi.class, id);
-
                 if(iTaiKhoanService.checkPassword(editedDoctor)) {
-                    if (taiKhoan.getUsername().equals(editedDoctor.getUsername())
-                            || (!taiKhoan.getUsername().equals(editedDoctor.getUsername())
-                            && iTaiKhoanService.checkExistedUsername(editedDoctor))) {
+                    if (iTaiKhoanService.checkNoChangeUsername(id, editedDoctor)
+                            || (!iTaiKhoanService.checkNoChangeUsername(id, editedDoctor))
+                            && iTaiKhoanService.checkExistedUsername(editedDoctor)) {
 
                         try {
-                            iTaiKhoanService.suaTaiKhoanVaBacSi(taiKhoan, bacSi, editedDoctor, request);
+                            iTaiKhoanService.suaTaiKhoanVaBacSi(id, editedDoctor, request);
+                            return "redirect:/doctor";
                         }
                         catch (Exception e) {
                             model.addAttribute("message", e.getMessage());
@@ -148,6 +134,8 @@ public class DoctorController {
                     model.addAttribute("message", "Xac nhan mat khau khong dung");
                 }
         }
+        model.addAttribute("doctor", editedDoctor);
+        model.addAttribute("id", id);
         return "doctor.edit";
     }
 

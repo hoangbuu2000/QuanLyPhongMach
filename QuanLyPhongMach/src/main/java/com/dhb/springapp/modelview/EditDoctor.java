@@ -1,6 +1,5 @@
 package com.dhb.springapp.modelview;
 
-import com.dhb.springapp.validators.ConfirmPassword;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,12 +7,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class AddDoctor {
+public class EditDoctor {
     @Length(min = 3, max = 12)
     private String username;
-    @Length(min = 3, max = 12)
+    @Length(max = 12)
     private String password;
-    @Length(min = 3, max = 12)
+    @Length(max = 12)
     private String confirmPassword;
     @Length(min = 2, max = 12)
     private String ho;
