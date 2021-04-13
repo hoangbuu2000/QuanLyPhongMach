@@ -30,7 +30,7 @@
                 <li>
                     <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                 </li>
-                <li class="submenu">
+                <li class="submenu ${employeeAct}">
                     <a href="#"><i class="fa fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">
                         <li><a href="employees.html">Employees List</a></li>

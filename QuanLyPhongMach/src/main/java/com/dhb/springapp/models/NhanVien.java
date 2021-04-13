@@ -24,6 +24,12 @@ public class NhanVien implements Serializable {
     private String dienThoai;
     @Column(name = "Image", length = 100)
     private String image;
+    @Column(name = "Email")
+    private String email;
+    @Column(name = "QueQuan")
+    private String queQuan;
+    @Column(name = "NgayVaoLam")
+    private Date ngayVaoLam;
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
@@ -100,5 +106,29 @@ public class NhanVien implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getQueQuan() {
+        return queQuan;
+    }
+
+    public void setQueQuan(String queQuan) {
+        this.queQuan = queQuan;
+    }
+
+    public Date getNgayVaoLam() {
+        return ngayVaoLam;
+    }
+
+    public void setNgayVaoLam(Date ngayVaoLam) {
+        this.ngayVaoLam = ngayVaoLam;
     }
 }

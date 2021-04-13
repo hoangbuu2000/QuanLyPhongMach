@@ -17,7 +17,6 @@
         </div>
         <form:form modelAttribute="doctor" action="/doctor/add" enctype="multipart/form-data" method="post">
             <div class="row">
-                <h4 class="text-center text-danger">${message}</h4>
                 <div class="col-lg-8 offset-lg-2">
                     <form>
                         <div class="row">

@@ -1416,299 +1416,311 @@ MaThuoc</ColNames>
       <Position>7</Position>
       <DataType>varchar(100)|0s</DataType>
     </column>
-    <key id="405" parent="309" name="PRIMARY">
+    <column id="405" parent="309" name="Email">
+      <Position>8</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <column id="406" parent="309" name="NgayVaoLam">
+      <Position>9</Position>
+      <DataType>date|0s</DataType>
+    </column>
+    <column id="407" parent="309" name="QueQuan">
+      <Position>10</Position>
+      <DataType>varchar(45)|0s</DataType>
+    </column>
+    <key id="408" parent="309" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="406" parent="309" name="fk_nhanvien_taikhoan">
+    <foreign-key id="409" parent="309" name="fk_nhanvien_taikhoan">
       <ColNames>id</ColNames>
       <RefTableName>taikhoan</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="407" parent="310" name="id">
+    <column id="410" parent="310" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="408" parent="310" name="MaBenhNhan">
+    <column id="411" parent="310" name="MaBenhNhan">
       <Position>2</Position>
       <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="409" parent="310" name="NgayKham">
+    <column id="412" parent="310" name="NgayKham">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="410" parent="310" name="DiaChi">
+    <column id="413" parent="310" name="DiaChi">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="411" parent="310" name="ThanhToan">
+    <column id="414" parent="310" name="ThanhToan">
       <Position>5</Position>
       <DataType>bit(1)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="412" parent="310" name="MaCaKham">
+    <column id="415" parent="310" name="MaCaKham">
       <Position>6</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="413" parent="310" name="MaBacSi">
+    <column id="416" parent="310" name="MaBacSi">
       <Position>7</Position>
       <DataType>varchar(36)|0s</DataType>
     </column>
-    <index id="414" parent="310" name="fk_phieukhambenh_benhnhan">
+    <index id="417" parent="310" name="fk_phieukhambenh_benhnhan">
       <ColNames>MaBenhNhan</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="415" parent="310" name="fk_phieukhambenh_cakhambenh_idx">
+    <index id="418" parent="310" name="fk_phieukhambenh_cakhambenh_idx">
       <ColNames>MaCaKham</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="416" parent="310" name="fk_phieukhambenh_bacsi">
+    <index id="419" parent="310" name="fk_phieukhambenh_bacsi">
       <ColNames>MaBacSi</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="417" parent="310" name="PRIMARY">
+    <key id="420" parent="310" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="418" parent="310" name="fk_phieukhambenh_benhnhan">
+    <foreign-key id="421" parent="310" name="fk_phieukhambenh_benhnhan">
       <ColNames>MaBenhNhan</ColNames>
       <RefTableName>benhnhan</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="419" parent="310" name="fk_phieukhambenh_cakhambenh">
+    <foreign-key id="422" parent="310" name="fk_phieukhambenh_cakhambenh">
       <ColNames>MaCaKham</ColNames>
       <RefTableName>cakhambenh</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="420" parent="310" name="fk_phieukhambenh_bacsi">
+    <foreign-key id="423" parent="310" name="fk_phieukhambenh_bacsi">
       <ColNames>MaBacSi</ColNames>
       <RefTableName>bacsi</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="421" parent="311" name="id">
+    <column id="424" parent="311" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="422" parent="311" name="Ten">
+    <column id="425" parent="311" name="Ten">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="423" parent="311" name="PRIMARY">
+    <key id="426" parent="311" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="424" parent="312" name="id">
+    <column id="427" parent="312" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="425" parent="312" name="TaiKhoan">
+    <column id="428" parent="312" name="TaiKhoan">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="426" parent="312" name="MatKhau">
+    <column id="429" parent="312" name="MatKhau">
       <Position>3</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="427" parent="312" name="Active">
+    <column id="430" parent="312" name="Active">
       <Position>4</Position>
       <DataType>bit(1)|0s</DataType>
       <DefaultExpression>b&apos;1&apos;</DefaultExpression>
     </column>
-    <column id="428" parent="312" name="MaRole">
+    <column id="431" parent="312" name="MaRole">
       <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="429" parent="312" name="username_UNIQUE">
+    <index id="432" parent="312" name="username_UNIQUE">
       <ColNames>TaiKhoan</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="430" parent="312" name="fk_taikhoan_role_idx">
+    <index id="433" parent="312" name="fk_taikhoan_role_idx">
       <ColNames>MaRole</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="431" parent="312" name="PRIMARY">
+    <key id="434" parent="312" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="432" parent="312" name="username_UNIQUE">
+    <key id="435" parent="312" name="username_UNIQUE">
       <ColNames>TaiKhoan</ColNames>
       <UnderlyingIndexName>username_UNIQUE</UnderlyingIndexName>
     </key>
-    <column id="433" parent="313" name="id">
+    <column id="436" parent="313" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="434" parent="313" name="TenThuoc">
+    <column id="437" parent="313" name="TenThuoc">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="435" parent="313" name="MoTa">
+    <column id="438" parent="313" name="MoTa">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="436" parent="313" name="DonGia">
+    <column id="439" parent="313" name="DonGia">
       <Position>4</Position>
       <DataType>decimal(10)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="437" parent="313" name="DonVi">
+    <column id="440" parent="313" name="DonVi">
       <Position>5</Position>
       <DataType>varchar(45)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="438" parent="313" name="PRIMARY">
+    <key id="441" parent="313" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="439" parent="314" name="id">
+    <column id="442" parent="314" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="440" parent="314" name="MaBacSi">
+    <column id="443" parent="314" name="MaBacSi">
       <Position>2</Position>
       <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="441" parent="314" name="MaBenhNhan">
+    <column id="444" parent="314" name="MaBenhNhan">
       <Position>3</Position>
       <DataType>varchar(36)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="442" parent="314" name="NgayKeToa">
+    <column id="445" parent="314" name="NgayKeToa">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="443" parent="314" name="MaLoaiBenh">
+    <column id="446" parent="314" name="MaLoaiBenh">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="444" parent="314" name="fk_toathuoc_bacsi">
+    <index id="447" parent="314" name="fk_toathuoc_bacsi">
       <ColNames>MaBacSi</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="445" parent="314" name="fk_toathuoc_benhnhan">
+    <index id="448" parent="314" name="fk_toathuoc_benhnhan">
       <ColNames>MaBenhNhan</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="446" parent="314" name="fk_toathuoc_loaibenh_idx">
+    <index id="449" parent="314" name="fk_toathuoc_loaibenh_idx">
       <ColNames>MaLoaiBenh</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="447" parent="314" name="PRIMARY">
+    <key id="450" parent="314" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="448" parent="314" name="fk_toathuoc_bacsi">
+    <foreign-key id="451" parent="314" name="fk_toathuoc_bacsi">
       <ColNames>MaBacSi</ColNames>
       <RefTableName>bacsi</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="449" parent="314" name="fk_toathuoc_benhnhan">
+    <foreign-key id="452" parent="314" name="fk_toathuoc_benhnhan">
       <ColNames>MaBenhNhan</ColNames>
       <RefTableName>benhnhan</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="450" parent="314" name="fk_toathuoc_loaibenh">
+    <foreign-key id="453" parent="314" name="fk_toathuoc_loaibenh">
       <ColNames>MaLoaiBenh</ColNames>
       <RefTableName>loaibenh</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <argument id="451" parent="315" name="id">
+    <argument id="454" parent="315" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="452" parent="316" name="MaCa">
+    <argument id="455" parent="316" name="MaCa">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="453" parent="316" name="NgayKham">
+    <argument id="456" parent="316" name="NgayKham">
       <Position>2</Position>
       <DataType>date|0s</DataType>
     </argument>
-    <argument id="454" parent="317" name="id">
+    <argument id="457" parent="317" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="455" parent="318" name="ngayKham">
+    <argument id="458" parent="318" name="ngayKham">
       <Position>1</Position>
       <DataType>datetime|0s</DataType>
     </argument>
-    <argument id="456" parent="319" name="date">
+    <argument id="459" parent="319" name="date">
       <Position>1</Position>
       <DataType>date|0s</DataType>
     </argument>
-    <argument id="457" parent="320" name="id">
+    <argument id="460" parent="320" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="458" parent="321" name="month">
+    <argument id="461" parent="321" name="month">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="459" parent="322" name="month">
+    <argument id="462" parent="322" name="month">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="460" parent="323" name="month">
+    <argument id="463" parent="323" name="month">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="461" parent="324" name="limit">
+    <argument id="464" parent="324" name="limit">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </argument>
-    <argument id="462" parent="325" name="id">
+    <argument id="465" parent="325" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="463" parent="325" name="tongtien">
+    <argument id="466" parent="325" name="tongtien">
       <Position>2</Position>
       <ArgumentDirection>O</ArgumentDirection>
       <DataType>decimal(10)|0s</DataType>
     </argument>
-    <argument id="464" parent="326" name="id">
+    <argument id="467" parent="326" name="id">
       <Position>1</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="465" parent="326" name="matoathuoc">
+    <argument id="468" parent="326" name="matoathuoc">
       <Position>2</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="466" parent="326" name="manhanvien">
+    <argument id="469" parent="326" name="manhanvien">
       <Position>3</Position>
       <DataType>varchar(36)|0s</DataType>
     </argument>
-    <argument id="467" parent="326" name="ngayxuat">
+    <argument id="470" parent="326" name="ngayxuat">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
     </argument>
-    <argument id="468" parent="326" name="tongtien">
+    <argument id="471" parent="326" name="tongtien">
       <Position>5</Position>
       <DataType>decimal(10)|0s</DataType>
     </argument>
