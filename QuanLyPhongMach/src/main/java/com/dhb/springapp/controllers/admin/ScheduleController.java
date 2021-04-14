@@ -1,12 +1,20 @@
 package com.dhb.springapp.controllers.admin;
 
 import com.dhb.springapp.enums.Order;
+import com.dhb.springapp.models.BacSi;
+import com.dhb.springapp.models.CaKhamBenh;
 import com.dhb.springapp.models.ChiTietCaKhamBenh;
+import com.dhb.springapp.modelview.AddSchedule;
+import com.dhb.springapp.service.IBacSiService;
+import com.dhb.springapp.service.ICaKhamBenhService;
 import com.dhb.springapp.service.IChiTietCaKhamBenhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @ControllerAdvice
@@ -14,6 +22,10 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduleController {
     @Autowired
     IChiTietCaKhamBenhService iChiTietCaKhamBenhService;
+    @Autowired
+    IBacSiService iBacSiService;
+    @Autowired
+    ICaKhamBenhService iCaKhamBenhService;
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
@@ -22,6 +34,10 @@ public class ScheduleController {
         model.addAttribute("dashboard", "");
         model.addAttribute("employeeAct", "");
         model.addAttribute("scheduleAct", "active");
+
+        //Chi lay nhung ca kham benh con trong theo ngay
+        model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
+        model.addAttribute("shifts", iCaKhamBenhService.getAll(CaKhamBenh.class));
     }
 
     @GetMapping()
@@ -32,12 +48,20 @@ public class ScheduleController {
     }
 
     @GetMapping("/add")
-    public String addView() {
+    public String addView(ModelMap model) {
+        model.addAttribute("schedule", new ChiTietCaKhamBenh());
         return "schedule.add";
     }
 
+    // Neu admin them thi se duoc chon bac si, neu bac si tu them thi khong duoc chon bac si ma chi lay bac si hien tai
     @PostMapping("/add")
-    public String addProcess() {
+    public String addProcess(@ModelAttribute("schedule") @Valid ChiTietCaKhamBenh schedule,
+                             BindingResult result, ModelMap model) {
+        if (!result.hasErrors()) {
+            ChiTietCaKhamBenh t = iChiTietCaKhamBenhService.insert(schedule);
+            if (t != null)
+                return "redirect:/schedule";
+        }
         return "schedule.add";
     }
 

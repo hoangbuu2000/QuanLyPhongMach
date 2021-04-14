@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="page-wrapper" style="min-height: 754px;">
     <div class="content">
         <div class="row">
@@ -23,30 +25,30 @@
                         <thead>
                         <tr>
                             <th>Doctor Name</th>
-                            <th>Department</th>
-                            <th>Available Days</th>
-                            <th>Available Time</th>
+                            <th>Date</th>
+                            <th>Time</th>
                             <th>Status</th>
                             <th class="text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td><img width="28" height="28" src="assets/img/user.jpg" class="rounded-circle m-r-5" alt=""> Henry Daniels</td>
-                            <td>Cardiology</td>
-                            <td>Sunday, Monday, Tuesday</td>
-                            <td>10:00 AM - 7:00 PM</td>
-                            <td><span class="custom-badge status-green">Active</span></td>
-                            <td class="text-right">
-                                <div class="dropdown dropdown-action">
-                                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="edit-schedule.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_schedule"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                        <c:forEach items="${schedules}" var="s">
+                            <tr>
+                                <td><img width="28" height="28" src="<c:url value="${s.bacSi.image}" />" class="rounded-circle m-r-5" alt=""> ${s.bacSi.ten}</td>
+                                <td><fmt:formatDate value="${s.ngayKhamBenh}" pattern="dd-MM-yyyy" /></td>
+                                <td>${s.caKhamBenh.tenCa} (${s.caKhamBenh.moTa})</td>
+                                <td><span class="custom-badge status-green">Active</span></td>
+                                <td class="text-right">
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="edit-schedule.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_schedule"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
