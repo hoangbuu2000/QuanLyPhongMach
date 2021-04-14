@@ -1,6 +1,7 @@
 package com.dhb.springapp.repository.implement;
 
 import com.dhb.springapp.models.BacSi;
+import com.dhb.springapp.models.NhanVien;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.repository.ITaiKhoanRepository;
 import org.hibernate.query.Query;
@@ -43,8 +44,26 @@ public class TaiKhoanRepository extends GenericRepository<TaiKhoan> implements I
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean suaTaiKhoanVaBacSi(TaiKhoan taiKhoan, BacSi bacSi) {
         TaiKhoan t = update(taiKhoan);
-        currentSession().evict(bacSi);
+//        currentSession().evict(bacSi);
         currentSession().saveOrUpdate(bacSi);
+
+        return t != null;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public boolean themTaiKhoanVaNhanVien(TaiKhoan taiKhoan, NhanVien nhanVien) {
+        TaiKhoan t = insert(taiKhoan);
+        currentSession().save(nhanVien);
+
+        return t != null;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public boolean suaTaiKhoanVaNhanVien(TaiKhoan taiKhoan, NhanVien nhanVien) {
+        TaiKhoan t = update(taiKhoan);
+        currentSession().saveOrUpdate(nhanVien);
 
         return t != null;
     }

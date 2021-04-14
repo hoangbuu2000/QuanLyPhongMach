@@ -1,5 +1,9 @@
 package com.dhb.springapp.controllers.admin;
 
+import com.dhb.springapp.enums.Order;
+import com.dhb.springapp.models.ChiTietCaKhamBenh;
+import com.dhb.springapp.service.IChiTietCaKhamBenhService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @ControllerAdvice
 @RequestMapping("/schedule")
 public class ScheduleController {
+    @Autowired
+    IChiTietCaKhamBenhService iChiTietCaKhamBenhService;
+
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
         model.addAttribute("doctorAct", "");
@@ -18,7 +25,9 @@ public class ScheduleController {
     }
 
     @GetMapping()
-    public String index() {
+    public String index(ModelMap model) {
+        model.addAttribute("schedules", iChiTietCaKhamBenhService
+                .getAll(ChiTietCaKhamBenh.class));
         return "schedule.index";
     }
 

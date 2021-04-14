@@ -1,38 +1,27 @@
 package com.dhb.springapp.controllers.admin;
 
 import com.dhb.springapp.models.BacSi;
-import com.dhb.springapp.models.Role;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.modelview.AddDoctor;
 import com.dhb.springapp.service.IBacSiService;
-import com.dhb.springapp.service.IGenericService;
 import com.dhb.springapp.service.ITaiKhoanService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.IOException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.UUID;
 
 @Controller
 @ControllerAdvice
 @RequestMapping("/doctor")
 public class DoctorController {
-    @Autowired
-    private Environment env;
     @Autowired
     private IBacSiService iBacSiService;
     @Autowired
@@ -95,7 +84,7 @@ public class DoctorController {
 
     @GetMapping("/edit/{id}")
     public String editView(@PathVariable(name = "id") String id, ModelMap model) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         BacSi bacSi = iBacSiService.getById(BacSi.class, id);
         TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
 

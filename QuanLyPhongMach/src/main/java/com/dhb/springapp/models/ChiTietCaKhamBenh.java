@@ -8,38 +8,16 @@ import java.util.Date;
 @Table(name = "chitietcakhambenh")
 public class ChiTietCaKhamBenh implements Serializable {
     @Id
-    @Column(name = "MaCa")
-    private int maCa;
-    @Id
-    @Column(name = "MaBacSi")
-    private String maBacSi;
-    @Id
     @Column(name = "NgayKhamBenh")
     private Date ngayKhamBenh;
+    @Id
     @ManyToOne
-    @MapsId
     @JoinColumn(name = "MaCa")
     private CaKhamBenh caKhamBenh;
+    @Id
     @ManyToOne
-    @MapsId
     @JoinColumn(name = "MaBacSi")
     private BacSi bacSi;
-
-    public int getMaCa() {
-        return maCa;
-    }
-
-    public void setMaCa(int maCa) {
-        this.maCa = maCa;
-    }
-
-    public String getMaBacSi() {
-        return maBacSi;
-    }
-
-    public void setMaBacSi(String maBacSi) {
-        this.maBacSi = maBacSi;
-    }
 
     public Date getNgayKhamBenh() {
         return ngayKhamBenh;

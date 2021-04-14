@@ -1,9 +1,11 @@
 package com.dhb.springapp.service.implement;
 
 import com.dhb.springapp.models.BacSi;
+import com.dhb.springapp.models.NhanVien;
 import com.dhb.springapp.models.Role;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.modelview.AddDoctor;
+import com.dhb.springapp.modelview.AddEmployee;
 import com.dhb.springapp.repository.IGenericRepository;
 import com.dhb.springapp.repository.ITaiKhoanRepository;
 import com.dhb.springapp.service.IRoleService;
@@ -120,7 +122,7 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
         }
 
 
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         bacSi.setTen(editedDoctor.getTen());
         bacSi.setHo(editedDoctor.getHo());
@@ -141,8 +143,106 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
     }
 
     @Override
+    public void themTaiKhoanVaNhanVien(AddEmployee addEmployee, HttpServletRequest request) throws Exception {
+        //chi luu duoc anh trong thu muc target tuk a trui
+        MultipartFile img = addEmployee.getImage();
+        String relativePath = "/resources/images/nhanvien/" + addEmployee.getUsername() + ".png";
+        String targetPath = request.getSession().getServletContext()
+                .getRealPath(String.format("/resources/images/nhanvien/%s.png", addEmployee.getUsername()));
+        if (img != null && !img.isEmpty()) {
+            try{
+                img.transferTo(new File(targetPath));
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                //luu y o day la mot giao tac, them tai khoan truoc, sau do them bac si
+                String id = UUID.randomUUID().toString();
+                TaiKhoan taiKhoan = new TaiKhoan();
+                taiKhoan.setId(id);
+                taiKhoan.setUsername(addEmployee.getUsername());
+                taiKhoan.setPassword(addEmployee.getPassword());
+                taiKhoan.setActive(addEmployee.isActive());
+                taiKhoan.setRole(roleService.getById(Role.class, 3));
+
+
+                NhanVien nhanVien = new NhanVien();
+                nhanVien.setTaiKhoan(taiKhoan);
+                nhanVien.setTen(addEmployee.getTen());
+                nhanVien.setHo(addEmployee.getHo());
+                nhanVien.setDienThoai(addEmployee.getDienThoai());
+                nhanVien.setNgaySinh(format.parse(addEmployee.getNgaySinh()));
+                nhanVien.setGioiTinh(addEmployee.getGioiTinh());
+                nhanVien.setImage(relativePath);
+                nhanVien.setQueQuan(addEmployee.getQueQuan());
+                nhanVien.setEmail(addEmployee.getEmail());
+                nhanVien.setNgayVaoLam(format.parse(addEmployee.getNgayVaoLam()));
+
+                if(!taiKhoanRepository.themTaiKhoanVaNhanVien(taiKhoan, nhanVien))
+                    throw new Exception("Giao tac them that bat");
+            }
+            catch (IllegalStateException | IOException | ParseException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void suaTaiKhoanVaNhanVien(String id, AddEmployee editedEmployee, HttpServletRequest request) throws Exception {
+        TaiKhoan taiKhoan = getById(TaiKhoan.class, id);
+        NhanVien nhanVien = taiKhoan.getNhanVien();
+        MultipartFile img = editedEmployee.getImage();
+        String relativePath = "/resources/images/nhanvien/" + editedEmployee.getUsername() + ".png";
+        String targetPath = request.getSession().getServletContext()
+                .getRealPath(String.format("/resources/images/nhanvien/%s.png", editedEmployee.getUsername()));
+        if (!checkNoChangeUsername(id, editedEmployee)) {
+            relativePath = "/resources/images/nhanvien/" + editedEmployee.getUsername() + ".png";
+            targetPath = request.getSession().getServletContext()
+                    .getRealPath(String.format("/resources/images/nhanvien/%s.png", editedEmployee.getUsername()));
+            String oldPath = request.getSession().getServletContext()
+                    .getRealPath(String.format("/resources/images/nhanvien/%s.png", taiKhoan.getUsername()));
+            File file = new File(oldPath);
+            file.renameTo(new File(targetPath));
+        }
+        if (img != null && !img.isEmpty()) {
+            try {
+                String oldPath = request.getSession().getServletContext()
+                        .getRealPath(String.format("/resources/images/nhanvien/%s.png", taiKhoan.getUsername()));
+                File file = new File(oldPath);
+                file.delete();
+                img.transferTo(new File(targetPath));
+            }
+            catch (IllegalStateException | IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        nhanVien.setTen(editedEmployee.getTen());
+        nhanVien.setHo(editedEmployee.getHo());
+        nhanVien.setEmail(editedEmployee.getEmail());
+        nhanVien.setGioiTinh(editedEmployee.getGioiTinh());
+        nhanVien.setNgaySinh(format.parse(editedEmployee.getNgaySinh()));
+        nhanVien.setQueQuan(editedEmployee.getQueQuan());
+        nhanVien.setDienThoai(editedEmployee.getDienThoai());
+        nhanVien.setImage(relativePath);
+        nhanVien.setNgayVaoLam(format.parse(editedEmployee.getNgayVaoLam()));
+
+        taiKhoan.setUsername(editedEmployee.getUsername());
+        taiKhoan.setPassword(editedEmployee.getPassword().isEmpty() ? taiKhoan.getPassword() : editedEmployee.getPassword());
+        taiKhoan.setActive(editedEmployee.isActive());
+
+        if (!taiKhoanRepository.suaTaiKhoanVaNhanVien(taiKhoan, nhanVien))
+            throw new Exception("Giao tac them that bai");
+    }
+
+    @Override
     public boolean checkPassword(AddDoctor addDoctor) {
         return addDoctor.getPassword().equals(addDoctor.getConfirmPassword());
+    }
+
+    @Override
+    public boolean checkPassword(AddEmployee addEmployee) {
+        return addEmployee.getPassword().equals(addEmployee.getConfirmPassword());
     }
 
     @Override
@@ -151,7 +251,17 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
     }
 
     @Override
+    public boolean checkExistedUsername(AddEmployee addEmployee) {
+        return getTaiKhoanByUsername(addEmployee.getUsername()) == null;
+    }
+
+    @Override
     public boolean checkNoChangeUsername(String id, AddDoctor addDoctor) {
         return getById(TaiKhoan.class, id).getUsername().equals(addDoctor.getUsername());
+    }
+
+    @Override
+    public boolean checkNoChangeUsername(String id, AddEmployee addEmployee) {
+        return getById(TaiKhoan.class, id).getUsername().equals(addEmployee.getUsername());
     }
 }

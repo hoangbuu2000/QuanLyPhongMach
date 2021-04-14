@@ -24,7 +24,7 @@
                 <li class="${appointmentAct}">
                     <a href="<c:url value="/appointment" />"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                 </li>
-                <li>
+                <li class="${scheduleAct}">
                     <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
                 </li>
                 <li>

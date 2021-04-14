@@ -1,6 +1,9 @@
 package com.dhb.springapp.service.implement;
 
 import com.dhb.springapp.models.NhanVien;
+import com.dhb.springapp.models.TaiKhoan;
+import com.dhb.springapp.modelview.AddDoctor;
+import com.dhb.springapp.modelview.AddEmployee;
 import com.dhb.springapp.repository.IGenericRepository;
 import com.dhb.springapp.repository.INhanVienRepository;
 import com.dhb.springapp.service.INhanVienService;
@@ -8,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +72,25 @@ public class NhanVienService extends GenericService<NhanVien> implements INhanVi
             result.setGioiTinh(nv.getGioiTinh());
         }
         return result;
+    }
+
+    @Override
+    public AddEmployee castEmployeeToModelView(NhanVien nhanVien, TaiKhoan taiKhoan, SimpleDateFormat format) {
+        AddEmployee employee = new AddEmployee();
+        employee.setTen(nhanVien.getTen());
+        employee.setHo(nhanVien.getHo());
+        employee.setEmail(nhanVien.getEmail());
+        employee.setUsername(taiKhoan.getUsername());
+        employee.setPassword(taiKhoan.getPassword());
+        employee.setConfirmPassword(taiKhoan.getPassword());
+        employee.setDienThoai(nhanVien.getDienThoai());
+        employee.setGioiTinh(nhanVien.getGioiTinh());
+        employee.setNgaySinh(format.format(nhanVien.getNgaySinh()));
+        employee.setQueQuan(nhanVien.getQueQuan());
+        employee.setUrlImg(nhanVien.getImage());
+        employee.setActive(taiKhoan.isActive());
+        employee.setNgayVaoLam(format.format(nhanVien.getNgayVaoLam()));
+
+        return employee;
     }
 }

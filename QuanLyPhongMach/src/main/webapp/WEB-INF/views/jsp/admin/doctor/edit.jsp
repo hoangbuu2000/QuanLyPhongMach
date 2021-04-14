@@ -66,8 +66,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label><spring:message code="add.body.label.dob" /></label>
-                                <div class="clear-cal-icon">
-                                    <form:input path="ngaySinh" cssClass="form-control" type="date" />
+                                <div class="cal-icon">
+                                    <form:input path="ngaySinh" cssClass="form-control datetimepicker" />
                                     <form:errors path="ngaySinh" cssClass="text-danger" />
                                 </div>
                             </div>
