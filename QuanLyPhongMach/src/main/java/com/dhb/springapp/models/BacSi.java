@@ -35,7 +35,7 @@ public class BacSi implements Serializable {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
-    public TaiKhoan taiKhoan;
+    private TaiKhoan taiKhoan;
     @OneToMany(mappedBy = "bacSi", fetch = FetchType.LAZY)
     private Set<ChiTietCaKhamBenh> dsChiTietCaKhamBenh;
 

@@ -31,4 +31,9 @@ public class CaKhamBenhService extends GenericService<CaKhamBenh> implements ICa
     public List<CaKhamBenh> layCaKhamTheoNgayKham(Date ngayKhamBenh) {
         return caKhamBenhRepository.layCaKhamTheoNgayKham(ngayKhamBenh);
     }
+
+    @Override
+    public List<CaKhamBenh> layCaKhamConTrong(Date ngayKhamBenh) {
+        return caKhamBenhRepository.layCaKhamConTrong(ngayKhamBenh);
+    }
 }

@@ -9,4 +9,5 @@ import java.util.List;
 public interface ICaKhamBenhService extends IGenericService<CaKhamBenh> {
     List<BacSi> layBacSiTheoCaKham(int id, Date ngayKhamBenh);
     List<CaKhamBenh> layCaKhamTheoNgayKham(Date ngayKhamBenh);
+    List<CaKhamBenh> layCaKhamConTrong(Date ngayKhamBenh);
 }

@@ -36,6 +36,7 @@ public class NhanVien implements Serializable {
     private TaiKhoan taiKhoan;
     @OneToMany(mappedBy = "nhanVien", fetch = FetchType.LAZY)
     private Set<HoaDon> dsHoaDon;
+
     public String getId() {
         return id;
     }

@@ -29,4 +29,13 @@ public class CaKhamBenhRepository extends GenericRepository<CaKhamBenh> implemen
                 .addEntity(CaKhamBenh.class).setParameter("d", ngayKhamBenh).getResultList();
         return result;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<CaKhamBenh> layCaKhamConTrong(Date ngayKhamBenh) {
+        List<CaKhamBenh> result;
+        result = currentSession().createSQLQuery("CALL getCaKhamBenhConTrong(:d)")
+                .addEntity(CaKhamBenh.class).setParameter("d", ngayKhamBenh).getResultList();
+        return result;
+    }
 }

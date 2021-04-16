@@ -1,5 +1,7 @@
 package com.dhb.springapp.service.implement;
 
+import com.dhb.springapp.models.BacSi;
+import com.dhb.springapp.models.CaKhamBenh;
 import com.dhb.springapp.models.ChiTietCaKhamBenh;
 import com.dhb.springapp.repository.IChiTietCaKhamBenhRepository;
 import com.dhb.springapp.repository.IGenericRepository;
@@ -7,6 +9,8 @@ import com.dhb.springapp.service.IChiTietCaKhamBenhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class ChiTietCaKhamBenhService extends GenericService<ChiTietCaKhamBenh> implements IChiTietCaKhamBenhService {
@@ -16,5 +20,26 @@ public class ChiTietCaKhamBenhService extends GenericService<ChiTietCaKhamBenh> 
     public ChiTietCaKhamBenhService(@Qualifier("chiTietCaKhamBenhRepository")IGenericRepository<ChiTietCaKhamBenh> genericRepository) {
         super(genericRepository);
         this.chiTietCaKhamBenhRepository = (IChiTietCaKhamBenhRepository) genericRepository;
+    }
+
+    @Override
+    public boolean checkExistedSchedule(BacSi bacSi, CaKhamBenh caKhamBenh, Date ngayKhamBenh) {
+        return chiTietCaKhamBenhRepository.getAll(ChiTietCaKhamBenh.class).stream()
+                .anyMatch(ct -> ct.getBacSi().getId().equals(bacSi.getId())
+                        && ct.getCaKhamBenh().getId() == caKhamBenh.getId()
+                        && ct.getNgayKhamBenh().getYear() == ngayKhamBenh.getYear()
+                        && ct.getNgayKhamBenh().getMonth() == ngayKhamBenh.getMonth()
+                        && ct.getNgayKhamBenh().getDate() == ngayKhamBenh.getDate());
+    }
+
+    @Override
+    public ChiTietCaKhamBenh getExistedSchedule(BacSi bacSi, CaKhamBenh caKhamBenh, Date ngayKhamBenh) {
+        return chiTietCaKhamBenhRepository.getAll(ChiTietCaKhamBenh.class).stream()
+                .filter(ct -> ct.getBacSi().getId().equals(bacSi.getId())
+                        && ct.getCaKhamBenh().getId() == caKhamBenh.getId()
+                        && ct.getNgayKhamBenh().getYear() == ngayKhamBenh.getYear()
+                        && ct.getNgayKhamBenh().getMonth() == ngayKhamBenh.getMonth()
+                        && ct.getNgayKhamBenh().getDate() == ngayKhamBenh.getDate()
+                ).findFirst().orElse(null);
     }
 }

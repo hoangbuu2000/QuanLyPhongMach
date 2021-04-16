@@ -19,6 +19,18 @@ public class ChiTietCaKhamBenh implements Serializable {
     @JoinColumn(name = "MaBacSi")
     private BacSi bacSi;
 
+    @Transient
+    private String ngayKham;
+
+    @Override
+    public String toString() {
+        return "ChiTietCaKhamBenh{" +
+                "ngayKhamBenh=" + ngayKhamBenh +
+                ", caKhamBenh=" + caKhamBenh +
+                ", bacSi=" + bacSi +
+                '}';
+    }
+
     public Date getNgayKhamBenh() {
         return ngayKhamBenh;
     }
@@ -41,5 +53,13 @@ public class ChiTietCaKhamBenh implements Serializable {
 
     public void setBacSi(BacSi bacSi) {
         this.bacSi = bacSi;
+    }
+
+    public String getNgayKham() {
+        return ngayKham;
+    }
+
+    public void setNgayKham(String ngayKham) {
+        this.ngayKham = ngayKham;
     }
 }
