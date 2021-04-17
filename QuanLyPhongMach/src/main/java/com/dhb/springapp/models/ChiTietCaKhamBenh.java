@@ -9,6 +9,7 @@ import java.util.Date;
 public class ChiTietCaKhamBenh implements Serializable {
     @Id
     @Column(name = "NgayKhamBenh")
+    @Temporal(TemporalType.DATE)
     private Date ngayKhamBenh;
     @Id
     @ManyToOne

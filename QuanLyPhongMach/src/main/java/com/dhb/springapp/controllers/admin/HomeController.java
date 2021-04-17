@@ -30,6 +30,8 @@ public class HomeController {
         model.addAttribute("employeeAct", "");
         model.addAttribute("scheduleAct", "");
         model.addAttribute("appointmentAct", "");
+        model.addAttribute("diseaseAct", "");
+        model.addAttribute("medicineAct", "");
     }
 
     @GetMapping()

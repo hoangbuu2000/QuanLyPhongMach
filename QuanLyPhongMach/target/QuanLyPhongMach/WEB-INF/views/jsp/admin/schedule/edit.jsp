@@ -275,7 +275,11 @@
 </div>
 
 <script>
-
+    $.fn.sortSelect = function () {
+        let op = this.children("option");
+        op.sort((a, b) => a.text > b.text ? 1 : -1);
+        return this.empty().append(op);
+    }
 
     function pickDate(obj) {
         if (obj.value != "" && moment(obj.value, "DD/MM/YYYY").isValid()) {
@@ -289,9 +293,16 @@
             $.getJSON("/schedule/api/shifts?date=" + ngayKham).done(function (task) {
                 console.log("DONE: ", JSON.stringify(task));
                 let ds = task;
+                let flag = false;
                 for(let i = 0; i < ds.length; i++) {
                     console.log(ds[i].id);
+                    if (ds[i].id == '${schedule.caKhamBenh.id}')
+                        flag = true;
                     caKham.append(new Option(ds[i].tenCa, ds[i].id));
+                }
+                if (flag == false) {
+                    caKham.append(new Option('${schedule.caKhamBenh.tenCa}', '${schedule.caKhamBenh.id}'));
+                    caKham.sortSelect();
                 }
             });
         }

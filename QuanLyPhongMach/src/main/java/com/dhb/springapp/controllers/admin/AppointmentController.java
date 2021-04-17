@@ -38,6 +38,8 @@ public class AppointmentController {
         model.addAttribute("employeeAct", "");
         model.addAttribute("scheduleAct", "");
         model.addAttribute("appointmentAct", "active");
+        model.addAttribute("diseaseAct", "");
+        model.addAttribute("medicineAct", "");
     }
 
     @GetMapping()

@@ -25,20 +25,29 @@
                     <a href="<c:url value="/appointment" />"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                 </li>
                 <li class="${scheduleAct}">
-                    <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                    <a href="<c:url value="/schedule" />"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                </li>
+                <li class="${diseaseAct}">
+                    <a href="<c:url value="/disease" />"><i class="fa fa-deaf"></i> <span>Type of Disease</span></a>
+                </li>
+                <li class="${medicineAct}">
+                    <a href="<c:url value="/medicine" />"><i class="fa fa-eject"></i> <span>Medicines</span></a>
                 </li>
                 <li>
                     <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                 </li>
-                <li class="submenu ${employeeAct}">
-                    <a href="#"><i class="fa fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
-                    <ul style="display: none;">
-                        <li><a href="employees.html">Employees List</a></li>
-                        <li><a href="leaves.html">Leaves</a></li>
-                        <li><a href="holidays.html">Holidays</a></li>
-                        <li><a href="attendance.html">Attendance</a></li>
-                    </ul>
+                <li class="${employeeAct}">
+                    <a href="<c:url value="/employee" />"><i class="fa fa-user-plus"></i> <span>Employees List</span></a>
                 </li>
+<%--                <li class="submenu">--%>
+<%--                    <a href="#"><i class="fa fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>--%>
+<%--                    <ul style="display: none;">--%>
+<%--                        <li class="${employeeAct}"><a href="<c:url value="/employee" />">Employees List</a></li>--%>
+<%--                        <li><a href="leaves.html">Leaves</a></li>--%>
+<%--                        <li><a href="holidays.html">Holidays</a></li>--%>
+<%--                        <li><a href="attendance.html">Attendance</a></li>--%>
+<%--                    </ul>--%>
+<%--                </li>--%>
                 <li class="submenu">
                     <a href="#"><i class="fa fa-money"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
                     <ul style="display: none;">

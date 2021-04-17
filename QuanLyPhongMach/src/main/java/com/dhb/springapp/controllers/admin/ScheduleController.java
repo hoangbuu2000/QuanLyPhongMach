@@ -40,7 +40,10 @@ public class ScheduleController {
         model.addAttribute("patientAct", "");
         model.addAttribute("dashboard", "");
         model.addAttribute("employeeAct", "");
+        model.addAttribute("appointmentAct", "");
         model.addAttribute("scheduleAct", "active");
+        model.addAttribute("diseaseAct", "");
+        model.addAttribute("medicineAct", "");
 
         //Chi lay nhung ca kham benh con trong theo ngay
         model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
@@ -130,12 +133,13 @@ public class ScheduleController {
     public String editProcess(@ModelAttribute("schedule") @Valid ChiTietCaKhamBenh schedule,
                               BindingResult result, ModelMap model) throws ParseException {
         if (!result.hasErrors()) {
+            System.out.println(schedule.getNgayKham());
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             schedule.setNgayKhamBenh(format.parse(schedule.getNgayKham()));
 
             if (iChiTietCaKhamBenhService.checkExistedSchedule(schedule.getBacSi(),
                     schedule.getCaKhamBenh(),
-                    schedule.getNgayKhamBenh())) {
+                    format.parse(schedule.getNgayKham()))) {
                 ChiTietCaKhamBenh t = iChiTietCaKhamBenhService.update(schedule);
                 if (t != null)
                     return "redirect:/schedule";

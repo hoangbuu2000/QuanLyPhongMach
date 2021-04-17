@@ -38,6 +38,9 @@ public class EmployeeController {
         model.addAttribute("dashboard", "");
         model.addAttribute("employeeAct", "active");
         model.addAttribute("scheduleAct", "");
+        model.addAttribute("diseaseAct", "");
+        model.addAttribute("medicineAct", "");
+        model.addAttribute("appointmentAct", "");
     }
 
     @GetMapping()

@@ -35,6 +35,8 @@ public class DoctorController {
         model.addAttribute("employeeAct", "");
         model.addAttribute("scheduleAct", "");
         model.addAttribute("appointment", "");
+        model.addAttribute("diseaseAct", "");
+        model.addAttribute("medicineAct", "");
     }
 
     @GetMapping()
