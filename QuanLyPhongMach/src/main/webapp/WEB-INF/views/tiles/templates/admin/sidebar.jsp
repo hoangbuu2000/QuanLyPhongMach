@@ -33,6 +33,9 @@
                 <li class="${medicineAct}">
                     <a href="<c:url value="/medicine" />"><i class="fa fa-eject"></i> <span>Medicines</span></a>
                 </li>
+                <li class="${prescriptionAct}">
+                    <a href="<c:url value="/prescription" />"><i class="fa fa-paypal"></i> <span>Prescription</span></a>
+                </li>
                 <li>
                     <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                 </li>
