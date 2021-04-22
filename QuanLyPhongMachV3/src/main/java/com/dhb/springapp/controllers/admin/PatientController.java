@@ -187,31 +187,6 @@ public class PatientController {
 
                 medicines.put(thuoc, soLuong);
             });
-//            List<ChiTietToaThuoc> result = new ArrayList<>();
-//            iToaThuocService.getById(ToaThuoc.class, id).getDsChiTietToaThuoc().forEach(ct -> {
-//                ToaThuoc toaThuoc = new ToaThuoc();
-//                toaThuoc.setId(ct.getToaThuoc().getId());
-//                toaThuoc.setNgayKeToa(ct.getToaThuoc().getNgayKeToa());
-//                toaThuoc.setLoaiBenh(ct.getToaThuoc().getLoaiBenh());
-//                toaThuoc.setBenhNhan(ct.getToaThuoc().getBenhNhan());
-//                toaThuoc.setBacSi(ct.getToaThuoc().getBacSi());
-//
-//                Thuoc thuoc = new Thuoc();
-//                thuoc.setId(ct.getThuoc().getId());
-//                thuoc.setTenThuoc(ct.getThuoc().getTenThuoc());
-//                thuoc.setMoTa(ct.getThuoc().getMoTa());
-//                thuoc.setDonGia(ct.getThuoc().getDonGia());
-//                thuoc.setDonVi(ct.getThuoc().getDonVi());
-//
-//                ChiTietToaThuoc chiTietToaThuoc = new ChiTietToaThuoc();
-//                chiTietToaThuoc.setToaThuoc(toaThuoc);
-//                chiTietToaThuoc.setThuoc(thuoc);
-//                chiTietToaThuoc.setSoLuong(ct.getSoLuong());
-//                chiTietToaThuoc.setDonGia(ct.getDonGia());
-//                chiTietToaThuoc.setThanhTien(ct.getThanhTien());
-//
-//                result.a
-//            });
             ajaxResponse = mapper.writeValueAsString(medicines);
         }
         catch (JsonProcessingException e) {
