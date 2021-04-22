@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="page-wrapper" style="min-height: 754px;">
     <div class="content">
         <div class="row">
@@ -70,11 +71,25 @@
                                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
                                                        aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="edit-patient.html"><i
+                                                        <a class="dropdown-item" href="<c:url value="/patient/edit/${p.id}" />"><i
                                                                 class="fa fa-pencil m-r-5"></i> <spring:message code="patient.index.table.action.edit" /></a>
                                                         <a class="dropdown-item" href="#" data-toggle="modal"
-                                                           data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i>
+                                                           data-target="#delete_patient${p.id}"><i class="fa fa-trash-o m-r-5"></i>
                                                             <spring:message code="patient.index.table.action.delete" /></a>
+                                                    </div>
+                                                </div>
+                                                <div id="delete_patient${p.id}" class="modal fade delete-modal" role="dialog">
+                                                    <div class="modal-dialog modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-body text-center">
+                                                                <h3>Are you sure want to delete this Patient (${p.ten})?</h3>
+                                                                <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                                                                    <form:form action="/patient/delete/${p.id}" method="post">
+                                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                                    </form:form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>

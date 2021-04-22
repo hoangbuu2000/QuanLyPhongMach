@@ -1,8 +1,6 @@
 package com.dhb.springapp.formatters;
 
 import com.dhb.springapp.models.Thuoc;
-import com.dhb.springapp.service.IThuocService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 
 import java.text.ParseException;

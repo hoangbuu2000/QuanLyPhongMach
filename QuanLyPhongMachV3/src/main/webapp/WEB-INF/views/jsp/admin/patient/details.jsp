@@ -8,17 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <div class="page-wrapper">
     <div class="content">
         <table class="table table-responsive-md">
             <thead>
             <tr>
-                <td>Ho ten</td>
-                <td>Gioi tinh</td>
-                <td>Ngay sinh</td>
-                <td>Tuoi</td>
-                <td>Que quan</td>
-                <td>Dien thoai</td>
+                <td><spring:message code="patient.details.table.fullname" /></td>
+                <td><spring:message code="patient.details.table.gender" /></td>
+                <td><spring:message code="patient.details.table.dob" /></td>
+                <td><spring:message code="patient.details.table.age" /></td>
+                <td><spring:message code="patient.details.table.country" /></td>
+                <td><spring:message code="patient.details.table.phone" /></td>
             </tr>
             </thead>
             <tbody>

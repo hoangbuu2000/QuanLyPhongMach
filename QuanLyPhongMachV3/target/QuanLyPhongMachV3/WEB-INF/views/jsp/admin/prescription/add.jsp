@@ -112,12 +112,12 @@
                         <table id="table_medicine" class="table table-responsive-md">
                             <thead>
                             <tr>
-                                <td>STT</td>
-                                <td>Ten thuoc</td>
-                                <td>So luong</td>
-                                <td>Don vi</td>
-                                <td>Don gia</td>
-                                <td>Thanh tien</td>
+                                <td><spring:message code="prescription.add.table.medicine.num" /></td>
+                                <td><spring:message code="prescription.add.table.medicine.name" /></td>
+                                <td><spring:message code="prescription.add.table.medicine.quantity" /></td>
+                                <td><spring:message code="prescription.add.table.medicine.unit" /></td>
+                                <td><spring:message code="prescription.add.table.medicine.price" /></td>
+                                <td><spring:message code="prescription.add.table.medicine.total" /></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -130,7 +130,7 @@
                                         </td>
                                         <td id="select${i}">
                                             <select id="${i}" name="medicine" onchange="getUnitAndPrice(this)" class="medicine" class="form-control select">
-                                                <option value="0">Chon thuoc</option>
+                                                <option value="0"><spring:message code="prescription.add.table.medicine.select.label" /></option>
                                                 <c:forEach items="${medicines}" var="m">
                                                     <c:if test="${set.getKey().id == m.id}">
                                                         <option value="${m.id}" selected>${m.tenThuoc}</option>
@@ -154,11 +154,11 @@
                             <c:if test="${prescription.id == null}">
                                 <tr>
                                     <td class="stt">
-                                        1
+                                        <spring:message code="prescription.add.table.medicine.num.first" />
                                     </td>
                                     <td id="select1">
                                         <select id="1" name="medicine" onchange="getUnitAndPrice(this)" class="medicine" class="form-control select">
-                                            <option value="0" selected>Chon thuoc</option>
+                                            <option value="0" selected><spring:message code="prescription.add.table.medicine.select.label" /></option>
                                             <c:forEach items="${medicines}" var="m">
                                                 <option value="${m.id}">${m.tenThuoc}</option>
                                             </c:forEach>
@@ -175,12 +175,16 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <td colspan="5">Total:</td>
+                                <td colspan="5"><spring:message code="prescription.add.table.medicine.total" />:</td>
                                 <td colspan="1" id="total" class="right"></td>
                             </tr>
                             <tr>
                                 <td colspan="5"></td>
-                                <td colspan="1"><a href="javascript:;" onclick="addRow()" class="btn btn-primary">Them thuoc</a></td>
+                                <td colspan="1">
+                                    <a href="javascript:;" onclick="addRow()" class="btn btn-primary">
+                                        <spring:message code="prescription.add.table.medicine.add.more" />
+                                    </a>
+                                </td>
                             </tr>
                             </tfoot>
                         </table>
@@ -415,7 +419,7 @@
         $.getJSON("/medicine/api/getAll").done(function (task) {
             console.log("List Medicines: ", JSON.stringify(task));
             let ds = task;
-            obj.append(new Option("Chon thuoc", "0"));
+            obj.append(new Option("<spring:message code="prescription.add.table.medicine.select.label" />", "0"));
             for(let i = 0; i < ds.length; i++) {
                 console.log(ds[i].id);
                 obj.append(new Option(ds[i].tenThuoc, ds[i].id));
@@ -485,7 +489,7 @@
             '</td>' +
             '<td id="select'+ newStt +'">' +
             '<select id="'+ newStt +'" name="medicine" onchange="getUnitAndPrice(this)" class="medicine" class="form-control select">' +
-            '<option value="0" selected>Chon thuoc</option>' +
+            '<option value="0" selected><spring:message code="prescription.add.table.medicine.select.label" /></option>' +
             <c:forEach items="${medicines}" var="m">
             '<option value="${m.id}">${m.tenThuoc}</option>'+
             </c:forEach>

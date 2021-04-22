@@ -5,13 +5,19 @@ import com.dhb.springapp.models.BenhNhan;
 import com.dhb.springapp.models.LoaiBenh;
 import com.dhb.springapp.models.Thuoc;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 public class AddPrescription {
     private String id;
+    @NotEmpty(message = "validation.date.not.empty")
     private String date;
+    @NotNull(message = "validation.doctor.not.null")
     private BacSi doctor;
+    @NotNull(message = "validation.patient.not.null")
     private BenhNhan patient;
+    @NotNull(message = "validation.disease.not.null")
     private LoaiBenh disease;
     private Map<Thuoc, Integer> medicines;
 
