@@ -50,9 +50,9 @@ public class HoaDonRepository extends GenericRepository<HoaDon> implements IHoaD
             q.where(builder.between(root.get("ngayXuat").as(Date.class), format.parse(from),
                     format.parse(to)));
         else if ((from != null && !from.isEmpty()) && (to == null || to.isEmpty()))
-            q.where(builder.greaterThan(root.get("ngayXuat").as(Date.class), format.parse(from)));
+            q.where(builder.greaterThanOrEqualTo(root.get("ngayXuat").as(Date.class), format.parse(from)));
         else if ((from == null || from.isEmpty()) && (to != null && !to.isEmpty()))
-            q.where(builder.lessThan(root.get("ngayXuat").as(Date.class), format.parse(to)));
+            q.where(builder.lessThanOrEqualTo(root.get("ngayXuat").as(Date.class), format.parse(to)));
         return currentSession().createQuery(q).getResultList();
     }
 }

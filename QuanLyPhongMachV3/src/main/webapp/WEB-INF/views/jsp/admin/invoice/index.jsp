@@ -322,28 +322,26 @@
     </div>
 </div>
 
-
 <script>
     function searchInvoice() {
         let list = document.querySelectorAll("div.cal-icon > input");
-        let from = list[0];
-        let to = list[1];
-        $.getJSON("/invoice/search?from="+from.value+"&to="+to.value).done(function (task) {
+        let fromm = list[0].value;
+        let to = list[1].value;
+        $.getJSON("/invoice/search?from="+fromm+"&to="+to).done(function (task) {
             $('#table-data tbody tr').remove();
+            console.log(JSON.stringify(task));
             let ds = task;
             for(let i = 0; i < ds.length; i++) {
                 console.log(ds[i].id);
                 if (ds[i].id != null) {
-                    <c:set var="id">ds[i].id</c:set>
-                    <c:set var="ngayXuat">ds[i].ngayXuat</c:set>
                     $('#table-data').find('tbody').append(
                         '<tr>'+
-                        '<td>'+ i + 1 +'</td>'+
+                        '<td>'+ (parseInt(i) + 1) +'</td>'+
                         '<td>' +
-                        '<a href="<c:url value="/invoice/details?id=${id}" />">${id}</a>'+
+                        '<a href="/invoice/details?id='+ds[i].id+'">'+ds[i].id+'</a>'+
                         '</td>'+
                         '<td>'+ds[i].tenBenhNhan+'</td>'+
-                        '<td><fmt:formatDate value="${ngayXuat}" pattern="dd-MM-yyyy" />'+
+                        '<td>'+formatDate(ds[i].ngayXuat)+
                         '</td>'+
                         '<td>'+ds[i].tenNhanVien+'</td>'+
                         '<td>'+ds[i].tongTien+'</td>'+
@@ -357,28 +355,28 @@
                         '<i class="fa fa-ellipsis-v"></i></a>'+
                         '<div class="dropdown-menu dropdown-menu-right">'+
                         '<a class="dropdown-item" ' +
-                        'href="<c:url value="/invoice/addorupdate?id=${id}" />">'+
+                        'href="/invoice/addorupdate?id='+ds[i].id+'">'+
                         '<i class="fa fa-pencil m-r-5"></i> Edit</a>'+
                         '<a class="dropdown-item" ' +
-                        'href="<c:url value="/invoice/details?id=${id}" />">'+
+                        'href="/invoice/details?id='+ds[i].id+'">'+
                         '<i class="fa fa-eye m-r-5"></i> View</a>'+
                         '<a class="dropdown-item" href="#">' +
                         '<i class="fa fa-file-pdf-o m-r-5"></i> Download</a>'+
                         '<a class="dropdown-item" ' +
-                        'href="#" data-toggle="modal" data-target="#delete_invoice${id}">'+
+                        'href="#" data-toggle="modal" data-target="#delete_invoice'+ds[i].id+'">'+
                         '<i class="fa fa-trash-o m-r-5"></i> Delete</a>'+
                         '</div>'+
                         '</div>'+
-                        '<div id="delete_invoice${id}" class="modal fade delete-modal" role="dialog">'+
+                        '<div id="delete_invoice'+ds[i].id+'" class="modal fade delete-modal" role="dialog">'+
                         '<div class="modal-dialog modal-dialog-centered">'+
                         '<div class="modal-content">'+
                         '<div class="modal-body text-center">'+
                         '<h3>Are you sure want to delete this Invoice?</h3>'+
                         '<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">' +
                         'Close</a>'+
-                        '<form:form action="/invoice/delete/${id}" method="post">'+
+                        '<form action="/invoice/delete/'+ds[i].id+'" method="post">'+
                         '<button type="submit" class="btn btn-danger">Delete</button>'+
-                        '</form:form>'+
+                        '</form>'+
                         '</div>'+
                         '</div>'+
                         '</div>'+
@@ -391,5 +389,19 @@
 
             }
         })
+    }
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [day, month, year].join('-');
     }
 </script>

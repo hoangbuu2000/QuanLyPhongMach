@@ -131,7 +131,7 @@ public class InvoiceController {
                                 @RequestParam(value = "to", required = false)String to) {
         ObjectMapper mapper = new ObjectMapper();
         String ajaxResponse = "";
-        if (!(from == null || from.isEmpty() && to == null || to.isEmpty())) {
+        if (!((from == null || from.isEmpty()) && (to == null || to.isEmpty()))) {
             try {
                 List<SearchInvoice> result = new ArrayList<>();
                 iHoaDonService.getHoaDonFromTo(from, to).forEach(h -> {

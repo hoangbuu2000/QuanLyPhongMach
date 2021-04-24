@@ -48,13 +48,13 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
-                <a href="#" class="btn btn-success btn-block"> Search </a>
+                <a href="javascript:;" onclick="searchInvoice()" class="btn btn-success btn-block"> Search </a>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
-                    <table class="table table-striped custom-table mb-0">
+                    <table id="table-data" class="table table-striped custom-table mb-0">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -321,3 +321,87 @@
         </div>
     </div>
 </div>
+
+<script>
+    function searchInvoice() {
+        let list = document.querySelectorAll("div.cal-icon > input");
+        let fromm = list[0].value;
+        let to = list[1].value;
+        $.getJSON("/invoice/search?from="+fromm+"&to="+to).done(function (task) {
+            $('#table-data tbody tr').remove();
+            console.log(JSON.stringify(task));
+            let ds = task;
+            for(let i = 0; i < ds.length; i++) {
+                console.log(ds[i].id);
+                if (ds[i].id != null) {
+                    $('#table-data').find('tbody').append(
+                        '<tr>'+
+                        '<td>'+ (parseInt(i) + 1) +'</td>'+
+                        '<td>' +
+                        '<a href="/invoice/details?id='+ds[i].id+'">'+ds[i].id+'</a>'+
+                        '</td>'+
+                        '<td>'+ds[i].tenBenhNhan+'</td>'+
+                        '<td>'+formatDate(ds[i].ngayXuat)+
+                        '</td>'+
+                        '<td>'+ds[i].tenNhanVien+'</td>'+
+                        '<td>'+ds[i].tongTien+'</td>'+
+                        '<td>' +
+                        '<span class="custom-badge status-green">Paid</span>' +
+                        '</td>'+
+                        '<td class="text-right">'+
+                        '<div class="dropdown dropdown-action">'+
+                        '<a href="#" class="action-icon dropdown-toggle" ' +
+                        'data-toggle="dropdown" aria-expanded="false">' +
+                        '<i class="fa fa-ellipsis-v"></i></a>'+
+                        '<div class="dropdown-menu dropdown-menu-right">'+
+                        '<a class="dropdown-item" ' +
+                        'href="/invoice/addorupdate?id='+ds[i].id+'">'+
+                        '<i class="fa fa-pencil m-r-5"></i> Edit</a>'+
+                        '<a class="dropdown-item" ' +
+                        'href="/invoice/details?id='+ds[i].id+'">'+
+                        '<i class="fa fa-eye m-r-5"></i> View</a>'+
+                        '<a class="dropdown-item" href="#">' +
+                        '<i class="fa fa-file-pdf-o m-r-5"></i> Download</a>'+
+                        '<a class="dropdown-item" ' +
+                        'href="#" data-toggle="modal" data-target="#delete_invoice'+ds[i].id+'">'+
+                        '<i class="fa fa-trash-o m-r-5"></i> Delete</a>'+
+                        '</div>'+
+                        '</div>'+
+                        '<div id="delete_invoice'+ds[i].id+'" class="modal fade delete-modal" role="dialog">'+
+                        '<div class="modal-dialog modal-dialog-centered">'+
+                        '<div class="modal-content">'+
+                        '<div class="modal-body text-center">'+
+                        '<h3>Are you sure want to delete this Invoice?</h3>'+
+                        '<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">' +
+                        'Close</a>'+
+                        '<form action="/invoice/delete/'+ds[i].id+'" method="post">'+
+                        '<button type="submit" class="btn btn-danger">Delete</button>'+
+                        '</form>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</div>'+
+                        '</td>'+
+                        '</tr>'
+                    );
+                }
+
+            }
+        })
+    }
+
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [day, month, year].join('-');
+    }
+</script>
