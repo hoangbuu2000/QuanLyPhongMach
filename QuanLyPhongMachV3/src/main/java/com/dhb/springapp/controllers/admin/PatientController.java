@@ -48,6 +48,8 @@ public class PatientController {
         model.addAttribute("appointmentAct", "");
         model.addAttribute("diseaseAct", "");
         model.addAttribute("medicineAct", "");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
 
         model.addAttribute("danhSachLoaiBenh", iLoaiBenhService.getAll(LoaiBenh.class));
         model.addAttribute("danhSachCaKhamBenh", iCaKhamBenhService.getAll(CaKhamBenh.class));

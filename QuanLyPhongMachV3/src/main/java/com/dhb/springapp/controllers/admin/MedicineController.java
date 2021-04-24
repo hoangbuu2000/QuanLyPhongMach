@@ -32,6 +32,8 @@ public class MedicineController {
         model.addAttribute("appointmentAct", "");
         model.addAttribute("diseaseAct", "");
         model.addAttribute("medicineAct", "active");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
     }
 
     @GetMapping("/api/getAll")
@@ -93,7 +95,7 @@ public class MedicineController {
         return "medicine.add";
     }
 
-    @PostMapping
+    @PostMapping("/delete")
     public String delete(@RequestParam("id")String id) {
         if (id != null && !id.isEmpty()) {
             try {

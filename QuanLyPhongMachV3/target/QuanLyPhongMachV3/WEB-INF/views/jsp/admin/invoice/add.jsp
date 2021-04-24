@@ -23,60 +23,76 @@
                 </h4>
             </div>
         </div>
-        <form:form modelAttribute="invoice" method="post">
+        <form:form onsubmit="return false;" modelAttribute="invoice" method="post">
             <form:errors path="*" element="div" cssClass="text-danger" />
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label><spring:message code="invoice.add.label.doctor" /> <span class="text-danger">*</span></label>
+                                <label><spring:message code="invoice.add.label.employee" /> <span class="text-danger">*</span></label>
                                 <c:if test="${invoice.id != null}">
-                                    <form:select path="nhanVien" cssClass="form-control select" >
+                                    <form:select path="employee" cssClass="form-control select" >
                                         <c:forEach items="${employees}" var="d">
-                                            <c:if test="${d.id == invoice.nhanVien.id}">
+                                            <c:if test="${d.id == invoice.employee.id}">
                                                 <form:option value="${d.id}" label="${d.ten}" selected="true" />
                                             </c:if>
-                                            <c:if test="${d.id != invoice.doctor.id}">
+                                            <c:if test="${d.id != invoice.employee.id}">
                                                 <form:option value="${d.id}" label="${d.ten}" />
                                             </c:if>
                                         </c:forEach>
                                     </form:select>
                                 </c:if>
                                 <c:if test="${invoice.id == null}">
-                                    <form:select path="nhanVien" items="${employees}" itemLabel="ten" itemValue="id"
+                                    <form:select path="employee" items="${employees}" itemLabel="ten" itemValue="id"
                                                  cssClass="form-control select" />
                                 </c:if>
-                                <form:errors path="nhanVien" cssClass="text-danger" />
+                                <form:errors path="employee" cssClass="text-danger" />
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label><spring:message code="invoice.add.label.patient" /></label>
+                                <label><spring:message code="invoice.add.label.prescription" /></label>
                                 <c:if test="${invoice.id != null}">
-                                    <form:select path="toaThuoc" cssClass="form-control select" >
+                                    <form:select onchange="getDetails(this)" path="prescription" cssClass="form-control select" >
                                         <form:option value="0" label="Choose the prescription" />
                                         <c:forEach items="${prescriptions}" var="d">
-                                            <c:if test="${d.id == invoice.toaThuoc.id}">
+                                            <c:if test="${d.id == invoice.prescription.id}">
                                                 <form:option value="${d.id}" label="${d.displayName}" selected="true" />
                                             </c:if>
-                                            <c:if test="${d.id != invoice.patient.id}">
+                                            <c:if test="${d.id != invoice.prescription.id}">
                                                 <form:option value="${d.id}" label="${d.displayName}" />
                                             </c:if>
                                         </c:forEach>
                                     </form:select>
                                 </c:if>
                                 <c:if test="${invoice.id == null}">
-                                    <form:select onchange="getDetails(this)" path="toaThuoc" items="${prescriptions}"
-                                                 itemLabel="displayName"
-                                                 itemValue="id"
-                                                 cssClass="form-control select" />
+                                    <form:select onchange="getDetails(this)" path="prescription"
+                                                 cssClass="form-control select">
+                                        <form:option value="0" label="Choose the prescription" />
+                                        <c:forEach items="${prescriptions}" var="p">
+                                            <form:option value="${p.id}" label="${p.displayName}" />
+                                        </c:forEach>
+                                    </form:select>
                                 </c:if>
-                                <form:errors path="toaThuoc" cssClass="text-danger" />
+                                <form:errors path="prescription" cssClass="text-danger" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label><spring:message code="invoice.add.label.date" /></label>
+                                <c:if test="${invoice.id != null}">
+                                    <form:input path="date" cssClass="form-control datetimepicker" value="${invoice.date}" />
+                                </c:if>
+                                <c:if test="${invoice.id == null}">
+                                    <form:input path="date" cssClass="form-control datetimepicker" />
+                                </c:if>
+                                <form:errors path="date" cssClass="text-danger" />
                             </div>
                         </div>
                     </div>
 
+                    <form:hidden path="medicines" />
                     <table id="table-modal" class="table table-responsive-md">
                         <thead>
                         <tr>
@@ -94,15 +110,15 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <td colspan="6">Tien thuoc</td>
+                            <th colspan="7">Tien thuoc</th>
                             <td colspan="1">0 VND</td>
                         </tr>
                         <tr>
-                            <td colspan="6">Tien kham</td>
+                            <th colspan="7">Tien kham</th>
                             <td colspan="1">0 VND</td>
                         </tr>
                         <tr>
-                            <td colspan="6">Tong cong</td>
+                            <th colspan="7">Tong cong</th>
                             <td colspan="1">0 VND</td>
                         </tr>
                         </tfoot>
@@ -110,10 +126,10 @@
 
                     <div class="m-t-20 text-center">
                         <c:if test="${invoice.id != null}">
-                            <button class="btn btn-primary submit-btn"><spring:message code="invoice.edit.form.submit" /></button>
+                            <button onclick="setUp()" class="btn btn-primary submit-btn"><spring:message code="invoice.edit.form.submit" /></button>
                         </c:if>
                         <c:if test="${invoice.id == null}">
-                            <button class="btn btn-primary submit-btn"><spring:message code="invoice.add.form.submit" /></button>
+                            <button onclick="setUp()" class="btn btn-primary submit-btn"><spring:message code="invoice.add.form.submit" /></button>
                         </c:if>
                     </div>
                 </div>
@@ -368,6 +384,7 @@
                     e.append(
                         '<tr>'+
                         '<td class="stt">' + newStt +
+                        '<input type="hidden" value="'+id+'" '+
                         '</td>'+
                         '<td class="medicine">' + tenThuoc +
                         '</td>'+
@@ -380,6 +397,10 @@
                         '<td class="unit">' + donVi +
                         '</td>'+
                         '<td class="total">' + thanhTien +
+                        '</td>'+
+                        '<td>'+
+                        '<a class="btn btn-primary" href="javascript:;" onclick="deleteMedicine('+newStt+')">Delete'+
+                        '</a>'+
                         '</td>'+
                         '</tr>'
                     );
@@ -395,4 +416,52 @@
             })
         })
     }
+
+    function deleteMedicine(stt) {
+        let e = document.querySelector("#table-modal > tbody");
+        let els = document.getElementsByClassName("stt");
+        console.log("KhaKha");
+        for(let i = 0; i < els.length; i++) {
+            console.log(i);
+            if (els[i].innerText == stt) {
+                let thanhTien = e.rows[i].cells[6].innerText;
+                console.log("Thanh tien: ", thanhTien);
+                let tThuoc = $("#table-modal > tfoot > tr:first-child > td:last-child");
+                let moneyThuoc = tThuoc[0].innerText.substr(0, tThuoc[0].innerText.indexOf("V") - 1);
+                tThuoc.empty().append(parseInt(moneyThuoc) - parseInt(thanhTien) + " VND");
+                let tongCong = $("#table-modal > tfoot > tr:last-child > td:last-child");
+                let moneyTotal = tongCong[0].innerText.substr(0, tongCong[0].innerText.indexOf("V") - 1);
+                tongCong.empty().append(parseInt(moneyTotal) - parseInt(thanhTien) + " VND");
+                e.deleteRow(i);
+                break;
+            }
+        }
+    }
+
+    function setUp() {
+        let medicines = document.getElementsByClassName("stt");
+        let quantities = document.getElementsByClassName("quantity");
+
+        let hiddenInput = document.querySelector("input[type=hidden]#medicines");
+        let str = "";
+        for(let i = 0; i < medicines.length; i++) {
+            let medicine = medicines[i].childNodes[1].value;
+            let quantity = quantities[i].innerHTML;
+            console.log("MEDICINE ID: ", medicine);
+            console.log("QUANTITY: ", quantity);
+            if (medicine !== "" && quantity !== "")
+                str += medicine+"-"+quantity+";";
+        }
+        hiddenInput.value = str;
+        console.log("VALUE: ", str);
+
+        document.querySelector("form").submit();
+    }
+
+    <c:if test="${invoice.id != null}">
+        setTimeout(function () {
+            let e = document.getElementsByName("prescription")[0];
+            getDetails(e);
+        }, 500);
+    </c:if>
 </script>

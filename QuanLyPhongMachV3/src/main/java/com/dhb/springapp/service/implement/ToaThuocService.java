@@ -57,7 +57,7 @@ public class ToaThuocService extends GenericService<ToaThuoc> implements IToaThu
             toaThuoc.setNgayKeToa(format.parse(addPrescription.getDate()));
 
             List<ChiTietToaThuoc> chiTietToaThuocList = setUpChiTietToaThuoc(addPrescription, toaThuoc);
-            if (toaThuocRepository.addOrUpdate(id, toaThuoc, chiTietToaThuocList))
+            if (!toaThuocRepository.addOrUpdate(id, toaThuoc, chiTietToaThuocList))
                 throw new Exception("Giao tac them that bai");
 
         }

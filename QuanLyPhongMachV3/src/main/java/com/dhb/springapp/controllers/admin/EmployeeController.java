@@ -41,6 +41,8 @@ public class EmployeeController {
         model.addAttribute("diseaseAct", "");
         model.addAttribute("medicineAct", "");
         model.addAttribute("appointmentAct", "");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
     }
 
     @GetMapping()
@@ -162,7 +164,6 @@ public class EmployeeController {
                     nhanVienList = iNhanVienService.castPersistenceToTransient(
                             iNhanVienService.getAllOrderBy(NhanVien.class, "ten", Order.asc));
             }
-            nhanVienList.forEach(System.out::println);
             ajaxResponse = mapper.writeValueAsString(nhanVienList);
         }
         catch (JsonProcessingException e) {

@@ -36,8 +36,8 @@
                 <li class="${prescriptionAct}">
                     <a href="<c:url value="/prescription" />"><i class="fa fa-paypal"></i> <span>Prescription</span></a>
                 </li>
-                <li>
-                    <a href="departments.html"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
+                <li class="${invoiceAct}">
+                    <a href="<c:url value="/invoice" />"><i class="fa fa-hospital-o"></i> <span>Invoice</span></a>
                 </li>
                 <li class="${employeeAct}">
                     <a href="<c:url value="/employee" />"><i class="fa fa-user-plus"></i> <span>Employees List</span></a>

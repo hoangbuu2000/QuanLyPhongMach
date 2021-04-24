@@ -23,7 +23,7 @@ public class ToaThuoc implements Serializable {
     @ManyToOne
     @JoinColumn(name = "MaLoaiBenh")
     private LoaiBenh loaiBenh;
-    @OneToMany(mappedBy = "toaThuoc", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "toaThuoc", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<ChiTietToaThuoc> dsChiTietToaThuoc;
 
     @Transient

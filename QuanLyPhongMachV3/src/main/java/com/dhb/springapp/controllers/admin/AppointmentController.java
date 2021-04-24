@@ -40,6 +40,8 @@ public class AppointmentController {
         model.addAttribute("appointmentAct", "active");
         model.addAttribute("diseaseAct", "");
         model.addAttribute("medicineAct", "");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
     }
 
     @GetMapping()

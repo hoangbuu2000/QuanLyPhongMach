@@ -32,9 +32,22 @@ public class PrescriptionController {
     ILoaiBenhService iLoaiBenhService;
     @Autowired
     IThuocService iThuocService;
+    @Autowired
+    IHoaDonService iHoaDonService;
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
+        model.addAttribute("patientAct", "");
+        model.addAttribute("doctorAct", "");
+        model.addAttribute("dashboard", "");
+        model.addAttribute("employeeAct", "");
+        model.addAttribute("scheduleAct", "");
+        model.addAttribute("appointmentAct", "");
+        model.addAttribute("diseaseAct", "");
+        model.addAttribute("medicineAct", "");
+        model.addAttribute("prescriptionAct", "active");
+        model.addAttribute("invoiceAct", "");
+
         model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
         // Nen chi hien thi nhung benh nhan co lich kham trong ca kham do, khi nao can thi moi cho xem het benh nhan
 //        model.addAttribute("patients", iBenhNhanService.getBenhNhanCoLichKhamTheoThoiGianChoTruoc(new Date()));
@@ -70,7 +83,6 @@ public class PrescriptionController {
                                      BindingResult result, ModelMap model) {
         if (!result.hasErrors()) {
             try {
-                System.out.println("FROM CONTROLLER: " + addPrescription.getMedicines().toString());
                 iToaThuocService.addOrUpdate(id, addPrescription,
                         new SimpleDateFormat("dd/MM/yyyy"));
                 return "redirect:/prescription";
@@ -116,5 +128,22 @@ public class PrescriptionController {
             e.printStackTrace();
         }
         return ajaxResponse;
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam("id")String id) {
+        if (id != null && !id.isEmpty()) {
+            try {
+                ToaThuoc toaThuoc = iToaThuocService.getById(ToaThuoc.class, id);
+                HoaDon hoaDon = iHoaDonService.getHoaDonTheoToaThuoc(id);
+                iHoaDonService.delete(hoaDon);
+                iToaThuocService.delete(toaThuoc);
+                return "redirect:/prescription";
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "404";
     }
 }

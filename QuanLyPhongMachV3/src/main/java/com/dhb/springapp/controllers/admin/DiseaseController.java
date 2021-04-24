@@ -26,6 +26,8 @@ public class DiseaseController {
         model.addAttribute("scheduleAct", "");
         model.addAttribute("diseaseAct", "active");
         model.addAttribute("medicineAct", "");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
     }
 
     @GetMapping()

@@ -32,6 +32,8 @@ public class HomeController {
         model.addAttribute("appointmentAct", "");
         model.addAttribute("diseaseAct", "");
         model.addAttribute("medicineAct", "");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
     }
 
     @GetMapping()

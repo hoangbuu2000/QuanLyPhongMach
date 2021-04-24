@@ -526,4 +526,12 @@
         document.querySelector("form").submit();
     }
 
+    let listPrice = document.querySelectorAll(".total");
+    let total = 0;
+    for(let i = 0; i < listPrice.length; i++) {
+        if (!isNaN(parseInt(listPrice[i].innerHTML)))
+            total += parseInt(listPrice[i].innerText);
+    }
+    document.querySelector("#total").innerHTML = total.toString() + " VND";
+
 </script>

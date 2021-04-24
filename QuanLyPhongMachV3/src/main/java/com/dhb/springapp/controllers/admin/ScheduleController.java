@@ -44,6 +44,8 @@ public class ScheduleController {
         model.addAttribute("scheduleAct", "active");
         model.addAttribute("diseaseAct", "");
         model.addAttribute("medicineAct", "");
+        model.addAttribute("prescriptionAct", "");
+        model.addAttribute("invoiceAct", "");
 
         //Chi lay nhung ca kham benh con trong theo ngay
         model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
