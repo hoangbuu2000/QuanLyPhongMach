@@ -11,13 +11,17 @@ import com.dhb.springapp.service.ITaiKhoanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +69,22 @@ public class EmployeeController {
             if(iTaiKhoanService.checkPassword(addEmployee)) {
                 if (iTaiKhoanService.checkExistedUsername(addEmployee)) {
                     try {
-                        iTaiKhoanService.themTaiKhoanVaNhanVien(addEmployee, request);
+                        //chi luu duoc anh trong thu muc target tuk a trui
+                        MultipartFile img = addEmployee.getImage();
+                        String relativePath = "";
+                        String targetPath;
+                        if (img != null && !img.isEmpty()) {
+                            try{
+                                relativePath = "/resources/images/nhanvien/" + addEmployee.getUsername() + ".png";
+                                targetPath = request.getSession().getServletContext()
+                                        .getRealPath(String.format("/resources/images/nhanvien/%s.png", addEmployee.getUsername()));
+                                img.transferTo(new File(targetPath));
+                            }
+                            catch (IllegalStateException | IOException ex) {
+                                System.err.println(ex.getMessage());
+                            }
+                        }
+                        iTaiKhoanService.themTaiKhoanVaNhanVien(relativePath, addEmployee);
                         return "redirect:/employee";
                     }
                     catch (Exception e) {
@@ -113,8 +132,34 @@ public class EmployeeController {
                         && iTaiKhoanService.checkExistedUsername(editedEmployee)) {
 
                     try {
-                        iTaiKhoanService.suaTaiKhoanVaNhanVien(id, editedEmployee, request);
-                        return "redirect:/doctor";
+                        TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
+                        MultipartFile img = editedEmployee.getImage();
+                        String relativePath = "/resources/images/nhanvien/" + editedEmployee.getUsername() + ".png";
+                        String targetPath = request.getSession().getServletContext()
+                                .getRealPath(String.format("/resources/images/nhanvien/%s.png", editedEmployee.getUsername()));
+                        if (!iTaiKhoanService.checkNoChangeUsername(id, editedEmployee)) {
+                            relativePath = "/resources/images/nhanvien/" + editedEmployee.getUsername() + ".png";
+                            targetPath = request.getSession().getServletContext()
+                                    .getRealPath(String.format("/resources/images/nhanvien/%s.png", editedEmployee.getUsername()));
+                            String oldPath = request.getSession().getServletContext()
+                                    .getRealPath(String.format("/resources/images/nhanvien/%s.png", taiKhoan.getUsername()));
+                            File file = new File(oldPath);
+                            file.renameTo(new File(targetPath));
+                        }
+                        if (img != null && !img.isEmpty()) {
+                            try {
+                                String oldPath = request.getSession().getServletContext()
+                                        .getRealPath(String.format("/resources/images/nhanvien/%s.png", taiKhoan.getUsername()));
+                                File file = new File(oldPath);
+                                file.delete();
+                                img.transferTo(new File(targetPath));
+                            }
+                            catch (IllegalStateException | IOException ex) {
+                                System.err.println(ex.getMessage());
+                            }
+                        }
+                        iTaiKhoanService.suaTaiKhoanVaNhanVien(id, relativePath, editedEmployee);
+                        return "redirect:/employee";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
@@ -136,6 +181,12 @@ public class EmployeeController {
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {
         return "redirect:/employee";
+    }
+
+    @PostMapping("/deleteAjax")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAjax(@RequestParam("id")String id) {
+        iNhanVienService.delete(iNhanVienService.getById(NhanVien.class, id));
     }
 
     @GetMapping("/search")

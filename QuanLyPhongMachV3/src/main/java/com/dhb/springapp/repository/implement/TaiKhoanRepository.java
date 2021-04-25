@@ -1,5 +1,6 @@
 package com.dhb.springapp.repository.implement;
 
+import com.dhb.springapp.models.Admin;
 import com.dhb.springapp.models.BacSi;
 import com.dhb.springapp.models.NhanVien;
 import com.dhb.springapp.models.TaiKhoan;
@@ -64,6 +65,23 @@ public class TaiKhoanRepository extends GenericRepository<TaiKhoan> implements I
     public boolean suaTaiKhoanVaNhanVien(TaiKhoan taiKhoan, NhanVien nhanVien) {
         TaiKhoan t = update(taiKhoan);
         currentSession().saveOrUpdate(nhanVien);
+
+        return t != null;
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public boolean themTaiKhoanVaAdmin(TaiKhoan taiKhoan, Admin admin) {
+        TaiKhoan t = insert(taiKhoan);
+        currentSession().save(admin);
+
+        return t != null;
+    }
+
+    @Override
+    public boolean suaTaiKhoanVaAdmin(TaiKhoan taiKhoan, Admin admin) {
+        TaiKhoan t = update(taiKhoan);
+        currentSession().saveOrUpdate(admin);
 
         return t != null;
     }

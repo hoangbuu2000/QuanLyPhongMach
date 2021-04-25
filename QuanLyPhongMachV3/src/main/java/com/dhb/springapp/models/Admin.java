@@ -22,6 +22,12 @@ public class Admin implements Serializable {
     private String dienThoai;
     @Column(name = "Image", length = 100)
     private String image;
+    @Column(name = "QueQuan")
+    private String queQuan;
+    @Column(name = "Email")
+    private String email;
+    @Column(name = "NgayVaoLam")
+    private Date ngayVaoLam;
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
@@ -89,5 +95,29 @@ public class Admin implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getQueQuan() {
+        return queQuan;
+    }
+
+    public void setQueQuan(String queQuan) {
+        this.queQuan = queQuan;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getNgayVaoLam() {
+        return ngayVaoLam;
+    }
+
+    public void setNgayVaoLam(Date ngayVaoLam) {
+        this.ngayVaoLam = ngayVaoLam;
     }
 }

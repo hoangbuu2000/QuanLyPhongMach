@@ -12,9 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -61,7 +65,22 @@ public class DoctorController {
             if(iTaiKhoanService.checkPassword(addDoctor)) {
                 if (iTaiKhoanService.checkExistedUsername(addDoctor)) {
                     try {
-                        iTaiKhoanService.themTaiKhoanVaBacSi(addDoctor, request);
+                        //chi luu duoc anh trong thu muc target tuk a trui
+                        MultipartFile img = addDoctor.getImage();
+                        String relativePath = "";
+                        String targetPath;
+                        if (img != null && !img.isEmpty()) {
+                            try{
+                                relativePath = "/resources/images/bacsi/" + addDoctor.getUsername() + ".png";
+                                targetPath = request.getSession().getServletContext()
+                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", addDoctor.getUsername()));
+                                img.transferTo(new File(targetPath));
+                            }
+                            catch (IllegalStateException | IOException ex) {
+                                System.err.println(ex.getMessage());
+                            }
+                        }
+                        iTaiKhoanService.themTaiKhoanVaBacSi(relativePath, addDoctor);
                         return "redirect:/doctor";
                     }
                     catch (Exception e) {
@@ -112,7 +131,33 @@ public class DoctorController {
                             && iTaiKhoanService.checkExistedUsername(editedDoctor)) {
 
                         try {
-                            iTaiKhoanService.suaTaiKhoanVaBacSi(id, editedDoctor, request);
+                            TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
+                            MultipartFile img = editedDoctor.getImage();
+                            String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
+                            String targetPath = request.getSession().getServletContext()
+                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
+                            if (!iTaiKhoanService.checkNoChangeUsername(id, editedDoctor)) {
+                                relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
+                                targetPath = request.getSession().getServletContext()
+                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
+                                String oldPath = request.getSession().getServletContext()
+                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
+                                File file = new File(oldPath);
+                                file.renameTo(new File(targetPath));
+                            }
+                            if (img != null && !img.isEmpty()) {
+                                try {
+                                    String oldPath = request.getSession().getServletContext()
+                                            .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
+                                    File file = new File(oldPath);
+                                    file.delete();
+                                    img.transferTo(new File(targetPath));
+                                }
+                                catch (IllegalStateException | IOException ex) {
+                                    System.err.println(ex.getMessage());
+                                }
+                            }
+                            iTaiKhoanService.suaTaiKhoanVaBacSi(id, relativePath, editedDoctor);
                             return "redirect:/doctor";
                         }
                         catch (Exception e) {

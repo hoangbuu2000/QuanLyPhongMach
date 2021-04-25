@@ -10,10 +10,13 @@ import java.util.List;
 public interface ITaiKhoanService extends IGenericService<TaiKhoan> {
     TaiKhoan getTaiKhoanByUsername(String username);
     List<TaiKhoan> getTaiKhoanTheoChucVu(String kw);
-    void themTaiKhoanVaBacSi(AddDoctor addDoctor, HttpServletRequest request) throws Exception;
-    void suaTaiKhoanVaBacSi(String id, AddDoctor editedDoctor, HttpServletRequest request) throws Exception;
-    void themTaiKhoanVaNhanVien(AddEmployee addEmployee, HttpServletRequest request) throws Exception;
-    void suaTaiKhoanVaNhanVien(String id, AddEmployee editedEmployee, HttpServletRequest request) throws Exception;
+    void themTaiKhoanVaBacSi(String relativePath, AddDoctor addDoctor) throws Exception;
+    void suaTaiKhoanVaBacSi(String id, String relativePath, AddDoctor editedDoctor) throws Exception;
+    void themTaiKhoanVaNhanVien(String relativePath, AddEmployee addEmployee) throws Exception;
+    void suaTaiKhoanVaNhanVien(String id, String relativePath, AddEmployee editedEmployee) throws Exception;
+    void themTaiKhoanVaAdmin(String relativePath, AddEmployee addEmployee) throws  Exception;
+    void suaTaiKhoanVaAdmin(String id, String relativePath, AddEmployee addEmployee) throws Exception;
+
     boolean checkPassword(AddDoctor addDoctor);
     boolean checkPassword(AddEmployee addEmployee);
     boolean checkExistedUsername(AddDoctor addDoctor);

@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label><spring:message code="add.body.label.dob" /></label>
                                     <div class="clear-cal-icon">
-                                        <form:input path="ngaySinh" cssClass="form-control" type="date"/>
+                                        <form:input path="ngaySinh" cssClass="form-control"/>
                                     </div>
                                 </div>
                             </div>

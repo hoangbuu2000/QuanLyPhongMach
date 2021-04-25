@@ -34,7 +34,7 @@ public class NhanVien implements Serializable {
     @MapsId
     @JoinColumn(name = "id")
     private TaiKhoan taiKhoan;
-    @OneToMany(mappedBy = "nhanVien", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nhanVien", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<HoaDon> dsHoaDon;
 
     public String getId() {

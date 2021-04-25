@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Buu
-  Date: 08/04/2021
-  Time: 10:45 SA
+  Date: 25/04/2021
+  Time: 4:02 CH
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,34 +12,24 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-4 col-3">
-                <h4 class="page-title">Employee</h4>
+                <h4 class="page-title">Admin</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/employee/add" />" class="btn btn-primary float-right btn-rounded"><i
-                        class="fa fa-plus"></i> Add Employee</a>
+                <a href="<c:url value="/admin-management/add" />" class="btn btn-primary float-right btn-rounded"><i
+                        class="fa fa-plus"></i> Add Admin</a>
             </div>
         </div>
         <div class="row filter-row">
             <div class="col-sm-6 col-md-3">
                 <div class="form-group form-focus">
-                    <label class="focus-label">Employee ID</label>
-                    <input id="eplID" name="eplID" type="text" class="form-control floating">
+                    <label class="focus-label">Admin ID</label>
+                    <input id="adID" name="adID" type="text" class="form-control floating">
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group form-focus">
-                    <label class="focus-label">Employee Name</label>
-                    <input id="eplName" name="eplName" type="text" class="form-control floating">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group form-focus select-focus focused">
-                    <label class="focus-label">Role</label>
-                    <select class="select floating select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                        <option>Select Role</option>
-                        <option>Pharmacist</option>
-                    </select>
-                    <%--<span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-h9k8-container"><span class="select2-selection__rendered" id="select2-h9k8-container" title="Select Role">Select Role</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>--%>
+                    <label class="focus-label">Admin Name</label>
+                    <input id="adName" name="adName" type="text" class="form-control floating">
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
@@ -53,16 +43,15 @@
                         <thead>
                         <tr>
                             <th style="min-width:200px;">Name</th>
-                            <th>Employee ID</th>
+                            <th>Admin ID</th>
                             <th>Email</th>
                             <th>Mobile</th>
                             <th style="min-width: 110px;">Join Date</th>
-                            <th>Role</th>
                             <th class="text-right">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${employees}" var="e">
+                        <c:forEach items="${admins}" var="e">
                             <tr id="${e.id}">
                                 <td>
                                     <img width="28" height="28" src="<c:url value="${e.image}" />"
@@ -73,26 +62,23 @@
                                 <td>${e.email}</td>
                                 <td>${e.dienThoai}</td>
                                 <td><fmt:formatDate value="${e.ngayVaoLam}" pattern="dd-MM-yyyy"/></td>
-                                <td>
-                                    <span class="custom-badge status-green">Pharmacist</span>
-                                </td>
                                 <td class="text-right">
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
                                            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="<c:url value="/employee/edit/${e.id}" />"><i
+                                            <a class="dropdown-item" href="<c:url value="/admin-management/edit/${e.id}" />"><i
                                                     class="fa fa-pencil m-r-5"></i> Edit</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal"
-                                               data-target="#delete_employee${e.id}"><i class="fa fa-trash-o m-r-5"></i>
+                                               data-target="#delete_admin${e.id}"><i class="fa fa-trash-o m-r-5"></i>
                                                 Delete</a>
                                         </div>
                                     </div>
-                                    <div id="delete_employee${e.id}" class="modal fade delete-modal" role="dialog">
+                                    <div id="delete_admin${e.id}" class="modal fade delete-modal" role="dialog">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-body text-center">
-                                                    <h3>Are you sure want to delete this Employee (${e.ten})?</h3>
+                                                    <h3>Are you sure want to delete this admin (${e.ten})?</h3>
                                                     <div class="m-t-20"><a href="#" class="btn btn-white"
                                                                            data-dismiss="modal">Close</a>
                                                         <a href="javascript:;" onclick="deleteAjax(${e.id})" class="btn btn-danger" data-dismiss="modal">Delete</a>
@@ -330,9 +316,9 @@
 
 <script>
     function search1() {
-        let id = $('#eplID');
-        let name = $('#eplName');
-        $.getJSON('/employee/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
+        let id = $('#adID');
+        let name = $('#adName');
+        $.getJSON('/admin/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             $('#table-data tbody tr').remove();
             let ds = task;
@@ -357,15 +343,15 @@
                         '<div class="dropdown dropdown-action">' +
                         '<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>' +
                         '<div class="dropdown-menu dropdown-menu-right">' +
-                        '<a class="dropdown-item" href="/employee/edit/' + ds[i].id + '"><i class="fa fa-pencil m-r-5"></i> Edit</a>' +
-                        '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_employee' + ds[i].id + '"><i class="fa fa-trash-o m-r-5"></i> Delete</a>' +
+                        '<a class="dropdown-item" href="/admin-management/edit/' + ds[i].id + '"><i class="fa fa-pencil m-r-5"></i> Edit</a>' +
+                        '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_admin' + ds[i].id + '"><i class="fa fa-trash-o m-r-5"></i> Delete</a>' +
                         '</div>' +
                         '</div>' +
-                        '<div id="delete_employee' + ds[i].id + '" class="modal fade delete-modal" role="dialog">' +
+                        '<div id="delete_admin' + ds[i].id + '" class="modal fade delete-modal" role="dialog">' +
                         '<div class="modal-dialog modal-dialog-centered">' +
                         '<div class="modal-content">' +
                         '<div class="modal-body text-center">' +
-                        '<h3>Are you sure want to delete this Employee (' + ds[i].ten + ')?</h3>' +
+                        '<h3>Are you sure want to delete this admin (' + ds[i].ten + ')?</h3>' +
                         '<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>' +
                         '<a href="javascript:;" onclick="deleteAjax('+ds[i].id+')" class="btn btn-danger" data-dismiss="modal">Delete</a>' +
                         '</div>' +
@@ -397,7 +383,7 @@
     }
 
     function deleteAjax(id) {
-        fetch("/employee/deleteAjax?id="+id, {
+        fetch("/admin-management/deleteAjax?id="+id, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
