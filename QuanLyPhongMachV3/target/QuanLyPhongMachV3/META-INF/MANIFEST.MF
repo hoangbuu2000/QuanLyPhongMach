@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: Buu
-Build-Jdk: version 13.0.2
+Built-By: ndt05
+Build-Jdk: Azul Zulu Community™ version 13.0.6
+Implementation-Title: QuanLyPhongMachV3 Maven Webapp
+Implementation-Version: 1.0-SNAPSHOT
+Implementation-Vendor-Id: com.dhb
+Main-Class: ${start-class}
 

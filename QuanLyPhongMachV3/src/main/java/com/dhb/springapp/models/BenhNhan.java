@@ -28,7 +28,7 @@ public class BenhNhan implements Serializable {
     private String email;
     @OneToMany(mappedBy = "benhNhan", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<ToaThuoc> dsToaThuoc;
-    @OneToMany(mappedBy = "benhNhan", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "benhNhan", cascade = CascadeType.REMOVE)
     private Set<PhieuKhamBenh> dsPhieuKhamBenh;
 
     public String getId() {

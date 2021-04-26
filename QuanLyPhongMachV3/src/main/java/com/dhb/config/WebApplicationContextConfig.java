@@ -67,21 +67,20 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
 
         return resource;
     }
-
-    @Bean
-    public LocalValidatorFactoryBean getValidator() {
-        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-
-        bean.setValidationMessageSource(messageSource());
-        return bean;
-    }
+//
+//    @Bean
+//    public LocalValidatorFactoryBean getValidator() {
+//        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+//
+//        bean.setValidationMessageSource(messageSource());
+//        return bean;
+//    }
 
     @Bean(name = "localeResolver")
     public LocaleResolver getLocaleResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
         resolver.setCookieDomain("myAppLocaleDomain");
         resolver.setDefaultLocale(Locale.US);
-
         resolver.setCookieMaxAge(60*60);
         return resolver;
     }
