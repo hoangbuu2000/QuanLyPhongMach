@@ -37,17 +37,6 @@ public class PrescriptionController {
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
-        model.addAttribute("patientAct", "");
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("appointmentAct", "");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "active");
-        model.addAttribute("invoiceAct", "");
-
         model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
         // Nen chi hien thi nhung benh nhan co lich kham trong ca kham do, khi nao can thi moi cho xem het benh nhan
 //        model.addAttribute("patients", iBenhNhanService.getBenhNhanCoLichKhamTheoThoiGianChoTruoc(new Date()));

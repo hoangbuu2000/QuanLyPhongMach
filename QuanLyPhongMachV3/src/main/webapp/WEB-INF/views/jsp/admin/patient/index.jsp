@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="patient.index.page.title" /></h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="add-patient.html" class="btn btn btn-primary btn-rounded float-right"><i
+                <a href="<c:url value="/patient/add" />" class="btn btn btn-primary btn-rounded float-right"><i
                         class="fa fa-plus"></i> <spring:message code="patient.index.add" /></a>
             </div>
         </div>

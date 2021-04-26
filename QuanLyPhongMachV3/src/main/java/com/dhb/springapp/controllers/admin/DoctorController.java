@@ -23,27 +23,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Controller
-@ControllerAdvice
 @RequestMapping("/doctor")
 public class DoctorController {
     @Autowired
     private IBacSiService iBacSiService;
     @Autowired
     private ITaiKhoanService iTaiKhoanService;
-
-    @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctorAct", "active");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("appointment", "");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-    }
 
     @GetMapping()
     public String index(ModelMap model) {

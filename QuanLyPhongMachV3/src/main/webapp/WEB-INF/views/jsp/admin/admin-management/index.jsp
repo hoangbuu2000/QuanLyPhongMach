@@ -318,7 +318,7 @@
     function search1() {
         let id = $('#adID');
         let name = $('#adName');
-        $.getJSON('/admin/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
+        $.getJSON('/admin-management/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             $('#table-data tbody tr').remove();
             let ds = task;

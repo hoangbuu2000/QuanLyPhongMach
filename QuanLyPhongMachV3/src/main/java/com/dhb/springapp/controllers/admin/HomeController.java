@@ -14,27 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("admin.home")
-@ControllerAdvice
 @RequestMapping("/admin")
 public class HomeController {
     @Autowired
     IBacSiService iBacSiService;
     @Autowired
     IBenhNhanService iBenhNhanService;
-
-    @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        model.addAttribute("dashboard", "active");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("appointmentAct", "");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-    }
 
     @GetMapping()
     public String index(ModelMap model) {

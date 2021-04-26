@@ -36,17 +36,6 @@ public class ScheduleController {
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("appointmentAct", "");
-        model.addAttribute("scheduleAct", "active");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-
         //Chi lay nhung ca kham benh con trong theo ngay
         model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
     }

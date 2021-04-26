@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@ControllerAdvice
 @RequestMapping("/appointment")
 public class AppointmentController {
     @Autowired
@@ -29,20 +28,6 @@ public class AppointmentController {
     @Autowired
     private IBenhNhanService iBenhNhanService;
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-
-    @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("appointmentAct", "active");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-    }
 
     @GetMapping()
     public String index(ModelMap model) {

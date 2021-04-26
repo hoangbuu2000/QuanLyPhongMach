@@ -16,25 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@ControllerAdvice
 @RequestMapping("/medicine")
 public class MedicineController {
     @Autowired
     IThuocService iThuocService;
-
-    @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("appointmentAct", "");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "active");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-    }
 
     @GetMapping("/api/getAll")
     public @ResponseBody String getMedicines() {

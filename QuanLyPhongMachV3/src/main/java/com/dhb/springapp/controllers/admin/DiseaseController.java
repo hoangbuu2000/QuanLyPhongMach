@@ -11,24 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@ControllerAdvice
 @RequestMapping("/disease")
 public class DiseaseController {
     @Autowired
     ILoaiBenhService iLoaiBenhService;
-
-    @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("diseaseAct", "active");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-    }
 
     @GetMapping()
     public String index(ModelMap model) {

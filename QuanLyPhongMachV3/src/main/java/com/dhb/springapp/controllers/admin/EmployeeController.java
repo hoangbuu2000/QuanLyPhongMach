@@ -27,27 +27,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@ControllerAdvice
 @RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
     INhanVienService iNhanVienService;
     @Autowired
     ITaiKhoanService iTaiKhoanService;
-
-    @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("patientAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "active");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("appointmentAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "");
-    }
 
     @GetMapping()
     public String index(ModelMap model) {

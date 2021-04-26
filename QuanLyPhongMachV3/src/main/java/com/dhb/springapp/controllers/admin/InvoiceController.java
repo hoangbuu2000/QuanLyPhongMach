@@ -39,17 +39,6 @@ public class InvoiceController {
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
-        model.addAttribute("patientAct", "");
-        model.addAttribute("doctorAct", "");
-        model.addAttribute("dashboard", "");
-        model.addAttribute("employeeAct", "");
-        model.addAttribute("scheduleAct", "");
-        model.addAttribute("appointmentAct", "");
-        model.addAttribute("diseaseAct", "");
-        model.addAttribute("medicineAct", "");
-        model.addAttribute("prescriptionAct", "");
-        model.addAttribute("invoiceAct", "active");
-
         model.addAttribute("prescriptions", iToaThuocService.getAll(ToaThuoc.class));
         model.addAttribute("employees", iNhanVienService.getAll(NhanVien.class));
     }

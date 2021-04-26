@@ -1,11 +1,14 @@
 package com.dhb.springapp.controllers.admin;
 
+import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.models.Admin;
 import com.dhb.springapp.models.NhanVien;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.modelview.AddEmployee;
 import com.dhb.springapp.service.IAdminService;
 import com.dhb.springapp.service.ITaiKhoanService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,8 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @ControllerAdvice
@@ -157,5 +162,39 @@ public class AdminController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteAjax(@RequestParam("id")String id) {
         iAdminService.delete(iAdminService.getById(Admin.class, id));
+    }
+
+    @GetMapping("/search")
+    @ResponseBody
+    public String search(@RequestParam(value = "id", required = false) String id,
+                         @RequestParam(value = "name", required = false) String name) {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+        List<Admin> adminList = new ArrayList<>();
+        try {
+            if (id != null && !id.isEmpty()) {
+                if (name != null && !name.isEmpty()) {
+                    adminList = iAdminService.castPersistenceToTransient(
+                            iAdminService.getAdminTheoTenVaID(id, name));
+                }
+                else {
+                    adminList.add(iAdminService.castPersistenceToTransient(
+                            iAdminService.getById(Admin.class, id)));
+                }
+            }
+            else {
+                if (name != null && !name.isEmpty())
+                    adminList = iAdminService.castPersistenceToTransient(
+                            iAdminService.getAdminTheoTen(name));
+                else
+                    adminList = iAdminService.castPersistenceToTransient(
+                            iAdminService.getAllOrderBy(Admin.class, "ten", Order.asc));
+            }
+            ajaxResponse = mapper.writeValueAsString(adminList);
+        }
+        catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return ajaxResponse;
     }
 }

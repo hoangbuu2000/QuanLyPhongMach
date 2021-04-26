@@ -7,39 +7,76 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
+                <c:if test='${url == "/admin"}'>
+                    <c:set value="active" var="dashboard"/>
+                </c:if>
+                <c:if test='${url.contains("admin-management")}'>
+                    <c:set value="active" var="admin"/>
+                </c:if>
+                <c:if test='${url.contains("doctor")}'>
+                    <c:set value="active" var="doctor"/>
+                </c:if>
+                <c:if test='${url.contains("patient")}'>
+                    <c:set value="active" var="patient"/>
+                </c:if>
+                <c:if test='${url.contains("appointment")}'>
+                    <c:set value="active" var="appointment"/>
+                </c:if>
+                <c:if test='${url.contains("schedule")}'>
+                    <c:set value="active" var="schedule"/>
+                </c:if>
+                <c:if test='${url.contains("disease")}'>
+                    <c:set value="active" var="disease"/>
+                </c:if>
+                <c:if test='${url.contains("medicine")}'>
+                    <c:set value="active" var="medicine"/>
+                </c:if>
+                <c:if test='${url.contains("prescription")}'>
+                    <c:set value="active" var="prescription"/>
+                </c:if>
+                <c:if test='${url.contains("invoice")}'>
+                    <c:set value="active" var="invoice"/>
+                </c:if>
+                <c:if test='${url.contains("employee")}'>
+                    <c:set value="active" var="employee"/>
+                </c:if>
                 <li class="menu-title">Main</li>
                 <li class="${dashboard}">
                     <a href="<c:url value="/admin" />"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                 </li>
-                <li class="${doctorAct}">
+                <li class="${admin}">
+                    <a href="<c:url value="/admin-management" />"><i class="fa fa-star"></i> <span>Admin</span></a>
+                </li>
+                <li class="${doctor}">
                     <a href="<c:url value="/doctor" />"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                 </li>
-                <li class="${patientAct}">
+                <li class="${patient}">
                     <a href="<c:url value="/patient" />"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                 </li>
-                <li class="${appointmentAct}">
+                <li class="${appointment}">
                     <a href="<c:url value="/appointment" />"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                 </li>
-                <li class="${scheduleAct}">
+                <li class="${schedule}">
                     <a href="<c:url value="/schedule" />"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
                 </li>
-                <li class="${diseaseAct}">
+                <li class="${disease}">
                     <a href="<c:url value="/disease" />"><i class="fa fa-deaf"></i> <span>Type of Disease</span></a>
                 </li>
-                <li class="${medicineAct}">
+                <li class="${medicine}">
                     <a href="<c:url value="/medicine" />"><i class="fa fa-eject"></i> <span>Medicines</span></a>
                 </li>
-                <li class="${prescriptionAct}">
+                <li class="${prescription}">
                     <a href="<c:url value="/prescription" />"><i class="fa fa-paypal"></i> <span>Prescription</span></a>
                 </li>
-                <li class="${invoiceAct}">
+                <li class="${invoice}">
                     <a href="<c:url value="/invoice" />"><i class="fa fa-hospital-o"></i> <span>Invoice</span></a>
                 </li>
-                <li class="${employeeAct}">
+                <li class="${employee}">
                     <a href="<c:url value="/employee" />"><i class="fa fa-user-plus"></i> <span>Employees List</span></a>
                 </li>
 <%--                <li class="submenu">--%>
