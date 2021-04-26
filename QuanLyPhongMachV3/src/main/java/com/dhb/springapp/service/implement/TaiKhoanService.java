@@ -12,6 +12,10 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
@@ -25,7 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-@Service
+@Service("userDetailsService")
 public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKhoanService {
     private ITaiKhoanRepository taiKhoanRepository;
     @Autowired
@@ -236,5 +240,17 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
     @Override
     public boolean checkNoChangeUsername(String id, AddEmployee addEmployee) {
         return getById(TaiKhoan.class, id).getUsername().equals(addEmployee.getUsername());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        TaiKhoan users = taiKhoanRepository.getTaiKhoanByUsername(s);
+        if (users == null)
+            throw new UsernameNotFoundException("Username invalid");
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        authorities.add(new SimpleGrantedAuthority(String.valueOf(users.getRole().getId())));
+        return new org.springframework.security.core.userdetails.User(
+                users.getUsername(), users.getPassword(), authorities
+        );
     }
 }

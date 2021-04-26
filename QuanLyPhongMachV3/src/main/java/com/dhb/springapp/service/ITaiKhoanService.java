@@ -3,11 +3,12 @@ package com.dhb.springapp.service;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.modelview.AddDoctor;
 import com.dhb.springapp.modelview.AddEmployee;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public interface ITaiKhoanService extends IGenericService<TaiKhoan> {
+public interface ITaiKhoanService extends IGenericService<TaiKhoan>, UserDetailsService {
     TaiKhoan getTaiKhoanByUsername(String username);
     List<TaiKhoan> getTaiKhoanTheoChucVu(String kw);
     void themTaiKhoanVaBacSi(String relativePath, AddDoctor addDoctor) throws Exception;

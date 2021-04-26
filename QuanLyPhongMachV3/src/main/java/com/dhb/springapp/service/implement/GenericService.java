@@ -1,8 +1,12 @@
 package com.dhb.springapp.service.implement;
 
+import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.repository.IGenericRepository;
 import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.service.IGenericService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -10,6 +14,10 @@ import java.util.List;
 
 @Service
 public abstract class GenericService<T extends Serializable> implements IGenericService<T> {
+    @Autowired
+    @Qualifier("passwordEncoder")
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     private final IGenericRepository<T> genericRepository;
 
     public GenericService(IGenericRepository<T> genericRepository) {
@@ -18,6 +26,9 @@ public abstract class GenericService<T extends Serializable> implements IGeneric
 
     @Override
     public T insert(T t) {
+        if (t.getClass() == TaiKhoan.class){
+            ((TaiKhoan) t).setPassword(bCryptPasswordEncoder.encode(((TaiKhoan) t).getPassword()));
+        }
         return this.genericRepository.insert(t);
     }
 
