@@ -7,6 +7,7 @@ import com.dhb.springapp.service.IAdminService;
 import com.dhb.springapp.service.IBacSiService;
 import com.dhb.springapp.service.IBenhNhanService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,8 @@ class AdminServiceTest {
     }
 
     @Test
-    void getById() {
-        benhNhanService.getById(BenhNhan.class,"1851050168").getDsPhieuKhamBenh().forEach(i-> System.out.println(i.getId()));
+    void getByIdValid() {
+        Assertions.assertEquals(BenhNhan.class, benhNhanService.getById(BenhNhan.class, "1851050168").getClass());
     }
 
     @Test
