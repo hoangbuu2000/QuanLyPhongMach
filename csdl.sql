@@ -30,6 +30,9 @@ CREATE TABLE `admin` (
   `NgaySinh` date NOT NULL,
   `DienThoai` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `Image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `QueQuan` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `Email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `NgayVaoLam` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_admin_taikhoan` FOREIGN KEY (`id`) REFERENCES `taikhoan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -41,7 +44,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES ('1851050010','Dang','Buu','Nam','2000-02-04','0768107704','/resources/image/admin.png');
+INSERT INTO `admin` VALUES ('1851050010','Dang','Buu','Nam','2000-02-04','0768107704','/resources/image/admin.png',NULL,NULL,NULL);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -213,7 +216,7 @@ CREATE TABLE `chitiettoathuoc` (
 
 LOCK TABLES `chitiettoathuoc` WRITE;
 /*!40000 ALTER TABLE `chitiettoathuoc` DISABLE KEYS */;
-INSERT INTO `chitiettoathuoc` VALUES ('cfc45e18-718a-402b-8cf2-b3769f6406bb',1,1,35000,35000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',2,4,25000,100000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',3,2,30000,60000),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219',1,50,35000,1750000),('ffdfd1d0-c378-4365-b08f-fbe4b016d1f8',4,2,225000,450000),('TOATHUOC1',1,3,35000,105000),('TOATHUOC1',2,1,25000,25000);
+INSERT INTO `chitiettoathuoc` VALUES ('cfc45e18-718a-402b-8cf2-b3769f6406bb',1,2,35000,70000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',2,4,25000,100000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',3,1,30000,30000),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219',1,50,35000,1750000);
 /*!40000 ALTER TABLE `chitiettoathuoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -244,7 +247,7 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
-INSERT INTO `hoadon` VALUES ('HOADONSO1','TOATHUOC1','1851050105','2021-03-18 00:00:00',230000);
+INSERT INTO `hoadon` VALUES ('d6de45fc-ed8f-4c16-9df4-6827180569c5','d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','4023e5e5-2e07-4be2-8363-33919cbae9eb','2021-04-24 00:00:00',1750000),('e912245c-a603-4f94-bf33-230969be5f8b','cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050105','2021-04-23 00:00:00',200000);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -303,7 +306,7 @@ CREATE TABLE `nhanvien` (
 
 LOCK TABLES `nhanvien` WRITE;
 /*!40000 ALTER TABLE `nhanvien` DISABLE KEYS */;
-INSERT INTO `nhanvien` VALUES ('1851050105','Nguyen','Phuc','Nam','2000-01-01','0768107704',NULL,'1851050010buu@ou.edu.vn','2021-03-18','Tien Giang'),('4023e5e5-2e07-4be2-8363-33919cbae9eb','Nguyễn','Thị Nho','Nữ','2003-02-26','0768107704','/resources/images/nhanvien/nhoxanh123.png','nhoxanh@gmail.com','2021-04-14','Dong Thap');
+INSERT INTO `nhanvien` VALUES ('1851050105','Nguyen','Phuc','Nam','2000-01-01','0768107704',NULL,'1851050010buu@ou.edu.vn','2021-03-18','Tien Giang'),('4023e5e5-2e07-4be2-8363-33919cbae9eb','Nguyễn','Thị Nho','Nữ','2003-02-26','0768107704','/resources/images/nhanvien/nhoxanh123.png','nhoxanh@gmail.com','2021-04-14','Dong Thap'),('a5bf37da-aa43-47d8-a114-55dead327dda','Binh','Bao','Nam','2000-01-10','0768107704','/resources/images/nhanvien/baobinh1.png','baobinh@gmail.com','2021-04-25','Tien Giang');
 /*!40000 ALTER TABLE `nhanvien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -391,7 +394,7 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES ('0b645856-3f3b-461e-b5ac-ee7c91f4ffd3','miquangg2','123',_binary '',2),('1851050010','hoangbuu','123',_binary '',1),('1851050105','thienphuc','123',_binary '',3),('1851050169','phanhuy','123',_binary '',2),('1dd56d41-06b4-4de9-9aa1-8a522c156866','tuyetngoc12','123',_binary '',2),('21520e40-a02b-408c-b396-2caf61d38325','badoithong','123',_binary '',2),('294e0097-82d7-46f0-9a2a-41cc72ac07dd','nobita','123',_binary '',2),('307fc8f6-0814-48ba-840e-2356552addc9','xucana123','123',_binary '',2),('4023e5e5-2e07-4be2-8363-33919cbae9eb','nhoxanh123','1234',_binary '',3),('48a7ca08-532a-4be9-9979-26395cf2d8f8','trongnd123','123',_binary '',2),('4acc8f5a-cfbf-4e70-8b6a-90b09446a065','vidu1','123',_binary '',2),('5ae9a432-0d93-4996-bdd4-49d37bc8dfaa','test','123',_binary '',2),('5aee0eec-9c0c-49da-a5b3-63f729d6b141','bidao','123',_binary '',2),('74b46ffa-f87a-44cb-a841-9682c330744c','tester2','123456',_binary '',3),('7b8cdfad-7538-471e-84ea-8241939d9076','toilacongan113','1234',_binary '',2),('7e51e415-1d11-4bf9-8c48-a27194f9da25','doraemon123','123',_binary '',2),('86bf2f24-5eff-45ed-bc91-5207dcf31e51','hutieunamvang','',_binary '',2),('870fe48e-7d4e-44ab-81f9-3a9334212336','shizuka123','123',_binary '',2),('8afecf5e-4c1a-44d1-be7b-3c168069c998','suneo','123',_binary '',2),('98d44248-7fe6-4ca8-a1ab-a7d1b20d3cc1','lol123','123',_binary '',2),('a831455e-c0a6-4f89-b7e0-46c58ac6812a','tester3','123456',_binary '',3),('ad434e89-2dd8-493a-a1b7-29184f810c0f','ximuoi123','123',_binary '',2),('b8fafee7-ad34-4cdb-915a-b18a93d7e09b','behaicute','123',_binary '',2),('bef47dae-4279-4433-bb22-47c89a41988d','deki','123',_binary '',2),('d75380ea-c35e-47a8-ba42-694f25b0d137','banhtet','123',_binary '',2),('f257ab84-7d86-431b-a3b6-5ae8c73018c6','chaolong','123',_binary '',2),('fa4444c6-bd2f-4e7c-81cd-4a6c7c9a94ce','comsuon','123',_binary '',2);
+INSERT INTO `taikhoan` VALUES ('0b645856-3f3b-461e-b5ac-ee7c91f4ffd3','miquangg2','123',_binary '',2),('1611276f-27b1-4df3-95ed-490f6b0b0de3','baobinh','123',_binary '',3),('1851050010','hoangbuu','123',_binary '',1),('1851050105','thienphuc','123',_binary '',3),('1851050169','phanhuy','123',_binary '',2),('1dd56d41-06b4-4de9-9aa1-8a522c156866','tuyetngoc12','123',_binary '',2),('21520e40-a02b-408c-b396-2caf61d38325','badoithong','123',_binary '',2),('294e0097-82d7-46f0-9a2a-41cc72ac07dd','nobita','123',_binary '',2),('307fc8f6-0814-48ba-840e-2356552addc9','xucana123','123',_binary '',2),('4023e5e5-2e07-4be2-8363-33919cbae9eb','nhoxanh123','1234',_binary '',3),('48a7ca08-532a-4be9-9979-26395cf2d8f8','trongnd123','123',_binary '',2),('4acc8f5a-cfbf-4e70-8b6a-90b09446a065','vidu1','123',_binary '',2),('5ae9a432-0d93-4996-bdd4-49d37bc8dfaa','test','123',_binary '',2),('5aee0eec-9c0c-49da-a5b3-63f729d6b141','bidao','123',_binary '',2),('74b46ffa-f87a-44cb-a841-9682c330744c','tester2','123456',_binary '',3),('7b8cdfad-7538-471e-84ea-8241939d9076','toilacongan113','1234',_binary '',2),('7e51e415-1d11-4bf9-8c48-a27194f9da25','doraemon123','123',_binary '',2),('86bf2f24-5eff-45ed-bc91-5207dcf31e51','hutieunamvang','',_binary '',2),('870fe48e-7d4e-44ab-81f9-3a9334212336','shizuka123','123',_binary '',2),('8afecf5e-4c1a-44d1-be7b-3c168069c998','suneo','123',_binary '',2),('98d44248-7fe6-4ca8-a1ab-a7d1b20d3cc1','lol123','123',_binary '',2),('a5bf37da-aa43-47d8-a114-55dead327dda','baobinh1','123',_binary '',3),('a831455e-c0a6-4f89-b7e0-46c58ac6812a','tester3','123456',_binary '',3),('ad434e89-2dd8-493a-a1b7-29184f810c0f','ximuoi123','123',_binary '',2),('b8fafee7-ad34-4cdb-915a-b18a93d7e09b','behaicute','123',_binary '',2),('bef47dae-4279-4433-bb22-47c89a41988d','deki','123',_binary '',2),('d75380ea-c35e-47a8-ba42-694f25b0d137','banhtet','123',_binary '',2),('f257ab84-7d86-431b-a3b6-5ae8c73018c6','chaolong','123',_binary '',2),('fa4444c6-bd2f-4e7c-81cd-4a6c7c9a94ce','comsuon','123',_binary '',2);
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -451,9 +454,402 @@ CREATE TABLE `toathuoc` (
 
 LOCK TABLES `toathuoc` WRITE;
 /*!40000 ALTER TABLE `toathuoc` DISABLE KEYS */;
-INSERT INTO `toathuoc` VALUES ('cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050169','2f59ee78-902d-4de5-9ce1-9fb474e41b5f','2021-04-20 00:00:00',2),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','1dd56d41-06b4-4de9-9aa1-8a522c156866','487c07e9-762c-4b4b-9985-8103586ccd5c','2021-04-21 00:00:00',3),('ffdfd1d0-c378-4365-b08f-fbe4b016d1f8','1dd56d41-06b4-4de9-9aa1-8a522c156866','f82aa923-9768-4b0f-8bd6-3837ea66d0f9','2021-04-22 00:00:00',2),('TOATHUOC1','1851050169','1851050168','2021-03-18 00:00:00',1);
+INSERT INTO `toathuoc` VALUES ('cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050169','2f59ee78-902d-4de5-9ce1-9fb474e41b5f','2021-04-20 00:00:00',2),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','1dd56d41-06b4-4de9-9aa1-8a522c156866','487c07e9-762c-4b4b-9985-8103586ccd5c','2021-04-21 00:00:00',3);
 /*!40000 ALTER TABLE `toathuoc` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'java'
+--
+/*!50003 DROP FUNCTION IF EXISTS `tinhTienToaThuoc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `tinhTienToaThuoc`(id varchar(36)) RETURNS decimal(10,0)
+    READS SQL DATA
+    DETERMINISTIC
+BEGIN
+	declare tienkham decimal default 0;
+    declare tienthuoc decimal default 0;
+    declare tongtien decimal default 0;
+
+	select DonGia
+    into tienkham
+    from loaibenh, toathuoc
+    where loaibenh.id = toathuoc.MaLoaiBenh and toathuoc.id = id;
+    
+	select sum(ThanhTien)
+    into tienthuoc
+	from chitiettoathuoc
+	where MaToaThuoc = id;
+    
+    set tongtien = tienkham + tienthuoc;
+RETURN tongtien;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getBacSiById` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getBacSiById`(`id` varchar(36))
+BEGIN
+	select * 
+    from bacsi
+    where id = `id`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getBacSiTheoCaKhamBenh` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getBacSiTheoCaKhamBenh`(`MaCa` int, `NgayKham` date)
+BEGIN
+	select b.*
+    from chitietcakhambenh ct
+    inner join cakhambenh c on c.id = ct.MaCa
+    inner join bacsi b on b.id = ct.MaBacSi
+    where ct.MaCa = `MaCa` and ct.NgayKhamBenh= `NgayKham`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getBenhAnTheoMaBenhNhan` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getBenhAnTheoMaBenhNhan`(IN id varchar(36))
+BEGIN
+	select b.Ten as BacSi, t.NgayKeToa, l.TenBenh, l.MoTa, t.id as MaToaThuoc
+    from benhnhan n
+    inner join toathuoc t on t.MaBenhNhan = n.id
+    inner join chitiettoathuoc ct on ct.MaToaThuoc = t.id
+    inner join bacsi b on b.id = t.MaBacSi
+    inner join loaibenh l on l.id = t.MaLoaiBenh
+    where n.id = `id`
+    group by MaToaThuoc;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getBenhNhanCoLichKhamTheoThoiGianChoTruoc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getBenhNhanCoLichKhamTheoThoiGianChoTruoc`(`ngay` date, `ca` int)
+BEGIN
+	select b.*
+    from benhnhan b
+    inner join phieukhambenh p on p.MaBenhNhan = b.id
+    inner join cakhambenh c on c.id = p.MaCaKham
+    where p.NgayKham = `ngay` and c.id = `ca`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getBenhNhanTheoNgayKhamBenh` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getBenhNhanTheoNgayKhamBenh`(`ngayKham` datetime)
+BEGIN
+	select n.*
+    from benhnhan n
+    inner join toathuoc t on t.MaBenhNhan = n.id
+    where t.NgayKeToa = `ngayKham`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getCaKhamBenhConTrong` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCaKhamBenhConTrong`(`ngayKham` date)
+BEGIN
+	select *
+from cakhambenh
+where id not in (
+		select MaCa 
+        from chitietcakhambenh 
+        where NgayKhamBenh = `ngayKham` 
+        group by MaCa 
+        having count(*) >= 2)
+;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getCaKhamBenhTheoBacSiVaNgayKhamBenh` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCaKhamBenhTheoBacSiVaNgayKhamBenh`(`id` varchar(36), `date` date)
+BEGIN
+	select c.*
+    from chitietcakhambenh ct
+    inner join cakhambenh c on c.id = ct.MaCa
+    inner join bacsi b on b.id = ct.MaBacSi
+    where b.id = `id` and ct.NgayKhamBenh = `date`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getCaKhamBenhTheoNgayKham` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCaKhamBenhTheoNgayKham`(`date` date)
+BEGIN
+	select c.*
+    from chitietcakhambenh ct
+    inner join cakhambenh c on c.id = ct.MaCa
+    where ct.NgayKhamBenh = `date`
+    group by c.id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getThuocTheoMaToaThuoc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getThuocTheoMaToaThuoc`(`id` varchar(36))
+BEGIN
+	select th.*
+    from thuoc th
+    inner join chitiettoathuoc ct on ct.MaThuoc = th.id
+    where ct.MaToaThuoc = `id`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getTongDoanhThuTheoThang` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTongDoanhThuTheoThang`(`month` int)
+BEGIN
+	select sum(TongTien)
+    from hoadon h
+    where month(h.NgayXuat) = `month`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getTongSoTienKhamBenhTrongThang` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTongSoTienKhamBenhTrongThang`(`month` int)
+BEGIN
+	select sum(l.DonGia)
+    from toathuoc t
+    inner join loaibenh l on l.id = t.MaLoaiBenh
+    where month(t.NgayKeToa) = `month` and t.id not in (select MaToaThuoc from chitiettoathuoc);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getTongSoTienThuocBanDuocTrongThang` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTongSoTienThuocBanDuocTrongThang`(`month` int)
+BEGIN
+	select sum(ct.ThanhTien)
+    from toathuoc t 
+    inner join chitiettoathuoc ct on t.id = ct.MaToaThuoc
+    inner join thuoc th on th.id = ct.MaThuoc
+    inner join hoadon h on h.MaToaThuoc = t.id
+    where month(h.NgayXuat) = `month`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getTopNewPatients` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTopNewPatients`(`limit` int)
+BEGIN
+	select n.*
+    from benhnhan n
+    inner join phieukhambenh p on p.MaBenhNhan = n.id
+    order by p.NgayKham desc
+    limit `limit`;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `tinhTienToaThuoc` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `tinhTienToaThuoc`(in id varchar(36), out tongtien decimal)
+BEGIN
+	declare tienkham decimal default 0;
+    declare tienthuoc decimal default 0;
+
+	select DonGia
+    into tienkham
+    from loaibenh, toathuoc
+    where loaibenh.id = toathuoc.MaLoaiBenh and toathuoc.id = id;
+    
+	select sum(ThanhTien)
+    into tienthuoc
+	from chitiettoathuoc
+	where MaToaThuoc = id;
+    
+    set tongtien = tienkham + tienthuoc;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `xuatHoaDon` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `xuatHoaDon`(`id` varchar(36), `matoathuoc` varchar(36), 
+`manhanvien` varchar(36), `ngayxuat` datetime, `tongtien` decimal)
+BEGIN
+	insert into hoadon(id, MaToaThuoc, MaNhanVien, NgayXuat, TongTien)
+    values(`id`, `matoathuoc`, `manhanvien`, `ngayxuat`, `tongtien`);
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -464,4 +860,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-22 13:37:00
+-- Dump completed on 2021-04-26  9:34:47
