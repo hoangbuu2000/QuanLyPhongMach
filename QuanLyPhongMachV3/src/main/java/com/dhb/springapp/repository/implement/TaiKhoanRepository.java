@@ -79,6 +79,7 @@ public class TaiKhoanRepository extends GenericRepository<TaiKhoan> implements I
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean suaTaiKhoanVaAdmin(TaiKhoan taiKhoan, Admin admin) {
         TaiKhoan t = update(taiKhoan);
         currentSession().saveOrUpdate(admin);

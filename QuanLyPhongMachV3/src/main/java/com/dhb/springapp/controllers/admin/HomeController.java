@@ -42,6 +42,6 @@ public class HomeController {
         model.addAttribute("soLuongBenhNhan", iBenhNhanService.getAll(BenhNhan.class).size());
         model.addAttribute("danhSachBacSi", iBacSiService.getAll(BacSi.class));
         model.addAttribute("danhSachBenhNhanMoi", PatientUtil.getNewPatients(iBenhNhanService.getTopNewBenhNhan(10)));
-        return "admin.index";
+        return "dashboard.index";
     }
 }

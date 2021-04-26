@@ -16,6 +16,7 @@
             </div>
         </div>
         <form:form modelAttribute="doctor" action="/doctor/add" enctype="multipart/form-data" method="post">
+            <form:errors path="*" element="div" cssClass="text-danger" />
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <form>
@@ -59,7 +60,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label><spring:message code="add.body.label.dob" /></label>
-                                    <div class="clear-cal-icon">
+                                    <div class="cal-icon">
                                         <form:input path="ngaySinh" cssClass="form-control"/>
                                     </div>
                                 </div>

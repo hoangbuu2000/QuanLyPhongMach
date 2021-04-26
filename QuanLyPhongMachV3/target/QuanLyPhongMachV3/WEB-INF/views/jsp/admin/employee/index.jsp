@@ -95,7 +95,7 @@
                                                     <h3>Are you sure want to delete this Employee (${e.ten})?</h3>
                                                     <div class="m-t-20"><a href="#" class="btn btn-white"
                                                                            data-dismiss="modal">Close</a>
-                                                        <a href="javascript:;" onclick="deleteAjax(${e.id})" class="btn btn-danger" data-dismiss="modal">Delete</a>
+                                                        <a href="javascript:;" onclick="deleteAjax('${e.id}')" class="btn btn-danger" data-dismiss="modal">Delete</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -367,7 +367,7 @@
                         '<div class="modal-body text-center">' +
                         '<h3>Are you sure want to delete this Employee (' + ds[i].ten + ')?</h3>' +
                         '<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>' +
-                        '<a href="javascript:;" onclick="deleteAjax('+ds[i].id+')" class="btn btn-danger" data-dismiss="modal">Delete</a>' +
+                        '<a href="javascript:;" onclick="deleteAjax(\''+ds[i].id+'\')" class="btn btn-danger" data-dismiss="modal">Delete</a>' +
                         '</div>' +
                         '</div>' +
                         '</div>' +

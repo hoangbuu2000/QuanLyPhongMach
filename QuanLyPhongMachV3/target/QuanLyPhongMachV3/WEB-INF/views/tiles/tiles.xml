@@ -30,7 +30,7 @@
     </definition>
 
     <!-- Dashboard -->
-    <definition name="admin.index" extends="admin.definition">
+    <definition name="dashboard.index" extends="admin.definition">
         <put-attribute name="title" value="Admin" />
         <put-attribute name="body" value="/WEB-INF/views/jsp/admin/index.jsp" />
     </definition>
@@ -232,5 +232,27 @@
         <put-attribute name="body" value="/WEB-INF/views/jsp/admin/invoice/details.jsp" />
     </definition>
     <!-- End Invoice -->
+
+    <!-- Admin -->
+    <definition name="admin.index" extends="admin.definition">
+        <put-attribute name="title" value="List Admins" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/admin-management/index.jsp" />
+    </definition>
+
+    <definition name="admin.add" extends="admin.definition">
+        <put-attribute name="title" value="Add Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/admin-management/add.jsp" />
+    </definition>
+
+    <definition name="admin.edit" extends="admin.definition">
+        <put-attribute name="title" value="Edit Admin" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/admin-management/edit.jsp" />
+    </definition>
+
+    <definition name="admin.details" extends="admin.definition">
+        <put-attribute name="title" value="Admin Details" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/admin-management/details.jsp" />
+    </definition>
+    <!-- End Employee -->
 
 </tiles-definitions>
