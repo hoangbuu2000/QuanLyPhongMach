@@ -17,7 +17,7 @@
                 <h4 class="page-title"><spring:message code="schedule.add.page.title" /></h4>
             </div>
         </div>
-        <form:form modelAttribute="schedule" action="/schedule/add" enctype="multipart/form-data" method="post">
+        <form:form modelAttribute="schedule" enctype="multipart/form-data" method="post">
             <form:errors path="*" cssClass="text-danger" />
             <p class="text-info">${message}</p>
             <div class="row">
@@ -305,7 +305,7 @@
             let ngayKham = $("#ngayKham").val();
 
             caKham.append(new Option("Choose your shift", ""));
-            $.getJSON("/schedule/api/shifts?date=" + ngayKham).done(function (task) {
+            $.getJSON("/admin/schedule/api/shifts?date=" + ngayKham).done(function (task) {
                 console.log("DONE: ", JSON.stringify(task));
                 let ds = task;
                 for(let i = 0; i < ds.length; i++) {

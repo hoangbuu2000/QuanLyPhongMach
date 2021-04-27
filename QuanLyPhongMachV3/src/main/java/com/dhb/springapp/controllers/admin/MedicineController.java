@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/medicine")
+@RequestMapping("/admin/medicine")
 public class MedicineController {
     @Autowired
     IThuocService iThuocService;

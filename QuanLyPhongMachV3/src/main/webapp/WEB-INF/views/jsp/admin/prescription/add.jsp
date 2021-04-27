@@ -416,7 +416,7 @@
 <script>
     function getMedicines(obj) {
         obj.options.length = 0;
-        $.getJSON("/medicine/api/getAll").done(function (task) {
+        $.getJSON("/admin/medicine/api/getAll").done(function (task) {
             console.log("List Medicines: ", JSON.stringify(task));
             let ds = task;
             obj.append(new Option("<spring:message code="prescription.add.table.medicine.select.label" />", "0"));
@@ -432,11 +432,11 @@
         let quantity = document.querySelector('#quantity' + obj.id).value;
 
         if (thuocId != '0') {
-            $.getJSON("/prescription/api/getunit?id=" + thuocId).done(function (task) {
+            $.getJSON("/admin/prescription/api/getunit?id=" + thuocId).done(function (task) {
                 console.log("Unit: ", JSON.stringify(task));
                 document.querySelector('#select' + obj.id + ' ~ td.unit').innerHTML = task;
             });
-            $.getJSON("/prescription/api/getprice?id=" + thuocId).done(function (task) {
+            $.getJSON("/admin/prescription/api/getprice?id=" + thuocId).done(function (task) {
                 document.querySelector('#select' + obj.id + ' ~ td.price').innerHTML = task;
                 if (quantity == null)
                     document.querySelector('#select' + obj.id + ' ~ td.total').innerHTML = '0';
@@ -515,13 +515,10 @@
         for(let i = 0; i < medicines.length; i++) {
             let medicine = medicines[i].value;
             let quantity = quantities[i].value;
-            console.log("MEDICINE ID: ", medicine);
-            console.log("QUANTITY: ", quantity);
             if (medicine !== "" && quantity !== "")
                 str += medicine+"-"+quantity+";";
         }
         hiddenInput.value = str;
-        console.log("VALUE: ", str);
 
         document.querySelector("form").submit();
     }

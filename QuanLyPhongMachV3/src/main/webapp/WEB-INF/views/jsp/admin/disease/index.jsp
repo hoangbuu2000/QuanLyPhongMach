@@ -11,7 +11,7 @@
                 <h4 class="page-title"><spring:message code="disease.index.page.title" /></h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/disease/addorupdate" />" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <spring:message code="disease.index.add" /></a>
+                <a href="<c:url value="/admin/disease/addorupdate" />" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <spring:message code="disease.index.add" /></a>
             </div>
         </div>
         <div class="row">
@@ -36,11 +36,11 @@
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="<c:url value="/disease/addorupdate?id=${s.id}" />"><i class="fa fa-pencil m-r-5"></i> <spring:message code="disease.index.table.action.edit" /></a>
+                                            <a class="dropdown-item" href="<c:url value="/admin/disease/addorupdate?id=${s.id}" />"><i class="fa fa-pencil m-r-5"></i> <spring:message code="disease.index.table.action.edit" /></a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_disease${s.id}"><i class="fa fa-trash-o m-r-5"></i> <spring:message code="disease.index.table.action.delete" /></a>
                                         </div>
                                     </div>
-                                    <form:form action="/disease/delete?id=${s.id}" method="post">
+                                    <form:form action="/admin/disease/delete?id=${s.id}" method="post">
                                         <div id="delete_schedule${s.id}" class="modal fade delete-modal" role="dialog">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">

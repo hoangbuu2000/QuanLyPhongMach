@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @ControllerAdvice
-@RequestMapping("/prescription")
+@RequestMapping("/admin/prescription")
 public class PrescriptionController {
     @Autowired
     IToaThuocService iToaThuocService;

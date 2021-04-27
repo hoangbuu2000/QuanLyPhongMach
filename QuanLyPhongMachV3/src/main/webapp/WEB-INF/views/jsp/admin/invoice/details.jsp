@@ -40,7 +40,7 @@
                     <div class="dropdown dropdown-action">
                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="<c:url value="/invoice/addorupdate?id=${invoice.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                            <a class="dropdown-item" href="<c:url value="/admin/invoice/addorupdate?id=${invoice.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_invoice${invoice.id}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                                 <div class="modal-body text-center">
                                     <h3>Are you sure want to delete this Invoice?</h3>
                                     <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                        <form:form action="/invoice/delete?id=${invoice.id}" method="post">
+                                        <form:form action="/admin/invoice/delete?id=${invoice.id}" method="post">
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form:form>
                                     </div>

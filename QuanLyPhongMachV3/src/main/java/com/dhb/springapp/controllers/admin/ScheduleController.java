@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 @Controller
 @ControllerAdvice
-@RequestMapping("/schedule")
+@RequestMapping("/admin/schedule")
 public class ScheduleController {
     @Autowired
     IChiTietCaKhamBenhService iChiTietCaKhamBenhService;

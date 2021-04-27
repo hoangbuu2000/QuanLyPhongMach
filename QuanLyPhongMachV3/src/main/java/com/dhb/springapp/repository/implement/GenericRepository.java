@@ -1,12 +1,14 @@
 package com.dhb.springapp.repository.implement;
 
 import com.dhb.springapp.enums.Order;
+import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.repository.IGenericRepository;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,10 @@ public abstract class GenericRepository<T extends Serializable> implements IGene
     @Qualifier("getSessionFactory")
     private LocalSessionFactoryBean sessionFactory;
 
+    @Autowired
+    @Qualifier("passwordEncoder")
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     protected Session currentSession() {
         return this.sessionFactory.getObject().getCurrentSession();
     }
@@ -28,6 +34,10 @@ public abstract class GenericRepository<T extends Serializable> implements IGene
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public T insert(T t) {
+        if (t.getClass() == TaiKhoan.class){
+            ((TaiKhoan) t).setPassword(bCryptPasswordEncoder.encode(((TaiKhoan) t).getPassword()));
+        }
+
         currentSession().save(t);
         return t;
     }
@@ -47,6 +57,10 @@ public abstract class GenericRepository<T extends Serializable> implements IGene
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public T update(T t) {
+        if (t.getClass() == TaiKhoan.class){
+            ((TaiKhoan) t).setPassword(bCryptPasswordEncoder.encode(((TaiKhoan) t).getPassword()));
+        }
+
         currentSession().saveOrUpdate(t);
         return t;
     }

@@ -256,8 +256,12 @@
     <!-- End Employee -->
 
     <!-- Login -->
-    <definition name="login" extends="admin.definition">
+    <definition name="login.definition" template="/WEB-INF/views/tiles/layouts/loginLayout.jsp">
         <put-attribute name="title" value="Login" />
+        <put-attribute name="body" value="" />
+    </definition>
+
+    <definition name="login" extends="login.definition">
         <put-attribute name="body" value="/WEB-INF/views/jsp/admin/authorize/login.jsp" />
     </definition>
 

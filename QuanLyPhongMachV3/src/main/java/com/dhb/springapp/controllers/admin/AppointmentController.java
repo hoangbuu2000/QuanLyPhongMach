@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/appointment")
+@RequestMapping("/admin/appointment")
 public class AppointmentController {
     @Autowired
     private IPhieuKhamBenhService iPhieuKhamBenhService;

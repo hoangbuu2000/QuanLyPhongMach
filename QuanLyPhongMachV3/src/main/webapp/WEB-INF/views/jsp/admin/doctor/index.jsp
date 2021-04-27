@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="index.body.page.title" /></h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/doctor/add" />" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <spring:message code="index.body.add.doctor" /></a>
+                <a href="<c:url value="/admin/doctor/add" />" class="btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <spring:message code="index.body.add.doctor" /></a>
             </div>
         </div>
         <div class="row doctor-grid">
@@ -24,23 +24,23 @@
                 <div class="col-md-4 col-sm-4  col-lg-3">
                     <div class="profile-widget">
                         <div class="doctor-img">
-                            <a class="avatar" href="profile.html"><img alt="" src="${bacSi.image}"></a>
+                            <a class="avatar" href="<c:url value="/admin/doctor/details/${bacSi.id}" />"><img alt="" src="${bacSi.image}"></a>
                         </div>
                         <div class="dropdown profile-action">
                             <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="<c:url value="/doctor/edit/${bacSi.id}" />"><i class="fa fa-pencil m-r-5"></i> <spring:message code="index.body.edit.doctor" /></a>
+                                <a class="dropdown-item" href="<c:url value="/admin/doctor/edit/${bacSi.id}" />"><i class="fa fa-pencil m-r-5"></i> <spring:message code="index.body.edit.doctor" /></a>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor${bacSi.id}"><i class="fa fa-trash-o m-r-5"></i> <spring:message code="index.body.delete.doctor" /></a>
                             </div>
                         </div>
-                        <h4 class="doctor-name text-ellipsis"><a href="profile.html">${bacSi.ten}</a></h4>
+                        <h4 class="doctor-name text-ellipsis"><a href="<c:url value="/admin/doctor/details/${bacSi.id}" />">${bacSi.ten}</a></h4>
                         <div class="doc-prof">${bacSi.dienThoai}</div>
                         <div class="user-country">
                             <i class="fa fa-map-marker"></i> ${bacSi.queQuan}
                         </div>
                     </div>
                 </div>
-                <form:form action="/doctor/delete/${bacSi.id}" method="post">
+                <form:form action="/admin/doctor/delete/${bacSi.id}" method="post">
                 <div id="delete_doctor${bacSi.id}" class="modal fade delete-modal" role="dialog">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">

@@ -123,7 +123,7 @@
 
 <script>
     function getDetails(id) {
-        $.getJSON("/patient/api/getDiseaseDetails?id="+id).done(function (task) {
+        $.getJSON("/admin/patient/api/getDiseaseDetails?id="+id).done(function (task) {
             let keys = Object.keys(task);
             let values = Object.values(task);
             let e = $("#table-modal > tbody");

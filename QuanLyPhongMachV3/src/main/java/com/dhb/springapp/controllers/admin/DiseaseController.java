@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/disease")
+@RequestMapping("/admin/disease")
 public class DiseaseController {
     @Autowired
     ILoaiBenhService iLoaiBenhService;

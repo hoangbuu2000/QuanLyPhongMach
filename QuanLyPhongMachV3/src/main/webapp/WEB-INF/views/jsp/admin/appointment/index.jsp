@@ -15,7 +15,7 @@
                 <h4 class="page-title">Appointments</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/appointment/add" />" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Appointment</a>
+                <a href="<c:url value="/admin/appointment/add" />" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Appointment</a>
             </div>
         </div>
         <div class="row">
@@ -48,7 +48,7 @@
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="edit-appointment.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="<c:url value="/admin/appointment/edit/${a.appointmentID}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_appointment${a.appointmentID}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                         </div>
                                     </div>
@@ -58,7 +58,7 @@
                                                 <div class="modal-body text-center">
                                                     <h3>Are you sure want to delete this Appointment ${a.appointmentID}?</h3>
                                                     <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                        <form:form action="/appointment/delete/${a.appointmentID}" method="post">
+                                                        <form:form action="/admin/appointment/delete/${a.appointmentID}" method="post">
                                                         <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form:form>
                                                     </div>

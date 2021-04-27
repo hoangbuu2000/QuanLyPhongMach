@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/employee")
+@RequestMapping("/admin/employee")
 public class EmployeeController {
     @Autowired
     INhanVienService iNhanVienService;

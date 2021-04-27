@@ -27,7 +27,7 @@ import java.util.List;
 
 @Controller
 @ControllerAdvice
-@RequestMapping("/admin-management")
+@RequestMapping("/admin/admin-management")
 public class AdminController {
     @Autowired
     IAdminService iAdminService;

@@ -18,7 +18,7 @@
                 <h4 class="page-title"><spring:message code="schedule.index.page.title" /></h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/schedule/add" />" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <spring:message code="schedule.index.add" /></a>
+                <a href="<c:url value="/admin/schedule/add" />" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> <spring:message code="schedule.index.add" /></a>
             </div>
         </div>
         <div class="row">
@@ -48,11 +48,11 @@
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="<c:url value="/schedule/edit/${s.bacSi.id}/${s.caKhamBenh.id}/${date}" />"><i class="fa fa-pencil m-r-5"></i> <spring:message code="schedule.index.table.action.edit" /></a>
+                                            <a class="dropdown-item" href="<c:url value="/admin/schedule/edit/${s.bacSi.id}/${s.caKhamBenh.id}/${date}" />"><i class="fa fa-pencil m-r-5"></i> <spring:message code="schedule.index.table.action.edit" /></a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_schedule${s.bacSi.id}${s.caKhamBenh.id}${date}"><i class="fa fa-trash-o m-r-5"></i> <spring:message code="schedule.index.table.action.delete" /></a>
                                         </div>
                                     </div>
-                                    <form:form action="/schedule/delete/${s.bacSi.id}/${s.caKhamBenh.id}/${date}" method="post">
+                                    <form:form action="/admin/schedule/delete/${s.bacSi.id}/${s.caKhamBenh.id}/${date}" method="post">
                                     <div id="delete_schedule${s.bacSi.id}${s.caKhamBenh.id}${date}" class="modal fade delete-modal" role="dialog">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
@@ -290,7 +290,7 @@
 
 <script>
     function deleteSchedule(maBacSi, maCaKham, ngayKham) {
-        fetch(`/schedule/delete/${maBacSi}/${maCaKham}/${ngayKham}`, {
+        fetch(`/admin/schedule/delete/`+maBacSi+`/`+maCaKham+`/`+ngayKham, {
             method: "delete",
             headers: {
                 "Content-Type": "application/json"

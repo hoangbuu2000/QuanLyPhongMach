@@ -23,7 +23,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Controller
-@RequestMapping("/doctor")
+@RequestMapping("/admin/doctor")
 public class DoctorController {
     @Autowired
     private IBacSiService iBacSiService;

@@ -26,7 +26,7 @@ import java.util.Map;
 
 @Controller
 @ControllerAdvice
-@RequestMapping("/invoice")
+@RequestMapping("/admin/invoice")
 public class InvoiceController {
     @Autowired
     IHoaDonService iHoaDonService;

@@ -15,7 +15,7 @@
                 <h4 class="page-title">Admin</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/admin-management/add" />" class="btn btn-primary float-right btn-rounded"><i
+                <a href="<c:url value="/admin/admin-management/add" />" class="btn btn-primary float-right btn-rounded"><i
                         class="fa fa-plus"></i> Add Admin</a>
             </div>
         </div>
@@ -67,7 +67,7 @@
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
                                            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="<c:url value="/admin-management/edit/${e.id}" />"><i
+                                            <a class="dropdown-item" href="<c:url value="/admin/admin-management/edit/${e.id}" />"><i
                                                     class="fa fa-pencil m-r-5"></i> Edit</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal"
                                                data-target="#delete_admin${e.id}"><i class="fa fa-trash-o m-r-5"></i>
@@ -318,7 +318,7 @@
     function search1() {
         let id = $('#adID');
         let name = $('#adName');
-        $.getJSON('/admin-management/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
+        $.getJSON('/admin/admin-management/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             $('#table-data tbody tr').remove();
             let ds = task;
@@ -343,7 +343,7 @@
                         '<div class="dropdown dropdown-action">' +
                         '<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>' +
                         '<div class="dropdown-menu dropdown-menu-right">' +
-                        '<a class="dropdown-item" href="/admin-management/edit/' + ds[i].id + '"><i class="fa fa-pencil m-r-5"></i> Edit</a>' +
+                        '<a class="dropdown-item" href="/admin/admin-management/edit/' + ds[i].id + '"><i class="fa fa-pencil m-r-5"></i> Edit</a>' +
                         '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_admin' + ds[i].id + '"><i class="fa fa-trash-o m-r-5"></i> Delete</a>' +
                         '</div>' +
                         '</div>' +
@@ -383,7 +383,7 @@
     }
 
     function deleteAjax(id) {
-        fetch("/admin-management/deleteAjax?id="+id, {
+        fetch("/admin/admin-management/deleteAjax?id="+id, {
             method: "POST",
             headers: {
                 "content-type": "application/json"

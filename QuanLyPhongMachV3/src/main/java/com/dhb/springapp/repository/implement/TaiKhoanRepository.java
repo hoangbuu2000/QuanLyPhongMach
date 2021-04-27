@@ -19,9 +19,8 @@ public class TaiKhoanRepository extends GenericRepository<TaiKhoan> implements I
     public TaiKhoan getTaiKhoanByUsername(String username) {
         Query q = currentSession().createQuery("From TaiKhoan where username=:u");
         q.setParameter("u", username);
-        q.setFirstResult(0);
 
-        return q.getResultList().size() == 0 ? null : (TaiKhoan) q.getResultList().get(0);
+        return q.getResultList().isEmpty() ? null : (TaiKhoan) q.getResultList().get(0);
     }
 
     @Override

@@ -20,7 +20,7 @@ import java.util.*;
 
 @Controller
 @ControllerAdvice
-@RequestMapping("/patient")
+@RequestMapping("/admin/patient")
 public class PatientController {
     @Autowired
     IBenhNhanService iBenhNhanService;

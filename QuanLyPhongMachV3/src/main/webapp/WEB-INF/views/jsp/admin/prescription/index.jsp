@@ -16,7 +16,7 @@
                 <h4 class="page-title">Prescription</h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/prescription/addorupdate" />" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add prescription</a>
+                <a href="<c:url value="/admin/prescription/addorupdate" />" class="btn btn-primary float-right btn-rounded"><i class="fa fa-plus"></i> Add prescription</a>
             </div>
         </div>
         <div class="row filter-row">
@@ -53,7 +53,7 @@
                         <tbody>
                         <c:forEach items="${prescriptions}" var="e">
                             <tr>
-                                <td><a href="<c:url value="/prescription/details?id=${e.id}" />">${e.id}</a></td>
+                                <td><a href="<c:url value="/admin/prescription/details?id=${e.id}" />">${e.id}</a></td>
                                 <td>
                                     <img width="28" height="28" src="<c:url value="${e.bacSi.image}" />" class="rounded-circle" alt="">
                                     <h2>${e.bacSi.ten}</h2>
@@ -65,7 +65,7 @@
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="<c:url value="/prescription/addorupdate?id=${e.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="<c:url value="/admin/prescription/addorupdate?id=${e.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_prescription${e.id}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                         </div>
                                     </div>
@@ -75,7 +75,7 @@
                                                 <div class="modal-body text-center">
                                                     <h3>Are you sure want to delete this Prescription?</h3>
                                                     <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                        <form:form action="/prescription/delete?id=${e.id}" method="post">
+                                                        <form:form action="/admin/prescription/delete?id=${e.id}" method="post">
                                                             <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form:form>
                                                     </div>
@@ -307,7 +307,7 @@
     function search1() {
         let id = $('#eplID');
         let name = $('#eplName');
-        $.getJSON('/prescription/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
+        $.getJSON('/admin/prescription/search?id=' + id.val() + '&name=' + name.val()).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             $('#table-data tbody tr').remove();
             let ds = task;
@@ -332,7 +332,7 @@
                         '<div class="dropdown dropdown-action">'+
                         '<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>'+
                         '<div class="dropdown-menu dropdown-menu-right">'+
-                        '<a class="dropdown-item" href="/prescription/edit/'+ds[i].id+'"><i class="fa fa-pencil m-r-5"></i> Edit</a>'+
+                        '<a class="dropdown-item" href="/admin/prescription/edit/'+ds[i].id+'"><i class="fa fa-pencil m-r-5"></i> Edit</a>'+
                         '<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_prescription'+ds[i].id+'"><i class="fa fa-trash-o m-r-5"></i> Delete</a>'+
                         '</div>'+
                         '</div>'+
@@ -342,7 +342,7 @@
                         '<div class="modal-body text-center">'+
                         '<h3>Are you sure want to delete this prescription ('+ds[i].ten+')?</h3>'+
                         '<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>'+
-                        '<form action="/prescription/delete/'+ds[i].id+'" method="post">'+
+                        '<form action="/admin/prescription/delete/'+ds[i].id+'" method="post">'+
                         '<button type="submit" class="btn btn-danger">Delete</button>'+
                         '</form>'+
                         '</div>'+

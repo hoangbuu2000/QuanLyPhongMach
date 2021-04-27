@@ -93,18 +93,41 @@
             <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
         </li>
         <li class="nav-item dropdown has-arrow">
+            <c:if test="${user.role.ten == 'ROLE_ADMIN'}">
             <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
-							<img class="rounded-circle" src="<c:url value="/resources/assets/img/user.jpg" />" width="24" alt="Admin">
+
+							<img class="rounded-circle" src="<c:url value="${user.admin.image}" />" width="24" alt="Admin">
 							<span class="status online"></span>
 						</span>
-                <span>Admin</span>
+                <span>${user.admin.ten}</span>
             </a>
+            </c:if>
+            <c:if test="${user.role.ten == 'ROLE_DOCTOR'}">
+                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img">
+
+							<img class="rounded-circle" src="<c:url value="${user.bacSi.image}" />" width="24" alt="Admin">
+							<span class="status online"></span>
+						</span>
+                    <span>${user.bacSi.ten}</span>
+                </a>
+            </c:if>
+            <c:if test="${user.role.ten == 'ROLE_EMPLOYEE'}">
+                <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+                        <span class="user-img">
+
+							<img class="rounded-circle" src="<c:url value="${user.nhanVien.image}" />" width="24" alt="Admin">
+							<span class="status online"></span>
+						</span>
+                    <span>${user.nhanVien.ten}</span>
+                </a>
+            </c:if>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="profile.html">My Profile</a>
                 <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
                 <a class="dropdown-item" href="settings.html">Settings</a>
-                <a class="dropdown-item" href="login.html">Logout</a>
+                <a class="dropdown-item" href="<c:url value="/logout" />">Logout</a>
             </div>
         </li>
     </ul>
@@ -114,7 +137,7 @@
             <a class="dropdown-item" href="profile.html">My Profile</a>
             <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
             <a class="dropdown-item" href="settings.html">Settings</a>
-            <a class="dropdown-item" href="login.html">Logout</a>
+            <a class="dropdown-item" href="<c:url value="/logout" />">Logout</a>
         </div>
     </div>
 </div>
