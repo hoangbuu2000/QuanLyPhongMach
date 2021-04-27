@@ -33,7 +33,7 @@
                     <div class="dropdown dropdown-action">
                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="<c:url value="/prescription/addorupdate?id=${prescription.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                            <a class="dropdown-item" href="<c:url value="/admin/prescription/addorupdate?id=${prescription.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_prescription${prescription.id}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                 <div class="modal-body text-center">
                                     <h3>Are you sure want to delete this Prescription?</h3>
                                     <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                        <form:form action="/prescription/delete?id=${prescription.id}" method="post">
+                                        <form:form action="/admin/prescription/delete?id=${prescription.id}" method="post">
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form:form>
                                     </div>

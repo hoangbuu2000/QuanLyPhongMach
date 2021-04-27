@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="patient.add.page.title" /></h4>
             </div>
         </div>
-        <form:form modelAttribute="patient" action="/appointment/add" method="post">
+        <form:form modelAttribute="patient" method="post">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="row">
@@ -377,7 +377,7 @@
         let bacSi = document.querySelector("select[name=bacSi]");
         bacSi.options.length = 0;
 
-        $.getJSON("/patient/ajax?date=" + ngayKham + "&shift=" + shift).done(function (task) {
+        $.getJSON("/admin/patient/ajax?date=" + ngayKham + "&shift=" + shift).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             let ds = task;
             for(let i = 0; i < ds.length; i++) {
@@ -389,7 +389,7 @@
 
     function getJson1(caKham, ngayKham) {
         caKham.append(new Option("Choose your shift", ""));
-        $.getJSON("/patient/ajax1?date=" + ngayKham).done(function (task) {
+        $.getJSON("/admin/patient/ajax1?date=" + ngayKham).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             let ds = task;
             for(let i = 0; i < ds.length; i++) {

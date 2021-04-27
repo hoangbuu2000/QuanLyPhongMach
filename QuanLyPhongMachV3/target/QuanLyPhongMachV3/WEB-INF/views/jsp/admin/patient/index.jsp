@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="patient.index.page.title" /></h4>
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
-                <a href="<c:url value="/patient/add" />" class="btn btn btn-primary btn-rounded float-right"><i
+                <a href="<c:url value="/admin/patient/add" />" class="btn btn btn-primary btn-rounded float-right"><i
                         class="fa fa-plus"></i> <spring:message code="patient.index.add" /></a>
             </div>
         </div>
@@ -61,7 +61,7 @@
                                     <tbody>
                                     <c:forEach items="${patient}" var="p">
                                         <tr role="row" class="odd">
-                                            <td><a href="<c:url value="/patient/details/${p.id}" />">${p.ten}</a></td>
+                                            <td><a href="<c:url value="/admin/patient/details/${p.id}" />">${p.ten}</a></td>
                                             <td>${p.tuoi}</td>
                                             <td>${p.gioiTinh}</td>
                                             <td>${p.dienThoai}</td>
@@ -71,7 +71,7 @@
                                                     <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown"
                                                        aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="<c:url value="/patient/edit/${p.id}" />"><i
+                                                        <a class="dropdown-item" href="<c:url value="/admin/patient/edit/${p.id}" />"><i
                                                                 class="fa fa-pencil m-r-5"></i> <spring:message code="patient.index.table.action.edit" /></a>
                                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                                            data-target="#delete_patient${p.id}"><i class="fa fa-trash-o m-r-5"></i>
@@ -84,7 +84,7 @@
                                                             <div class="modal-body text-center">
                                                                 <h3>Are you sure want to delete this Patient (${p.ten})?</h3>
                                                                 <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                                    <form:form action="/patient/delete/${p.id}" method="post">
+                                                                    <form:form action="/admin/patient/delete/${p.id}" method="post">
                                                                         <button type="submit" class="btn btn-danger">Delete</button>
                                                                     </form:form>
                                                                 </div>

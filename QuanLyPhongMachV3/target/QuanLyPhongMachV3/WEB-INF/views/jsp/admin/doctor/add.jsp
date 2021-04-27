@@ -15,7 +15,7 @@
                 <h4 class="page-title"><spring:message code="add.body.page.title" /></h4>
             </div>
         </div>
-        <form:form modelAttribute="doctor" action="/doctor/add" enctype="multipart/form-data" method="post">
+        <form:form modelAttribute="doctor" enctype="multipart/form-data" method="post">
             <form:errors path="*" element="div" cssClass="text-danger" />
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <label><spring:message code="add.body.label.dob" /></label>
                                     <div class="cal-icon">
-                                        <form:input path="ngaySinh" cssClass="form-control"/>
+                                        <form:input path="ngaySinh" cssClass="form-control datetimepicker"/>
                                     </div>
                                 </div>
                             </div>

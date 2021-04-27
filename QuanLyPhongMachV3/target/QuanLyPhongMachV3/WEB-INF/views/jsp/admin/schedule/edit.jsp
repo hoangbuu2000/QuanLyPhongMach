@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="schedule.edit.page.title" /></h4>
             </div>
         </div>
-        <form:form modelAttribute="schedule" action="/schedule/edit" method="post">
+        <form:form modelAttribute="schedule" method="post">
             <form:errors path="*" cssClass="text-danger" />
             <p class="text-info">${message}</p>
             <div class="row">
@@ -290,7 +290,7 @@
             let ngayKham = $("input[type=text]#ngayKham").val();
 
             caKham.append(new Option("Choose your shift", ""));
-            $.getJSON("/schedule/api/shifts?date=" + ngayKham).done(function (task) {
+            $.getJSON("/admin/schedule/api/shifts?date=" + ngayKham).done(function (task) {
                 console.log("DONE: ", JSON.stringify(task));
                 let ds = task;
                 let flag = false;

@@ -350,8 +350,8 @@
 <script>
     function getDetails(obj) {
         let id = obj.value;
-        $.getJSON("/invoice/api/getTienKham?idToaThuoc=" + id).done(function (res) {
-            $.getJSON("/patient/api/getDiseaseDetails?id="+id).done(function (task) {
+        $.getJSON("/admin/invoice/api/getTienKham?idToaThuoc=" + id).done(function (res) {
+            $.getJSON("/admin/patient/api/getDiseaseDetails?id="+id).done(function (task) {
                 let keys = Object.keys(task);
                 let values = Object.values(task);
                 let e = $("#table-modal > tbody");
@@ -420,12 +420,9 @@
     function deleteMedicine(stt) {
         let e = document.querySelector("#table-modal > tbody");
         let els = document.getElementsByClassName("stt");
-        console.log("KhaKha");
         for(let i = 0; i < els.length; i++) {
-            console.log(i);
             if (els[i].innerText == stt) {
                 let thanhTien = e.rows[i].cells[6].innerText;
-                console.log("Thanh tien: ", thanhTien);
                 let tThuoc = $("#table-modal > tfoot > tr:first-child > td:last-child");
                 let moneyThuoc = tThuoc[0].innerText.substr(0, tThuoc[0].innerText.indexOf("V") - 1);
                 tThuoc.empty().append(parseInt(moneyThuoc) - parseInt(thanhTien) + " VND");
@@ -447,13 +444,10 @@
         for(let i = 0; i < medicines.length; i++) {
             let medicine = medicines[i].childNodes[1].value;
             let quantity = quantities[i].innerHTML;
-            console.log("MEDICINE ID: ", medicine);
-            console.log("QUANTITY: ", quantity);
             if (medicine !== "" && quantity !== "")
                 str += medicine+"-"+quantity+";";
         }
         hiddenInput.value = str;
-        console.log("VALUE: ", str);
 
         document.querySelector("form").submit();
     }

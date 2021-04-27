@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="edit.body.page.title" /></h4>
             </div>
         </div>
-        <form:form method="post" action="/doctor/edit/${id}" modelAttribute="doctor" enctype="multipart/form-data">
+        <form:form method="post" modelAttribute="doctor" enctype="multipart/form-data">
             <p class="text-danger">${message}</p>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
@@ -361,8 +361,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    let pass = document.querySelector("#password");
-    pass.setAttribute("placeholder", "<spring:message code="add.body.pass.place" />" );
-</script>

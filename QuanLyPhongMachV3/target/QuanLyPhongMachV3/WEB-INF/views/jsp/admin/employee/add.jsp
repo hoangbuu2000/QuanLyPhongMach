@@ -16,7 +16,7 @@
                 <h4 class="page-title"><spring:message code="employee.add.page.title" /></h4>
             </div>
         </div>
-        <form:form modelAttribute="employee" action="/employee/add" enctype="multipart/form-data" method="post">
+        <form:form modelAttribute="employee" enctype="multipart/form-data" method="post">
             <form:errors path="*" cssClass="text-danger" />
             <p class="text-info">${message}</p>
             <div class="row">

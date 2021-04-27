@@ -16,7 +16,7 @@
                 <h4 class="page-title">Invoices</h4>
             </div>
             <div class="col-sm-7 col-8 text-right m-b-30">
-                <a href="<c:url value="/invoice/addorupdate" />" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Create New Invoice</a>
+                <a href="<c:url value="/admin/invoice/addorupdate" />" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Create New Invoice</a>
             </div>
         </div>
         <div class="row filter-row">
@@ -72,7 +72,7 @@
                         <c:forEach items="${invoices}" var="i">
                             <tr>
                                 <td>${e = e + 1}</td>
-                                <td><a href="<c:url value="/invoice/details?id=${i.id}" />">${i.id}</a></td>
+                                <td><a href="<c:url value="/admin/invoice/details?id=${i.id}" />">${i.id}</a></td>
                                 <td>${i.toaThuoc.benhNhan.ten}</td>
                                 <td><fmt:formatDate value="${i.ngayXuat}" pattern="dd-MM-yyyy" /></td>
                                 <td>${i.nhanVien.ten}</td>
@@ -82,8 +82,8 @@
                                     <div class="dropdown dropdown-action">
                                         <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="<c:url value="/invoice/addorupdate?id=${i.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                            <a class="dropdown-item" href="<c:url value="/invoice/details?id=${i.id}" />"><i class="fa fa-eye m-r-5"></i> View</a>
+                                            <a class="dropdown-item" href="<c:url value="/admin/invoice/addorupdate?id=${i.id}" />"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                                            <a class="dropdown-item" href="<c:url value="/admin/invoice/details?id=${i.id}" />"><i class="fa fa-eye m-r-5"></i> View</a>
                                             <a class="dropdown-item" href="#"><i class="fa fa-file-pdf-o m-r-5"></i> Download</a>
                                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_invoice${i.id}"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                                         </div>
@@ -94,7 +94,7 @@
                                                 <div class="modal-body text-center">
                                                     <h3>Are you sure want to delete this Invoice?</h3>
                                                     <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                                        <form:form action="/invoice/delete/${i.id}" method="post">
+                                                        <form:form action="/admin/invoice/delete/${i.id}" method="post">
                                                             <button type="submit" class="btn btn-danger">Delete</button>
                                                         </form:form>
                                                     </div>
@@ -327,7 +327,7 @@
         let list = document.querySelectorAll("div.cal-icon > input");
         let fromm = list[0].value;
         let to = list[1].value;
-        $.getJSON("/invoice/search?from="+fromm+"&to="+to).done(function (task) {
+        $.getJSON("/admin/invoice/search?from="+fromm+"&to="+to).done(function (task) {
             $('#table-data tbody tr').remove();
             console.log(JSON.stringify(task));
             let ds = task;
@@ -338,7 +338,7 @@
                         '<tr>'+
                         '<td>'+ (parseInt(i) + 1) +'</td>'+
                         '<td>' +
-                        '<a href="/invoice/details?id='+ds[i].id+'">'+ds[i].id+'</a>'+
+                        '<a href="/admin/invoice/details?id='+ds[i].id+'">'+ds[i].id+'</a>'+
                         '</td>'+
                         '<td>'+ds[i].tenBenhNhan+'</td>'+
                         '<td>'+formatDate(ds[i].ngayXuat)+
@@ -355,10 +355,10 @@
                         '<i class="fa fa-ellipsis-v"></i></a>'+
                         '<div class="dropdown-menu dropdown-menu-right">'+
                         '<a class="dropdown-item" ' +
-                        'href="/invoice/addorupdate?id='+ds[i].id+'">'+
+                        'href="/admin/invoice/addorupdate?id='+ds[i].id+'">'+
                         '<i class="fa fa-pencil m-r-5"></i> Edit</a>'+
                         '<a class="dropdown-item" ' +
-                        'href="/invoice/details?id='+ds[i].id+'">'+
+                        'href="/admin/invoice/details?id='+ds[i].id+'">'+
                         '<i class="fa fa-eye m-r-5"></i> View</a>'+
                         '<a class="dropdown-item" href="#">' +
                         '<i class="fa fa-file-pdf-o m-r-5"></i> Download</a>'+
@@ -374,7 +374,7 @@
                         '<h3>Are you sure want to delete this Invoice?</h3>'+
                         '<div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">' +
                         'Close</a>'+
-                        '<form action="/invoice/delete/'+ds[i].id+'" method="post">'+
+                        '<form action="/admin/invoice/delete/'+ds[i].id+'" method="post">'+
                         '<button type="submit" class="btn btn-danger">Delete</button>'+
                         '</form>'+
                         '</div>'+
