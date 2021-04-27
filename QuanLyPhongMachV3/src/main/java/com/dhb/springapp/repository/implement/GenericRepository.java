@@ -28,8 +28,14 @@ public abstract class GenericRepository<T extends Serializable> implements IGene
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public T insert(T t) {
-        currentSession().save(t);
-        return t;
+        try {
+            currentSession().save(t);
+            return t;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true)
@@ -47,8 +53,14 @@ public abstract class GenericRepository<T extends Serializable> implements IGene
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public T update(T t) {
-        currentSession().saveOrUpdate(t);
-        return t;
+        try {
+            currentSession().saveOrUpdate(t);
+            return t;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
