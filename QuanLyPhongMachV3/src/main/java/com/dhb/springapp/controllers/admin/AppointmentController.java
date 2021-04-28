@@ -47,7 +47,7 @@ public class AppointmentController {
         if (!result.hasErrors()) {
             try {
                 iBenhNhanService.themBenhNhanVaPhieuKhamBenh(addPatient, format);
-                return "redirect:/appointment";
+                return "redirect:/admin/appointment";
             }
             catch (Exception e) {
                 model.addAttribute("message", e.getMessage());
@@ -78,6 +78,6 @@ public class AppointmentController {
             PhieuKhamBenh phieuKhamBenh = iPhieuKhamBenhService.getById(PhieuKhamBenh.class, Integer.parseInt(id));
             iPhieuKhamBenhService.delete(phieuKhamBenh);
         }
-        return "redirect:/appointment";
+        return "redirect:/admin/appointment";
     }
 }

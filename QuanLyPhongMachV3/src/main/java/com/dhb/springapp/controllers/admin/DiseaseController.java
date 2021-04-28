@@ -43,7 +43,7 @@ public class DiseaseController {
                     iLoaiBenhService.update(loaiBenh);
                 else
                     iLoaiBenhService.insert(loaiBenh);
-                return "redirect:/disease";
+                return "redirect:/admin/disease";
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -57,7 +57,7 @@ public class DiseaseController {
         if (id != null && !id.isEmpty()) {
             try {
                 iLoaiBenhService.delete(iLoaiBenhService.getById(LoaiBenh.class, Integer.parseInt(id)));
-                return "redirect:/disease";
+                return "redirect:/admin/disease";
             }
             catch (Exception e) {
                 e.printStackTrace();

@@ -70,7 +70,7 @@ public class AdminController {
                             }
                         }
                         iTaiKhoanService.themTaiKhoanVaAdmin(relativePath, admin);
-                        return "redirect:/admin-management";
+                        return "redirect:/admin/admin-management";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
@@ -139,7 +139,7 @@ public class AdminController {
                             }
                         }
                         iTaiKhoanService.suaTaiKhoanVaAdmin(id, relativePath, editedAdmin);
-                        return "redirect:/admin";
+                        return "redirect:/admin/admin-management";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());

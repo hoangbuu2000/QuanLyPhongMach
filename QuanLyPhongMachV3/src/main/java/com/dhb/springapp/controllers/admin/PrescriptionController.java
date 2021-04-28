@@ -74,7 +74,7 @@ public class PrescriptionController {
             try {
                 iToaThuocService.addOrUpdate(id, addPrescription,
                         new SimpleDateFormat("dd/MM/yyyy"));
-                return "redirect:/prescription";
+                return "redirect:/admin/prescription";
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -127,7 +127,7 @@ public class PrescriptionController {
                 HoaDon hoaDon = iHoaDonService.getHoaDonTheoToaThuoc(id);
                 iHoaDonService.delete(hoaDon);
                 iToaThuocService.delete(toaThuoc);
-                return "redirect:/prescription";
+                return "redirect:/admin/prescription";
             }
             catch (Exception e) {
                 e.printStackTrace();

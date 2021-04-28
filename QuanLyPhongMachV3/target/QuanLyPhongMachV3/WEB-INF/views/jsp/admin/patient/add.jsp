@@ -377,7 +377,8 @@
         let bacSi = document.querySelector("select[name=bacSi]");
         bacSi.options.length = 0;
 
-        $.getJSON("/admin/patient/ajax?date=" + ngayKham + "&shift=" + shift).done(function (task) {
+        bacSi.append(new Option("Choose your doctor", ""));
+        $.getJSON("/api/ajax?date=" + ngayKham + "&shift=" + shift).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             let ds = task;
             for(let i = 0; i < ds.length; i++) {
@@ -389,7 +390,7 @@
 
     function getJson1(caKham, ngayKham) {
         caKham.append(new Option("Choose your shift", ""));
-        $.getJSON("/admin/patient/ajax1?date=" + ngayKham).done(function (task) {
+        $.getJSON("/api/ajax1?date=" + ngayKham).done(function (task) {
             console.log("DONE: ", JSON.stringify(task));
             let ds = task;
             for(let i = 0; i < ds.length; i++) {

@@ -1,47 +1,51 @@
 package com.dhb.springapp.controllers;
 
 import com.dhb.springapp.models.BacSi;
+import com.dhb.springapp.modelview.AddPatient;
 import com.dhb.springapp.service.IBacSiService;
+import com.dhb.springapp.service.IBenhNhanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller("home")
 @RequestMapping("/")
 public class HomeController {
-//    @Autowired
-//    IBacSiService iBacSiService;
+    @Autowired
+    IBenhNhanService iBenhNhanService;
 
     @RequestMapping()
     public String index(ModelMap model) {
-//        model.addAttribute("bacsi", iBacSiService.getAll(BacSi.class));
+        model.addAttribute("appointment", new AddPatient());
 
-//            Query query = session.createSQLQuery(
-//                    "CALL getBacSiById(:id)")
-//                    .addEntity(BacSi.class)
-//                    .setParameter("id", "1851050169");
-//            Query query1 = session.createSQLQuery(
-//                    "CALL getBenhNhanTheoNgayKhamBenh(:date)")
-//                    .addEntity(BenhNhan.class)
-//                    .setParameter("date", "2021-03-18");
+        return "homePage";
+    }
 
-//            model.addAttribute("bacsi", query.list());
-//            model.addAttribute("benhnhan", query1.list());
+    @PostMapping("/add")
+    public String addProcess(@ModelAttribute("appointment") @Valid AddPatient addPatient,
+                             BindingResult result, ModelMap model) throws ParseException {
+        if (!result.hasErrors()) {
+            try {
+                iBenhNhanService.themBenhNhanVaPhieuKhamBenh(addPatient, new SimpleDateFormat("dd/MM/yyyy"));
+                return "redirect:/booking";
+            }
+            catch (Exception e) {
+                model.addAttribute("message", e.getMessage());
+            }
+        }
 
-//            Query query = session.createQuery("From TaiKhoan");
-//            model.addAttribute("taikhoan", query.list());
+        return "homePage";
+    }
 
-//            Query q = session.createQuery("From ToaThuoc");
-//            model.addAttribute("toathuoc", q.getResultList());
-
-//            Query q = session.createQuery("From HoaDon");
-//            model.addAttribute("hoadon", q.getResultList());
-
-            return "homePage";
-
+    @GetMapping("/booking")
+    public String bookingResult() {
+        return "booking.result";
     }
 }

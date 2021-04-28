@@ -27,7 +27,6 @@ public class AddPatient {
     private String gioiTinh;
     @NotNull(message = "{validation.shift}")
     private CaKhamBenh caKham;
-    @NotNull(message = "{validation.doctor}")
     private BacSi bacSi;
     @Size(min = 1, message = "{validation.disease.size}")
     private Set<LoaiBenh> loaiBenhList;

@@ -66,7 +66,7 @@ public class DoctorController {
                             }
                         }
                         iTaiKhoanService.themTaiKhoanVaBacSi(relativePath, addDoctor);
-                        return "redirect:/doctor";
+                        return "redirect:/admin/doctor";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
@@ -143,7 +143,7 @@ public class DoctorController {
                                 }
                             }
                             iTaiKhoanService.suaTaiKhoanVaBacSi(id, relativePath, editedDoctor);
-                            return "redirect:/doctor";
+                            return "redirect:/admin/doctor";
                         }
                         catch (Exception e) {
                             model.addAttribute("message", e.getMessage());
@@ -166,7 +166,7 @@ public class DoctorController {
     public String deleteProcess(@PathVariable(name = "id") String id) {
         if (id != null && !id.isEmpty()) {
             iBacSiService.delete(iBacSiService.getById(BacSi.class, id));
-            return "redirect:/doctor";
+            return "redirect:/admin/doctor";
         }
         return "doctor.index";
     }

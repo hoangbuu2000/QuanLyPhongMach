@@ -71,7 +71,7 @@ public class InvoiceController {
             try {
                 iHoaDonService.addOrUpdate(id, addInvoice,
                         new SimpleDateFormat("dd/MM/yyyy"));
-                return "redirect:/invoice";
+                return "redirect:/admin/invoice";
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -99,7 +99,7 @@ public class InvoiceController {
         if (id != null && !id.isEmpty()) {
             try {
                 iHoaDonService.delete(iHoaDonService.getById(HoaDon.class, id));
-                return "redirect:/invoice";
+                return "redirect:/admin/invoice";
             }
             catch (Exception e) {
                 e.printStackTrace();

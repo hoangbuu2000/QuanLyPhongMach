@@ -70,7 +70,7 @@ public class EmployeeController {
                             }
                         }
                         iTaiKhoanService.themTaiKhoanVaNhanVien(relativePath, addEmployee);
-                        return "redirect:/employee";
+                        return "redirect:/admin/employee";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
@@ -144,7 +144,7 @@ public class EmployeeController {
                             }
                         }
                         iTaiKhoanService.suaTaiKhoanVaNhanVien(id, relativePath, editedEmployee);
-                        return "redirect:/employee";
+                        return "redirect:/admin/employee";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
@@ -165,7 +165,11 @@ public class EmployeeController {
 
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id) {
-        return "redirect:/employee";
+        if (id != null && !id.isEmpty()) {
+            iNhanVienService.delete(iNhanVienService.getById(NhanVien.class, id));
+            return "redirect:/admin/employee";
+        }
+        return "employee.index";
     }
 
     @PostMapping("/deleteAjax")

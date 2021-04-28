@@ -1,11 +1,14 @@
 package com.dhb.springapp.service.implement;
 
+import com.dhb.springapp.models.BacSi;
 import com.dhb.springapp.models.BenhNhan;
+import com.dhb.springapp.models.CaKhamBenh;
 import com.dhb.springapp.models.PhieuKhamBenh;
 import com.dhb.springapp.modelview.AddPatient;
 import com.dhb.springapp.repository.IBenhNhanRepository;
 import com.dhb.springapp.repository.IGenericRepository;
 import com.dhb.springapp.service.IBenhNhanService;
+import com.dhb.springapp.service.ICaKhamBenhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,15 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
 public class BenhNhanService extends GenericService<BenhNhan> implements IBenhNhanService {
     private IBenhNhanRepository benhNhanRepository;
+
+    @Autowired
+    private ICaKhamBenhService iCaKhamBenhService;
 
     @Autowired
     public BenhNhanService(@Qualifier("benhNhanRepository")IGenericRepository<BenhNhan> iGenericRepository) {
@@ -58,6 +65,13 @@ public class BenhNhanService extends GenericService<BenhNhan> implements IBenhNh
         benhNhan.setDienThoai(addPatient.getDienThoai());
         benhNhan.setNgaySinh(format.parse(addPatient.getNgaySinh()));
         benhNhan.setTuoi(addPatient.getTuoi());
+
+        if (addPatient.getBacSi() == null) {
+            List<BacSi> bacSiList = iCaKhamBenhService.layBacSiTheoCaKham(addPatient.getCaKham().getId(),
+                    format.parse(addPatient.getNgayKham()));
+            int idx = (int) (Math.random() * bacSiList.size());
+            addPatient.setBacSi(bacSiList.get(idx));
+        }
 
         // Them thong tin phieu kham benh cua benh nhan va loai benh
         PhieuKhamBenh phieuKhamBenh = new PhieuKhamBenh();

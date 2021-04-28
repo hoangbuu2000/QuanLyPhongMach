@@ -62,7 +62,7 @@ public class PatientController {
         if (!result.hasErrors()) {
             try {
                 iBenhNhanService.themBenhNhanVaPhieuKhamBenh(addPatient, format);
-                return "redirect:/patient";
+                return "redirect:/admin/patient";
             }
             catch (Exception e) {
                 model.addAttribute("message", e.getMessage());
@@ -92,7 +92,7 @@ public class PatientController {
                               @ModelAttribute("patient") BenhNhan editedPatient) {
         try {
             iBenhNhanService.update(editedPatient);
-            return String.format("redirect:/patient/details/{%s}", id);
+            return String.format("redirect:/admin/patient/details/%s", id);
         }
         catch (HibernateError e) {
             return "patient.edit";
@@ -103,86 +103,8 @@ public class PatientController {
     public String deleteProcess(@PathVariable(name = "id") String id) {
         if (id != null && !id.isEmpty()) {
             iBenhNhanService.delete(iBenhNhanService.getById(BenhNhan.class, id));
-            return "redirect:/patient";
+            return "redirect:/admin/patient";
         }
-        return "doctor.index";
-    }
-
-    @GetMapping("/ajax")
-    public @ResponseBody String layBacSi(@RequestParam("date") String date,
-                                       @RequestParam("shift") int shiftID) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-        ObjectMapper mapper = new ObjectMapper();
-        String ajaxResponse = "";
-        try {
-            List<BacSi> ds = new ArrayList<>();
-            iCaKhamBenhService.layBacSiTheoCaKham(shiftID, format.parse(date)).forEach(t -> {
-                BacSi b = new BacSi();
-                b.setId(t.getId());
-                b.setTen(t.getTen());
-                b.setHo(t.getHo());
-                b.setDienThoai(t.getDienThoai());
-                b.setEmail(t.getEmail());
-                b.setGioiTinh(t.getGioiTinh());
-                b.setNgaySinh(t.getNgaySinh());
-                b.setImage(t.getImage());
-                b.setQueQuan(t.getQueQuan());
-                ds.add(b);
-            });
-            ajaxResponse = mapper.writeValueAsString(ds);
-        }
-        catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return ajaxResponse;
-    }
-
-    @GetMapping("/ajax1")
-    public @ResponseBody String layCaKham(@RequestParam("date") String date) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-        ObjectMapper mapper = new ObjectMapper();
-        String ajaxResponse = "";
-        try {
-            List<CaKhamBenh> ds = new ArrayList<>();
-            iCaKhamBenhService.layCaKhamTheoNgayKham(format.parse(date)).forEach(t -> {
-                CaKhamBenh caKhamBenh = new CaKhamBenh();
-                caKhamBenh.setId(t.getId());
-                caKhamBenh.setTenCa(t.getTenCa());
-                caKhamBenh.setMoTa(t.getMoTa());
-                ds.add(caKhamBenh);
-            });
-            ajaxResponse = mapper.writeValueAsString(ds);
-        }
-        catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return ajaxResponse;
-    }
-
-    @GetMapping("/api/getDiseaseDetails")
-    public @ResponseBody String diseaseDetails(@RequestParam("id")String id) {
-        ObjectMapper mapper = new ObjectMapper();
-        String ajaxResponse = "";
-        try {
-            Map<Thuoc, Integer> medicines = new HashMap<>();
-            iToaThuocService.getById(ToaThuoc.class, id).getDsChiTietToaThuoc().forEach(ct -> {
-                Thuoc thuoc = new Thuoc();
-                thuoc.setId(ct.getThuoc().getId());
-                thuoc.setTenThuoc(ct.getThuoc().getTenThuoc());
-                thuoc.setDonGia(ct.getDonGia());
-                thuoc.setMoTa(ct.getThuoc().getMoTa());
-                thuoc.setDonVi(ct.getThuoc().getDonVi());
-                Integer soLuong = Integer.valueOf(ct.getSoLuong());
-
-                medicines.put(thuoc, soLuong);
-            });
-            ajaxResponse = mapper.writeValueAsString(medicines);
-        }
-        catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        return ajaxResponse;
+        return "patient.index";
     }
 }

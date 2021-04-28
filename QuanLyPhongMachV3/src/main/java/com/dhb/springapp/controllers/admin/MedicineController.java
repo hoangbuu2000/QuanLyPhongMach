@@ -71,7 +71,7 @@ public class MedicineController {
                     iThuocService.update(thuoc);
                 else
                     iThuocService.insert(thuoc);
-                return "redirect:/medicine";
+                return "redirect:/admin/medicine";
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -85,7 +85,7 @@ public class MedicineController {
         if (id != null && !id.isEmpty()) {
             try {
                 iThuocService.delete(iThuocService.getById(Thuoc.class, Integer.parseInt(id)));
-                return "redirect:/medicine";
+                return "redirect:/admin/medicine";
             }
             catch (Exception e) {
                 e.printStackTrace();

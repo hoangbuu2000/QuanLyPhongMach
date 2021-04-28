@@ -29,6 +29,9 @@
     <link href="<c:url value="/resources/client/css/owl.carousel.css"/>" rel="stylesheet" media="screen" />
     <link href="<c:url value="/resources/client/css/owl.theme.css"/>" rel="stylesheet" media="screen" />
     <link href="<c:url value="/resources/client/css/animate.css"/>" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/select2.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/bootstrap-datetimepicker.min.css" />">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/assets/css/style.css" />">
     <link href="<c:url value="/resources/client/css/style.css"/>" rel="stylesheet">
 
     <!-- boxed bg -->
@@ -63,6 +66,10 @@
 <script src="<c:url value="/resources/client/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"/>"></script>
 <script src="<c:url value="/resources/client/js/owl.carousel.min.js"/>"></script>
 <script src="<c:url value="/resources/client/js/nivo-lightbox.min.js"/>"></script>
+<script src="<c:url value="/resources/assets/js/select2.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/moment.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/bootstrap-datetimepicker.min.js" />"></script>
+<script src="<c:url value="/resources/assets/js/app.js" />"></script>
 <script src="<c:url value="/resources/client/js/custom.js"/>"></script>
 
 

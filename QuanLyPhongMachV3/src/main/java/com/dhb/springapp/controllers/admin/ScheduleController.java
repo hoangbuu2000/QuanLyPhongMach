@@ -95,7 +95,7 @@ public class ScheduleController {
                     schedule.getNgayKhamBenh())) {
                 ChiTietCaKhamBenh t = iChiTietCaKhamBenhService.insert(schedule);
                 if (t != null)
-                    return "redirect:/schedule";
+                    return "redirect:/admin/schedule";
                 else
                     model.addAttribute("message", "Giao tac them that bai");
             }
@@ -133,7 +133,7 @@ public class ScheduleController {
                     format.parse(schedule.getNgayKham()))) {
                 ChiTietCaKhamBenh t = iChiTietCaKhamBenhService.update(schedule);
                 if (t != null)
-                    return "redirect:/schedule";
+                    return "redirect:/admin/schedule";
                 else
                     model.addAttribute("message", "Giao tac sua that bai");
             }
@@ -174,9 +174,9 @@ public class ScheduleController {
         catch (Exception ex) {
             ex.printStackTrace();
             model.addAttribute("message", "Xoa that bai");
-            return "forward:/schedule";
+            return "forward:/admin/schedule";
         }
 
-        return "redirect:/schedule";
+        return "redirect:/admin/schedule";
     }
 }
