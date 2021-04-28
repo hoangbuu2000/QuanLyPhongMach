@@ -1,12 +1,8 @@
 package com.dhb.springapp.service.implement;
 
 import com.dhb.springapp.enums.Order;
-import com.dhb.springapp.models.BacSi;
-import com.dhb.springapp.models.Role;
-import com.dhb.springapp.models.TaiKhoan;
-import com.dhb.springapp.service.IBacSiService;
-import com.dhb.springapp.service.IRoleService;
-import com.dhb.springapp.service.ITaiKhoanService;
+import com.dhb.springapp.models.*;
+import com.dhb.springapp.service.*;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -15,9 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @SpringBootTest
 class BacSiServiceTest {
@@ -30,6 +24,13 @@ class BacSiServiceTest {
 
     @Autowired
     IBacSiService iBacSiService;
+
+    @Autowired
+    IBenhNhanService iBenhNhanService;
+
+    @Autowired
+    IToaThuocService  iToaThuocService;
+
     @BeforeEach
     void setUp(){
 
@@ -166,8 +167,31 @@ class BacSiServiceTest {
         bacSiList.forEach(t -> {
             Assertions.assertEquals(t.getTen(), "Long");
         });
-//        Assertions.assertEquals(bacSiList.get(0).getTen(), "Long");
-//        Assertions.assertEquals(bacSiList.get(1).getTen(),"Long");
+    }
+
+    @Test
+    void  getToaThuocTheoBacSi(){
+
+        BacSi bacSi = iBacSiService.getById(BacSi.class, "1851050169");
+        ToaThuoc toaThuoc = iToaThuocService.getById(ToaThuoc.class, "cfc45e18-718a-402b-8cf2-b3769f6406bb");
+
+        Set<ToaThuoc> dsToaThuoc = iBacSiService.getToaThuocTheoBacSi(bacSi);
+        Assertions.assertEquals(dsToaThuoc.size(), 1);
+        Assertions.assertEquals(dsToaThuoc.iterator().next().getId(), toaThuoc.getId());
+        Assertions.assertEquals(dsToaThuoc.iterator().next().getBacSi().getId(), bacSi.getId());
+
+    }
+
+    @Test
+    void  getBenhNhanTheoBacSi(){
+
+        BacSi bacSi = iBacSiService.getById(BacSi.class, "1851050169");
+        BenhNhan benhNhan = iBenhNhanService.getById(BenhNhan.class, "2f59ee78-902d-4de5-9ce1-9fb474e41b5f");
+
+        Set<BenhNhan> dsBenhNhan = iBacSiService.getBenhNhanTheoBacSi(bacSi);
+        Assertions.assertEquals(dsBenhNhan.size(), 1);
+        Assertions.assertEquals(dsBenhNhan.iterator().next().getId(), benhNhan.getId());
+        Assertions.assertEquals(dsBenhNhan.iterator().next().getDsToaThuoc().iterator().next().getBacSi().getId(),bacSi.getId());
 
     }
 
