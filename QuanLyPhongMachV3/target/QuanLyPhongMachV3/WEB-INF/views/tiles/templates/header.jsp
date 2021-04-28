@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="top-area">
         <div class="container">
@@ -26,7 +27,7 @@
                 <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand" href="index.html">
-                <img src="img/logo.png" alt="" width="150" height="40">
+                <img src="<c:url value="/resources/client/img/logo.png" />" alt="" width="150" height="40">
             </a>
         </div>
 
