@@ -42,10 +42,13 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge custom-badge red pull-right">Extra</span>More <b class="caret"></b></a>
                     <ul class="dropdown-menu" style="margin-top: 16px;">
-                        <li><a href="index.html">Home form</a></li>
-                        <li><a href="index-video.html">Home video</a></li>
-                        <li><a href="index-cta.html">Home CTA</a></li>
-                        <li><a href="https://bootstrapmade.com">Download</a></li>
+                        <form action="/search">
+                            <li><input name="q" class="form-control" placeholder="Enter ID" /></li>
+                            <li class="text-right"><input type="submit" value="Search" class="btn btn-primary" /></li>
+                        </form>
+<%--                        <li><a href="index-video.html">Home video</a></li>--%>
+<%--                        <li><a href="index-cta.html">Home CTA</a></li>--%>
+<%--                        <li><a href="https://bootstrapmade.com">Download</a></li>--%>
                     </ul>
                 </li>
             </ul>

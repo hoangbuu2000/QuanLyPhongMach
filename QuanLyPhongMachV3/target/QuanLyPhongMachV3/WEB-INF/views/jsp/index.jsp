@@ -41,8 +41,22 @@
                             <div class="panel panel-skin">
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Make an appoinment <small>(It's free!)</small></h3>
+                                    <a href="javascript:;" onclick="reExamination()"><h5 class="panel-title">re-examination?</h5></a>
                                 </div>
                                 <div class="panel-body">
+                                    <form action="/re-examination" class="lead" style="display: none">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                                <div class="form-group">
+                                                    <label for="id">ID</label>
+                                                    <input name="id" id="id" class="form-control" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" value="Submit" class="btn btn-primary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                     <form:form method="post" action="/add" role="form" cssClass="lead" modelAttribute="appointment">
                                         <c:if test="${message != null}">
                                             <p class="alert alert-danger">${message}</p>
@@ -818,6 +832,12 @@
         if (caKham.options.length > 0) {
             getJson();
         }
+    }
+
+    function reExamination() {
+        let e = document.getElementsByTagName("form");
+        e[1].style.display = "block";
+        e[2].style.display = "none";
     }
 
     //

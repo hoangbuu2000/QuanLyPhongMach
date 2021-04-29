@@ -20,6 +20,21 @@
         <put-attribute name="body" value="/WEB-INF/views/jsp/index.jsp" />
     </definition>
 
+    <definition name="booking.result" extends="base.definition">
+        <put-attribute name="title" value="Booking Result" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/booking.jsp" />
+    </definition>
+
+    <definition name="search" extends="base.definition">
+        <put-attribute name="title" value="Search" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/search.jsp" />
+    </definition>
+
+    <definition name="re-examination" extends="base.definition">
+        <put-attribute name="title" value="Re-examination" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/re-examination.jsp" />
+    </definition>
+
     <!-- Admin Layout -->
     <definition name="admin.definition" template="/WEB-INF/views/tiles/layouts/adminLayout.jsp">
         <put-attribute name="title" value="" />

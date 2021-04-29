@@ -83,7 +83,7 @@ public class BenhNhanRepository extends GenericRepository<BenhNhan> implements I
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean themBenhNhanVaPhieuKhamBenh(BenhNhan benhNhan, PhieuKhamBenh phieuKhamBenh) {
-        BenhNhan b = insert(benhNhan);
+        BenhNhan b = update(benhNhan);
         currentSession().save(phieuKhamBenh);
 
         if (b != null)

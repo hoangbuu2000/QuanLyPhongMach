@@ -29,7 +29,7 @@ public class PhieuKhamBenhService extends GenericService<PhieuKhamBenh> implemen
     @Override
     public List<Appointment> getAllAppointmentDESC(SimpleDateFormat format) {
         List<Appointment> appointmentList = new ArrayList<>();
-        getAllOrderBy(PhieuKhamBenh.class, "ngayKham", Order.desc)
+        getAllOrderBy(PhieuKhamBenh.class, "id", Order.desc)
                 .forEach(p -> {
                     Appointment appointment = new Appointment();
                     appointment.setAppointmentID(String.valueOf(p.getId()));

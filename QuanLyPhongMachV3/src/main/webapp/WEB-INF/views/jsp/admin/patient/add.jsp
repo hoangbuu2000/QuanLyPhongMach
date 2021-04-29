@@ -17,6 +17,10 @@
             </div>
         </div>
         <form:form modelAttribute="patient" method="post">
+            <c:if test="${message != null}">
+                <p class="text-danger">${message}</p>
+            </c:if>
+            <form:hidden path="id" value="${param.oldPatient}" />
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
                     <div class="row">

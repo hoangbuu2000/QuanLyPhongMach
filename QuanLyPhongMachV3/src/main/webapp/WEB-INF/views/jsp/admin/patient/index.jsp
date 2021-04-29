@@ -76,6 +76,8 @@
                                                         <a class="dropdown-item" href="#" data-toggle="modal"
                                                            data-target="#delete_patient${p.id}"><i class="fa fa-trash-o m-r-5"></i>
                                                             <spring:message code="patient.index.table.action.delete" /></a>
+                                                        <a class="dropdown-item" href="<c:url value="/admin/patient/add?oldPatient=${p.id}" />"><i
+                                                                class="fa fa-pencil m-r-5"></i> Re-examination</a>
                                                     </div>
                                                 </div>
                                                 <div id="delete_patient${p.id}" class="modal fade delete-modal" role="dialog">

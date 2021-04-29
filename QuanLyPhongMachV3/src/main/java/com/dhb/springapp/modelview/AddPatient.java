@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 import java.util.Set;
 
 public class AddPatient {
+    private String id;
     @NotEmpty(message = "{validation.last}")
     private String ho;
     @NotEmpty(message = "{validation.first}")
@@ -129,5 +130,13 @@ public class AddPatient {
 
     public void setThanhToan(boolean thanhToan) {
         this.thanhToan = thanhToan;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

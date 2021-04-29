@@ -51,21 +51,55 @@ public class PatientController {
     }
 
     @GetMapping("/add")
-    public String addView(ModelMap model) {
-        model.addAttribute("patient", new AddPatient());
+    public String addView(@RequestParam(value = "oldPatient", required = false)String id,
+                          ModelMap model) {
+        if (id != null && !id.isEmpty()) {
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            BenhNhan benhNhan = iBenhNhanService.getById(BenhNhan.class, id);
+            AddPatient addPatient = new AddPatient();
+            addPatient.setId(benhNhan.getId());
+            addPatient.setTen(benhNhan.getTen());
+            addPatient.setHo(benhNhan.getHo());
+            addPatient.setGioiTinh(benhNhan.getGioiTinh());
+            addPatient.setEmail(benhNhan.getEmail());
+            addPatient.setNgaySinh(format.format(benhNhan.getNgaySinh()));
+            addPatient.setDienThoai(benhNhan.getDienThoai());
+            addPatient.setTuoi(benhNhan.getTuoi());
+            addPatient.setBacSi(null);
+            addPatient.setCaKham(null);
+            addPatient.setNgayKham(null);
+            addPatient.setThanhToan(false);
+            addPatient.setLoaiBenhList(null);
+
+            model.addAttribute("patient", addPatient);
+        }
+        else
+            model.addAttribute("patient", new AddPatient());
         return "patient.add";
     }
 
     @PostMapping("/add")
-    public String addProcess(@ModelAttribute("patient") @Valid AddPatient addPatient,
+    public String addProcess(@RequestParam(value = "oldPatient", required = false) String id,
+                             @ModelAttribute("patient") @Valid AddPatient addPatient,
                              BindingResult result, ModelMap model) throws ParseException {
         if (!result.hasErrors()) {
-            try {
-                iBenhNhanService.themBenhNhanVaPhieuKhamBenh(addPatient, format);
-                return "redirect:/admin/patient";
+            if (id != null && !id.isEmpty()) {
+                try {
+                    iBenhNhanService.themBenhNhanTaiKham(addPatient, format);
+                    return "redirect:/admin/patient";
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    model.addAttribute("message", e.getMessage());
+                }
             }
-            catch (Exception e) {
-                model.addAttribute("message", e.getMessage());
+            else {
+                try {
+                    iBenhNhanService.themBenhNhanVaPhieuKhamBenh(addPatient, format);
+                    return "redirect:/admin/patient";
+                } catch (Exception e) {
+                    model.addAttribute("message", e.getMessage());
+                }
             }
         }
 

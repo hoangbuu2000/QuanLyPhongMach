@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -85,6 +86,64 @@ public class BenhNhanService extends GenericService<BenhNhan> implements IBenhNh
 
         if (!benhNhanRepository.themBenhNhanVaPhieuKhamBenh(benhNhan, phieuKhamBenh))
             throw new Exception("Giao tác thêm thất bại");
+    }
+
+    @Override
+    public void themBenhNhanTaiKham(AddPatient addPatient, SimpleDateFormat format) throws Exception {
+        BenhNhan patient = getById(BenhNhan.class, addPatient.getId());
+        if (patient != null) {
+            if (addPatient.getBacSi() == null) {
+                List<BacSi> bacSiList = iCaKhamBenhService.layBacSiTheoCaKham(addPatient.getCaKham().getId(),
+                        format.parse(addPatient.getNgayKham()));
+                int idx = (int) (Math.random() * bacSiList.size());
+                addPatient.setBacSi(bacSiList.get(idx));
+                System.out.println("idx: " + idx);
+            }
+
+            PhieuKhamBenh phieuKhamBenh = new PhieuKhamBenh();
+            phieuKhamBenh.setBenhNhan(patient);
+            phieuKhamBenh.setNgayKham(format.parse(addPatient.getNgayKham()));
+            phieuKhamBenh.setDiaChi("371 Nguyen Kiem");
+            phieuKhamBenh.setThanhToan(addPatient.isThanhToan());
+            phieuKhamBenh.setDsLoaiBenh(addPatient.getLoaiBenhList());
+            phieuKhamBenh.setCaKhamBenh(addPatient.getCaKham());
+            phieuKhamBenh.setBacSi(addPatient.getBacSi());
+
+            if (!benhNhanRepository.themBenhNhanVaPhieuKhamBenh(patient, phieuKhamBenh))
+                throw new Exception("Giao tác thêm thất bại");
+        }
+        else {
+            // Them thong tin benh nhan
+            BenhNhan benhNhan = new BenhNhan();
+            benhNhan.setId(addPatient.getId());
+            benhNhan.setTen(addPatient.getTen());
+            benhNhan.setHo(addPatient.getHo());
+            benhNhan.setGioiTinh(addPatient.getGioiTinh());
+            benhNhan.setEmail(addPatient.getEmail());
+            benhNhan.setDienThoai(addPatient.getDienThoai());
+            benhNhan.setNgaySinh(format.parse(addPatient.getNgaySinh()));
+            benhNhan.setTuoi(addPatient.getTuoi());
+
+            if (addPatient.getBacSi() == null) {
+                List<BacSi> bacSiList = iCaKhamBenhService.layBacSiTheoCaKham(addPatient.getCaKham().getId(),
+                        format.parse(addPatient.getNgayKham()));
+                int idx = (int) (Math.random() * bacSiList.size());
+                addPatient.setBacSi(bacSiList.get(idx));
+            }
+
+            // Them thong tin phieu kham benh cua benh nhan va loai benh
+            PhieuKhamBenh phieuKhamBenh = new PhieuKhamBenh();
+            phieuKhamBenh.setBenhNhan(benhNhan);
+            phieuKhamBenh.setNgayKham(format.parse(addPatient.getNgayKham()));
+            phieuKhamBenh.setDiaChi("371 Nguyen Kiem");
+            phieuKhamBenh.setThanhToan(addPatient.isThanhToan());
+            phieuKhamBenh.setDsLoaiBenh(addPatient.getLoaiBenhList());
+            phieuKhamBenh.setCaKhamBenh(addPatient.getCaKham());
+            phieuKhamBenh.setBacSi(addPatient.getBacSi());
+
+            if (!benhNhanRepository.themBenhNhanVaPhieuKhamBenh(benhNhan, phieuKhamBenh))
+                throw new Exception("Giao tác thêm thất bại");
+        }
     }
 
     @Override

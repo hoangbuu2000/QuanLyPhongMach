@@ -1,42 +1,47 @@
 <%--
   Created by IntelliJ IDEA.
   User: Buu
-  Date: 30/03/2021
-  Time: 12:03 CH
+  Date: 28/04/2021
+  Time: 7:51 CH
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<div class="page-wrapper">
+<div class="page-wrapper" style="padding-top: 155px">
     <div class="content">
-        <table class="table table-responsive-md">
-            <thead>
-            <tr>
-                <td><spring:message code="patient.details.table.fullname" /></td>
-                <td><spring:message code="patient.details.table.gender" /></td>
-                <td><spring:message code="patient.details.table.dob" /></td>
-                <td><spring:message code="patient.details.table.age" /></td>
-                <td><spring:message code="patient.details.table.country" /></td>
-                <td><spring:message code="patient.details.table.phone" /></td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>${patient.ho} ${patient.ten}</td>
-                <td>${patient.gioiTinh}</td>
-                <td><fmt:formatDate value="${patient.ngaySinh}" pattern="dd/MM/yyyy" /></td>
-                <td>${patient.tuoi}</td>
-                <td>...</td>
-                <td>${patient.dienThoai}</td>
-            </tr>
-            </tbody>
-            <tfoot></tfoot>
-        </table>
+        <c:if test="${patient == null}">
+            <h3 class="alert alert-danger">Khong co benh nhan phu hop</h3>
+        </c:if>
+        <c:if test="${patient != null}">
+            <table class="table table-responsive-md">
+                <thead>
+                <tr>
+                    <th><spring:message code="patient.details.table.fullname" /></th>
+                    <th><spring:message code="patient.details.table.gender" /></th>
+                    <th><spring:message code="patient.details.table.dob" /></th>
+                    <th><spring:message code="patient.details.table.age" /></th>
+                    <th><spring:message code="patient.details.table.country" /></th>
+                    <th><spring:message code="patient.details.table.phone" /></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>${patient.ho} ${patient.ten}</td>
+                    <td>${patient.gioiTinh}</td>
+                    <td><fmt:formatDate value="${patient.ngaySinh}" pattern="dd/MM/yyyy" /></td>
+                    <td>${patient.tuoi}</td>
+                    <td>...</td>
+                    <td>${patient.dienThoai}</td>
+                </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+        </c:if>
 
         <c:if test="${diseases.size() > 0}">
-            <table class="table table-response-md">
+            <table class="table table-response-md" style="margin-top: 100px">
                 <thead>
                 <tr>
                     <!--Model chi tiet toa thuoc -->
@@ -64,7 +69,7 @@
                 </tbody>
             </table>
         </c:if>
-        <c:if test="${diseases.size() <= 0}">
+        <c:if test="${diseases.size() <= 0 && patient != null}">
             <div class="alert-danger">
                 <h4>Benh nhan nay chua toi kham benh lan nao</h4>
             </div>
