@@ -351,7 +351,7 @@
     function getDetails(obj) {
         let id = obj.value;
         $.getJSON("/admin/invoice/api/getTienKham?idToaThuoc=" + id).done(function (res) {
-            $.getJSON("/admin/patient/api/getDiseaseDetails?id="+id).done(function (task) {
+            $.getJSON("/api/getDiseaseDetails?id="+id).done(function (task) {
                 let keys = Object.keys(task);
                 let values = Object.values(task);
                 let e = $("#table-modal > tbody");

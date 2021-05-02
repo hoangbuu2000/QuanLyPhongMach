@@ -247,8 +247,6 @@ public class TaiKhoanService extends GenericService<TaiKhoan> implements ITaiKho
         TaiKhoan users = taiKhoanRepository.getTaiKhoanByUsername(s);
         if (users == null)
             throw new UsernameNotFoundException("Username invalid");
-        System.out.printf("username: %s\npassword: %s\nrole: %s\n",
-                users.getUsername(), users.getPassword(), users.getRole().getTen());
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority(users.getRole().getTen()));
         return new org.springframework.security.core.userdetails.User(

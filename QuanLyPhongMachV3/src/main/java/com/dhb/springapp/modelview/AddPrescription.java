@@ -11,13 +11,13 @@ import java.util.Map;
 
 public class AddPrescription {
     private String id;
-    @NotEmpty(message = "validation.date.not.empty")
+    @NotEmpty(message = "{validation.date.not.empty}")
     private String date;
-    @NotNull(message = "validation.doctor.not.null")
+    @NotNull(message = "{validation.doctor.not.null}")
     private BacSi doctor;
-    @NotNull(message = "validation.patient.not.null")
+    @NotNull(message = "{validation.patient.not.null}")
     private BenhNhan patient;
-    @NotNull(message = "validation.disease.not.null")
+    @NotNull(message = "{validation.disease.not.null}")
     private LoaiBenh disease;
     private Map<Thuoc, Integer> medicines;
 

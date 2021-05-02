@@ -37,7 +37,7 @@ public class PrescriptionController {
 
     @ModelAttribute
     public void modelAttribute(ModelMap model) {
-        model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
+//        model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
         // Nen chi hien thi nhung benh nhan co lich kham trong ca kham do, khi nao can thi moi cho xem het benh nhan
 //        model.addAttribute("patients", iBenhNhanService.getBenhNhanCoLichKhamTheoThoiGianChoTruoc(new Date()));
         model.addAttribute("patients", iBenhNhanService.getAll(BenhNhan.class));

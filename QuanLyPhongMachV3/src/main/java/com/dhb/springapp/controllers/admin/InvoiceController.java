@@ -4,10 +4,7 @@ import com.dhb.springapp.models.*;
 import com.dhb.springapp.modelview.AddInvoice;
 import com.dhb.springapp.modelview.AddPrescription;
 import com.dhb.springapp.modelview.SearchInvoice;
-import com.dhb.springapp.service.IHoaDonService;
-import com.dhb.springapp.service.ILoaiBenhService;
-import com.dhb.springapp.service.INhanVienService;
-import com.dhb.springapp.service.IToaThuocService;
+import com.dhb.springapp.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,11 +34,24 @@ public class InvoiceController {
     INhanVienService iNhanVienService;
     @Autowired
     ILoaiBenhService iLoaiBenhService;
+    @Autowired
+    ITaiKhoanService iTaiKhoanService;
 
     @ModelAttribute
-    public void modelAttribute(ModelMap model) {
+    public void modelAttribute(ModelMap model, Principal principal) {
         model.addAttribute("prescriptions", iToaThuocService.getAll(ToaThuoc.class));
-        model.addAttribute("employees", iNhanVienService.getAll(NhanVien.class));
+        if (principal != null) {
+            TaiKhoan taiKhoan = iTaiKhoanService.getTaiKhoanByUsername(principal.getName());
+            if (taiKhoan != null && taiKhoan.getRole().getTen().equals("ROLE_ADMIN"))
+                model.addAttribute("employees", iNhanVienService.getAll(NhanVien.class));
+            else if (taiKhoan != null && taiKhoan.getRole().getTen().equals("ROLE_EMPLOYEE")) {
+                List<NhanVien> employees = new ArrayList<>();
+                NhanVien nhanVien = iNhanVienService.getById(NhanVien.class, taiKhoan.getId());
+                if (nhanVien != null)
+                    employees.add(nhanVien);
+                model.addAttribute("employees", employees);
+            }
+        }
     }
 
     @GetMapping()

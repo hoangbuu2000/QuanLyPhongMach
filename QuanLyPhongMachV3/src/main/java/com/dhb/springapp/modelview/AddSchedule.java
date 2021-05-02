@@ -3,9 +3,15 @@ package com.dhb.springapp.modelview;
 import com.dhb.springapp.models.BacSi;
 import com.dhb.springapp.models.CaKhamBenh;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class AddSchedule {
+    @NotNull
     private BacSi bacSi;
+    @NotNull
     private CaKhamBenh caKhamBenh;
+    @NotEmpty
     private String ngayKhamBenh;
 
     public BacSi getBacSi() {

@@ -9,4 +9,5 @@ import java.util.Date;
 public interface IChiTietCaKhamBenhService extends IGenericService<ChiTietCaKhamBenh> {
     boolean checkExistedSchedule(BacSi bacSi, CaKhamBenh caKhamBenh, Date ngayKhamBenh);
     ChiTietCaKhamBenh getExistedSchedule(BacSi bacSi, CaKhamBenh caKhamBenh, Date ngayKhamBenh);
+    void updateSchedule(ChiTietCaKhamBenh oldSchedule, ChiTietCaKhamBenh newSchedule) throws Exception;
 }

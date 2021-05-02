@@ -24,7 +24,6 @@ public class ChiTietCaKhamBenhService extends GenericService<ChiTietCaKhamBenh> 
 
     @Override
     public boolean checkExistedSchedule(BacSi bacSi, CaKhamBenh caKhamBenh, Date ngayKhamBenh) {
-        System.out.printf("Bac si: %s, Ca kham: %d, Date: %d, Month: %d, Year: %d", bacSi.getId(), caKhamBenh.getId(), ngayKhamBenh.getDate(), ngayKhamBenh.getMonth(), ngayKhamBenh.getYear());
         return chiTietCaKhamBenhRepository.getAll(ChiTietCaKhamBenh.class).stream()
                 .anyMatch(ct -> ct.getBacSi().getId().equals(bacSi.getId())
                         && ct.getCaKhamBenh().getId() == caKhamBenh.getId()
@@ -40,5 +39,10 @@ public class ChiTietCaKhamBenhService extends GenericService<ChiTietCaKhamBenh> 
                         && ct.getNgayKhamBenh().getMonth() == ngayKhamBenh.getMonth()
                         && ct.getNgayKhamBenh().getDate() == ngayKhamBenh.getDate()
                 ).findFirst().orElse(null);
+    }
+
+    @Override
+    public void updateSchedule(ChiTietCaKhamBenh oldSchedule, ChiTietCaKhamBenh newSchedule) throws Exception {
+        chiTietCaKhamBenhRepository.updateSchedule(oldSchedule, newSchedule);
     }
 }

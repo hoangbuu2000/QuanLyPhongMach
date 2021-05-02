@@ -4,9 +4,11 @@ import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.models.BacSi;
 import com.dhb.springapp.models.CaKhamBenh;
 import com.dhb.springapp.models.ChiTietCaKhamBenh;
+import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.service.IBacSiService;
 import com.dhb.springapp.service.ICaKhamBenhService;
 import com.dhb.springapp.service.IChiTietCaKhamBenhService;
+import com.dhb.springapp.service.ITaiKhoanService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -33,11 +36,23 @@ public class ScheduleController {
     IBacSiService iBacSiService;
     @Autowired
     ICaKhamBenhService iCaKhamBenhService;
+    @Autowired
+    ITaiKhoanService iTaiKhoanService;
 
     @ModelAttribute
-    public void modelAttribute(ModelMap model) {
-        //Chi lay nhung ca kham benh con trong theo ngay
-        model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
+    public void modelAttribute(ModelMap model, Principal principal) {
+        if (principal != null) {
+            TaiKhoan taiKhoan = iTaiKhoanService.getTaiKhoanByUsername(principal.getName());
+            if (taiKhoan != null && taiKhoan.getRole().getTen().equals("ROLE_ADMIN"))
+                model.addAttribute("doctors", iBacSiService.getAll(BacSi.class));
+            else if (taiKhoan != null && taiKhoan.getRole().getTen().equals("ROLE_DOCTOR")) {
+                List<BacSi> doctors = new ArrayList<>();
+                BacSi bacSi = iBacSiService.getById(BacSi.class, taiKhoan.getId());
+                if (bacSi != null)
+                    doctors.add(bacSi);
+                model.addAttribute("doctors", doctors);
+            }
+        }
     }
 
     @GetMapping()
@@ -120,27 +135,38 @@ public class ScheduleController {
         return "schedule.edit";
     }
 
-    @PostMapping("/edit")
-    public String editProcess(@ModelAttribute("schedule") @Valid ChiTietCaKhamBenh schedule,
+    @PostMapping("/edit/{idD}/{idS}/{date}")
+    public String editProcess(@PathVariable("idD") String maBacSi, @PathVariable("idS") String maCaKham,
+                              @PathVariable("date") String date,
+                              @ModelAttribute("schedule") @Valid ChiTietCaKhamBenh schedule,
                               BindingResult result, ModelMap model) throws ParseException {
         if (!result.hasErrors()) {
-            System.out.println(schedule.getNgayKham());
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            schedule.setNgayKhamBenh(format.parse(schedule.getNgayKham()));
+            BacSi bacSi = iBacSiService.getById(BacSi.class, maBacSi);
+            CaKhamBenh caKhamBenh = iCaKhamBenhService.getById(CaKhamBenh.class, Integer.parseInt(maCaKham));
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+            ChiTietCaKhamBenh schedule1 = iChiTietCaKhamBenhService.getExistedSchedule(bacSi,
+                    caKhamBenh, format.parse(date));
+            schedule.setNgayKhamBenh(format1.parse(schedule.getNgayKham()));
 
-            if (iChiTietCaKhamBenhService.checkExistedSchedule(schedule.getBacSi(),
+            if (!iChiTietCaKhamBenhService.checkExistedSchedule(schedule.getBacSi(),
                     schedule.getCaKhamBenh(),
-                    format.parse(schedule.getNgayKham()))) {
-                ChiTietCaKhamBenh t = iChiTietCaKhamBenhService.update(schedule);
-                if (t != null)
+                    format1.parse(schedule.getNgayKham()))) {
+                try {
+                    iChiTietCaKhamBenhService.updateSchedule(schedule1, schedule);
                     return "redirect:/admin/schedule";
-                else
-                    model.addAttribute("message", "Giao tac sua that bai");
+                }
+                catch (Exception e) {
+                    model.addAttribute("message", e.getMessage());
+                }
             }
             else {
-                model.addAttribute("message", "Khong ton tai lich lam viec");
+                model.addAttribute("message", "Lich lam viec da ton tai");
+                model.addAttribute("schedule", schedule1);
+                model.addAttribute("ngayKham", date);
             }
         }
+
         return "schedule.edit";
     }
 
@@ -151,25 +177,17 @@ public class ScheduleController {
 
     //Viet api
     @PostMapping("/delete/{idD}/{idS}/{date}")
-    public String delete(@PathVariable("idD") String maBacSi, @PathVariable("idS") String maCa,
+    public String delete(@PathVariable("idD") String maBacSi, @PathVariable("idS") String maCaKham,
                          @PathVariable("date") String date, ModelMap model) {
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         try {
-            ChiTietCaKhamBenh chiTietCaKhamBenh = iChiTietCaKhamBenhService.getAll(ChiTietCaKhamBenh.class).stream()
-                    .filter(t -> {
-                        try {
-                            return t.getBacSi().getId().equals(maBacSi)
-                                    && t.getCaKhamBenh().getId() == Integer.parseInt(maCa)
-                                    && t.getNgayKhamBenh().getYear() == format.parse(date).getYear()
-                                    && t.getNgayKhamBenh().getMonth() == format.parse(date).getMonth()
-                                    && t.getNgayKhamBenh().getDate() == format.parse(date).getDate();
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
-                        return false;
-                    }).findFirst().orElse(null);
-            iChiTietCaKhamBenhService.delete(chiTietCaKhamBenh);
+            BacSi bacSi = iBacSiService.getById(BacSi.class, maBacSi);
+            CaKhamBenh caKhamBenh = iCaKhamBenhService.getById(CaKhamBenh.class, Integer.parseInt(maCaKham));
+            ChiTietCaKhamBenh schedule = iChiTietCaKhamBenhService.getExistedSchedule(bacSi,
+                    caKhamBenh, format.parse(date));
+            if (schedule != null)
+                iChiTietCaKhamBenhService.delete(schedule);
         }
         catch (Exception ex) {
             ex.printStackTrace();

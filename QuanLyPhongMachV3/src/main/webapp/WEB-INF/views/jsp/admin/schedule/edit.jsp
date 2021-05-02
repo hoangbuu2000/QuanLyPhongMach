@@ -28,7 +28,15 @@
                                     <div class="col-sm-12 col-md-12 col-lg-6">
                                         <div class="form-group">
                                             <label><spring:message code="schedule.add.label.doctor" /></label>
-                                            <form:select path="bacSi" items="${doctors}" itemValue="id" itemLabel="ten" cssClass="form-control select">
+                                            <form:select path="bacSi" cssClass="form-control select">
+                                                <c:forEach items="${doctors}" var="d">
+                                                    <c:if test="${schedule.bacSi.id.equals(d.id)}">
+                                                        <form:option value="${d.id}" selected="true">${d.ten}</form:option>
+                                                    </c:if>
+                                                    <c:if test="${schedule.bacSi.id != d.id}">
+                                                        <form:option value="${d.id}">${d.ten}</form:option>
+                                                    </c:if>
+                                                </c:forEach>
                                             </form:select>
                                         </div>
                                     </div>
