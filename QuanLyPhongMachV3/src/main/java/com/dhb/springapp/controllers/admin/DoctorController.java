@@ -1,5 +1,7 @@
 package com.dhb.springapp.controllers.admin;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.dhb.springapp.models.BacSi;
 import com.dhb.springapp.models.TaiKhoan;
 import com.dhb.springapp.modelview.AddDoctor;
@@ -21,10 +23,18 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin/doctor")
 public class DoctorController {
+    Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+       "cloud_name", "dk5jgf3xj",
+       "api_key", "781767664334152",
+       "api_secret", "JmhAHxHXKWsrnrfWnsRiMg_JsSw"
+    ));
+
     @Autowired
     private IBacSiService iBacSiService;
     @Autowired
@@ -52,20 +62,23 @@ public class DoctorController {
                     try {
                         //chi luu duoc anh trong thu muc target tuk a trui
                         MultipartFile img = addDoctor.getImage();
-                        String relativePath = "";
-                        String targetPath;
+//                        String relativePath = "";
+//                        String targetPath;
+                        Map uploadResult = new HashMap();
                         if (img != null && !img.isEmpty()) {
                             try{
-                                relativePath = "/resources/images/bacsi/" + addDoctor.getUsername() + ".png";
-                                targetPath = request.getSession().getServletContext()
-                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", addDoctor.getUsername()));
-                                img.transferTo(new File(targetPath));
+//                                relativePath = "/resources/images/bacsi/" + addDoctor.getUsername() + ".png";
+//                                targetPath = request.getSession().getServletContext()
+//                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", addDoctor.getUsername()));
+//                                img.transferTo(new File(targetPath));
+                                uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
+                                        "public_id", "my_folder/" + addDoctor.getUsername()));
                             }
                             catch (IllegalStateException | IOException ex) {
                                 System.err.println(ex.getMessage());
                             }
                         }
-                        iTaiKhoanService.themTaiKhoanVaBacSi(relativePath, addDoctor);
+                        iTaiKhoanService.themTaiKhoanVaBacSi(uploadResult.get("url").toString(), addDoctor);
                         return "redirect:/admin/doctor";
                     }
                     catch (Exception e) {
@@ -118,31 +131,42 @@ public class DoctorController {
                         try {
                             TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
                             MultipartFile img = editedDoctor.getImage();
-                            String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
-                            String targetPath = request.getSession().getServletContext()
-                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
-                            if (!iTaiKhoanService.checkNoChangeUsername(id, editedDoctor)) {
-                                relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
-                                targetPath = request.getSession().getServletContext()
-                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
-                                String oldPath = request.getSession().getServletContext()
-                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
-                                File file = new File(oldPath);
-                                file.renameTo(new File(targetPath));
-                            }
+//                            String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
+//                            String targetPath = request.getSession().getServletContext()
+//                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
+//                            String oldPath = request.getSession().getServletContext()
+//                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
+                            String path = "";
+                            Map uploadResult = new HashMap();
                             if (img != null && !img.isEmpty()) {
+                                if (!iTaiKhoanService.checkNoChangeUsername(id, editedDoctor)) {
+//                                    File file = new File(oldPath);
+//                                    file.delete();
+                                    cloudinary.uploader().destroy("my_folder/"+taiKhoan.getUsername(),
+                                            ObjectUtils.emptyMap());
+                                }
                                 try {
-                                    String oldPath = request.getSession().getServletContext()
-                                            .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
-                                    File file = new File(oldPath);
-                                    file.delete();
-                                    img.transferTo(new File(targetPath));
+                                    uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
+                                            "public_id", "my_folder/" + editedDoctor.getUsername()));
+                                    path = uploadResult.get("url").toString();
+//                                    img.transferTo(new File(targetPath));
                                 }
                                 catch (IllegalStateException | IOException ex) {
                                     System.err.println(ex.getMessage());
                                 }
                             }
-                            iTaiKhoanService.suaTaiKhoanVaBacSi(id, relativePath, editedDoctor);
+                            else {
+                                path = taiKhoan.getBacSi().getImage();
+                                if (!iTaiKhoanService.checkNoChangeUsername(id, editedDoctor)) {
+                                    uploadResult = cloudinary.uploader().rename("my_folder/"+taiKhoan.getUsername(),
+                                            "my_folder/"+editedDoctor.getUsername(),
+                                            ObjectUtils.emptyMap());
+                                    path = uploadResult.get("url").toString();
+//                                    File file = new File(oldPath);
+//                                    file.renameTo(new File(targetPath));
+                                }
+                            }
+                            iTaiKhoanService.suaTaiKhoanVaBacSi(id, path, editedDoctor);
                             return "redirect:/admin/doctor";
                         }
                         catch (Exception e) {

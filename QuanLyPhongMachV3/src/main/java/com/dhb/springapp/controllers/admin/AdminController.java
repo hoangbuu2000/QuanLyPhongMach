@@ -1,5 +1,7 @@
 package com.dhb.springapp.controllers.admin;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.dhb.springapp.enums.Order;
 import com.dhb.springapp.models.Admin;
 import com.dhb.springapp.models.NhanVien;
@@ -23,12 +25,20 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @ControllerAdvice
 @RequestMapping("/admin/admin-management")
 public class AdminController {
+    Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "dk5jgf3xj",
+            "api_key", "781767664334152",
+            "api_secret", "JmhAHxHXKWsrnrfWnsRiMg_JsSw"
+    ));
+
     @Autowired
     IAdminService iAdminService;
     @Autowired
@@ -56,25 +66,39 @@ public class AdminController {
                     try {
                         //chi luu duoc anh trong thu muc target tuk a trui
                         MultipartFile img = admin.getImage();
-                        String relativePath = "";
-                        String targetPath;
+                        Map uploadResult = new HashMap();
                         if (img != null && !img.isEmpty()) {
-                            try{
-                                relativePath = "/resources/images/admin/" + admin.getUsername() + ".png";
-                                targetPath = request.getSession().getServletContext()
-                                        .getRealPath(String.format("/resources/images/admin/%s.png", admin.getUsername()));
-                                img.transferTo(new File(targetPath));
-                            }
-                            catch (IllegalStateException | IOException ex) {
-                                System.err.println(ex.getMessage());
-                            }
+                            uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
+                                        "public_id", "my_folder/" + admin.getUsername()));
                         }
-                        iTaiKhoanService.themTaiKhoanVaAdmin(relativePath, admin);
+                        iTaiKhoanService.themTaiKhoanVaAdmin(uploadResult.get("url").toString(), admin);
                         return "redirect:/admin/admin-management";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
                     }
+//                    try {
+//                        //chi luu duoc anh trong thu muc target tuk a trui
+//                        MultipartFile img = admin.getImage();
+//                        String relativePath = "";
+//                        String targetPath;
+//                        if (img != null && !img.isEmpty()) {
+//                            try{
+//                                relativePath = "/resources/images/admin/" + admin.getUsername() + ".png";
+//                                targetPath = request.getSession().getServletContext()
+//                                        .getRealPath(String.format("/resources/images/admin/%s.png", admin.getUsername()));
+//                                img.transferTo(new File(targetPath));
+//                            }
+//                            catch (IllegalStateException | IOException ex) {
+//                                System.err.println(ex.getMessage());
+//                            }
+//                        }
+//                        iTaiKhoanService.themTaiKhoanVaAdmin(relativePath, admin);
+//                        return "redirect:/admin/admin-management";
+//                    }
+//                    catch (Exception e) {
+//                        model.addAttribute("message", e.getMessage());
+//                    }
                 }
                 else {
                     model.addAttribute("message", "Tai khoan da ton tai");
@@ -114,36 +138,65 @@ public class AdminController {
                     try {
                         TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
                         MultipartFile img = editedAdmin.getImage();
-                        String relativePath = "/resources/images/admin/" + editedAdmin.getUsername() + ".png";
-                        String targetPath = request.getSession().getServletContext()
-                                .getRealPath(String.format("/resources/images/admin/%s.png", editedAdmin.getUsername()));
-                        if (!iTaiKhoanService.checkNoChangeUsername(id, editedAdmin)) {
-                            relativePath = "/resources/images/admin/" + editedAdmin.getUsername() + ".png";
-                            targetPath = request.getSession().getServletContext()
-                                    .getRealPath(String.format("/resources/images/admin/%s.png", editedAdmin.getUsername()));
-                            String oldPath = request.getSession().getServletContext()
-                                    .getRealPath(String.format("/resources/images/admin/%s.png", taiKhoan.getUsername()));
-                            File file = new File(oldPath);
-                            file.renameTo(new File(targetPath));
-                        }
+                        String path = "";
+                        Map uploadResult = new HashMap();
                         if (img != null && !img.isEmpty()) {
-                            try {
-                                String oldPath = request.getSession().getServletContext()
-                                        .getRealPath(String.format("/resources/images/admin/%s.png", taiKhoan.getUsername()));
-                                File file = new File(oldPath);
-                                file.delete();
-                                img.transferTo(new File(targetPath));
+                            if (!iTaiKhoanService.checkNoChangeUsername(id, editedAdmin)) {
+                                cloudinary.uploader().destroy("my_folder/"+taiKhoan.getUsername(),
+                                        ObjectUtils.emptyMap());
                             }
-                            catch (IllegalStateException | IOException ex) {
-                                System.err.println(ex.getMessage());
+                            uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
+                                        "public_id", "my_folder/" + editedAdmin.getUsername()));
+                            path = uploadResult.get("url").toString();
+                        }
+                        else {
+                            path = taiKhoan.getAdmin().getImage();
+                            if (!iTaiKhoanService.checkNoChangeUsername(id, editedAdmin)) {
+                                uploadResult = cloudinary.uploader().rename("my_folder/"+taiKhoan.getUsername(),
+                                        "my_folder/"+editedAdmin.getUsername(),
+                                        ObjectUtils.emptyMap());
+                                path = uploadResult.get("url").toString();
                             }
                         }
-                        iTaiKhoanService.suaTaiKhoanVaAdmin(id, relativePath, editedAdmin);
+                        iTaiKhoanService.suaTaiKhoanVaAdmin(id, path, editedAdmin);
                         return "redirect:/admin/admin-management";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
                     }
+//                    try {
+//                        TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
+//                        MultipartFile img = editedAdmin.getImage();
+//                        String relativePath = "/resources/images/admin/" + editedAdmin.getUsername() + ".png";
+//                        String targetPath = request.getSession().getServletContext()
+//                                .getRealPath(String.format("/resources/images/admin/%s.png", editedAdmin.getUsername()));
+//                        if (!iTaiKhoanService.checkNoChangeUsername(id, editedAdmin)) {
+//                            relativePath = "/resources/images/admin/" + editedAdmin.getUsername() + ".png";
+//                            targetPath = request.getSession().getServletContext()
+//                                    .getRealPath(String.format("/resources/images/admin/%s.png", editedAdmin.getUsername()));
+//                            String oldPath = request.getSession().getServletContext()
+//                                    .getRealPath(String.format("/resources/images/admin/%s.png", taiKhoan.getUsername()));
+//                            File file = new File(oldPath);
+//                            file.renameTo(new File(targetPath));
+//                        }
+//                        if (img != null && !img.isEmpty()) {
+//                            try {
+//                                String oldPath = request.getSession().getServletContext()
+//                                        .getRealPath(String.format("/resources/images/admin/%s.png", taiKhoan.getUsername()));
+//                                File file = new File(oldPath);
+//                                file.delete();
+//                                img.transferTo(new File(targetPath));
+//                            }
+//                            catch (IllegalStateException | IOException ex) {
+//                                System.err.println(ex.getMessage());
+//                            }
+//                        }
+//                        iTaiKhoanService.suaTaiKhoanVaAdmin(id, relativePath, editedAdmin);
+//                        return "redirect:/admin/admin-management";
+//                    }
+//                    catch (Exception e) {
+//                        model.addAttribute("message", e.getMessage());
+//                    }
                 }
                 else {
                     model.addAttribute("messages", "Tai khoan da ton tai");
