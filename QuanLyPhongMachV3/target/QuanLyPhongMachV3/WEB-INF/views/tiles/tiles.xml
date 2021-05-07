@@ -280,4 +280,14 @@
         <put-attribute name="body" value="/WEB-INF/views/jsp/admin/authorize/login.jsp" />
     </definition>
 
+    <!-- Chart -->
+    <definition name="chart.doctors" extends="admin.definition">
+        <put-attribute name="title" value="Chart Doctors" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/chart/doctors.jsp" />
+    </definition>
+    <definition name="chart.patients" extends="admin.definition">
+        <put-attribute name="title" value="Chart Doctors" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/chart/patients.jsp" />
+    </definition>
+
 </tiles-definitions>

@@ -1,11 +1,7 @@
 package com.dhb.springapp.controllers;
 
-import com.dhb.springapp.models.BacSi;
-import com.dhb.springapp.models.CaKhamBenh;
-import com.dhb.springapp.models.Thuoc;
-import com.dhb.springapp.models.ToaThuoc;
-import com.dhb.springapp.service.ICaKhamBenhService;
-import com.dhb.springapp.service.IToaThuocService;
+import com.dhb.springapp.models.*;
+import com.dhb.springapp.service.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
@@ -25,6 +18,12 @@ public class ApiController {
     IToaThuocService iToaThuocService;
     @Autowired
     ICaKhamBenhService iCaKhamBenhService;
+    @Autowired
+    IBenhNhanService iBenhNhanService;
+    @Autowired
+    ILoaiBenhService iLoaiBenhService;
+    @Autowired
+    IBacSiService iBacSiService;
 
     @GetMapping("/ajax")
     public @ResponseBody
@@ -102,6 +101,101 @@ public class ApiController {
         catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        return ajaxResponse;
+    }
+
+    @GetMapping("/getTotalPatient")
+    public @ResponseBody String getTotalPatient() {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+
+        int[] result = iBenhNhanService.getTotalPatientInMonthOfYear(new Date().getYear());
+        try {
+            ajaxResponse = mapper.writeValueAsString(result);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return ajaxResponse;
+    }
+
+    @GetMapping("/getTypeOfDisease")
+    public @ResponseBody String getTypeOfDisease() {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+
+        List<LoaiBenh> loaiBenhs = iLoaiBenhService.getAll(LoaiBenh.class);
+        Map<Integer, String> diseases = new HashMap<>();
+        loaiBenhs.forEach(l -> {
+            diseases.put(l.getId(), l.getTenBenh());
+        });
+
+        try {
+            ajaxResponse = mapper.writeValueAsString(diseases);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return ajaxResponse;
+    }
+
+    @GetMapping("/getTotalPatientOnDisease")
+    public @ResponseBody String getTotalPatientOnDisease(@RequestParam("id")String id,
+                                                         @RequestParam("year")String year) {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+
+        int result = iBenhNhanService.getTotalPatientOnDisease(Integer.parseInt(id), Integer.parseInt(year));
+        try {
+            ajaxResponse = mapper.writeValueAsString(result);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return ajaxResponse;
+    }
+
+    @GetMapping("/getTotalDoctors")
+    public @ResponseBody String getTotalDoctors() {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+
+        List<BacSi> result  = new ArrayList<>();
+        iBacSiService.getAll(BacSi.class).forEach(b -> {
+            BacSi bacSi = new BacSi();
+            bacSi.setId(b.getId());
+            bacSi.setHo(b.getHo());
+            bacSi.setTen(b.getTen());
+            bacSi.setGioiTinh(b.getGioiTinh());
+            bacSi.setNgaySinh(b.getNgaySinh());
+            bacSi.setDienThoai(b.getDienThoai());
+            bacSi.setImage(b.getImage());
+            bacSi.setQueQuan(b.getQueQuan());
+            bacSi.setEmail(b.getEmail());
+
+            result.add(bacSi);
+        });
+
+        try {
+            ajaxResponse = mapper.writeValueAsString(result);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return ajaxResponse;
+    }
+
+    @GetMapping("/getTotalPrescriptionOfDoctor")
+    public @ResponseBody String getTotalPatientOfDoctor(@RequestParam(value = "filter", required = false)
+                                                                    String filter) {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+
+        int[] result = iBacSiService.getTotalPrescriptionOfDoctor(filter);
+        try {
+            ajaxResponse = mapper.writeValueAsString(result);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         return ajaxResponse;
     }
 }

@@ -17,4 +17,6 @@ public interface IBenhNhanService extends IGenericService<BenhNhan> {
     List<Object[]> getBenhAnTheoBenhNhan(String id);
     List<BenhNhan> getBenhNhanCoLichKhamTheoThoiGianChoTruoc(Date date);
     void themBenhNhanTaiKham(AddPatient addPatient, SimpleDateFormat format) throws Exception;
+    int[] getTotalPatientInMonthOfYear(int year);
+    int getTotalPatientOnDisease(int id, int year);
 }

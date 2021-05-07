@@ -40,7 +40,7 @@
 
                             <div class="panel panel-skin">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><span class="fa fa-pencil-square-o"></span> Make an appoinment <small>(It's free!)</small></h3>
+                                    <h3 onclick="appointment()" style="cursor: pointer" class="panel-title"><span class="fa fa-pencil-square-o"></span> Make an appoinment <small>(It's free!)</small></h3>
                                     <a href="javascript:;" onclick="reExamination()"><h5 class="panel-title">re-examination?</h5></a>
                                 </div>
                                 <div class="panel-body">
@@ -540,12 +540,12 @@
             <div class="col-sm-12 col-md-12 col-lg-12" >
                 <div class="wow bounceInUp" data-wow-delay="0.2s">
                     <div id="owl-works" class="owl-carousel">
-                        <div class="item"><a href="img/photo/1.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="img/photo/1.jpg" class="img-responsive" alt="img"></a></div>
-                        <div class="item"><a href="img/photo/2.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="img/photo/2.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/photo/3.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="img/photo/3.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/photo/4.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="img/photo/4.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/photo/5.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5@2x.jpg"><img src="img/photo/5.jpg" class="img-responsive " alt="img"></a></div>
-                        <div class="item"><a href="img/photo/6.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/6@2x.jpg"><img src="img/photo/6.jpg" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="img/photo/1.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/1@2x.jpg"><img src="<c:url value="/resources/client/img/photo/1.jpg" />" class="img-responsive" alt="img"></a></div>
+                        <div class="item"><a href="img/photo/2.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/2@2x.jpg"><img src="<c:url value="/resources/client/img/photo/2.jpg" />" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="img/photo/3.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/3@2x.jpg"><img src="<c:url value="/resources/client/img/photo/3.jpg" />" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="img/photo/4.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/4@2x.jpg"><img src="<c:url value="/resources/client/img/photo/4.jpg" />" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="img/photo/5.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/5@2x.jpg"><img src="<c:url value="/resources/client/img/photo/5.jpg" />" class="img-responsive " alt="img"></a></div>
+                        <div class="item"><a href="img/photo/6.jpg" title="This is an image title" data-lightbox-gallery="gallery1" data-lightbox-hidpi="img/works/6@2x.jpg"><img src="<c:url value="/resources/client/img/photo/6.jpg" />" class="img-responsive " alt="img"></a></div>
                     </div>
                 </div>
             </div>
@@ -835,9 +835,13 @@
     }
 
     function reExamination() {
-        let e = document.getElementsByTagName("form");
-        e[1].style.display = "block";
-        e[2].style.display = "none";
+        $('form:nth-child(2)').fadeOut();
+        $('form:nth-child(1).lead').fadeIn();
+    }
+
+    function appointment() {
+        $('form:nth-child(2)').fadeIn();
+        $('form:nth-child(1).lead').fadeOut();
     }
 
     //

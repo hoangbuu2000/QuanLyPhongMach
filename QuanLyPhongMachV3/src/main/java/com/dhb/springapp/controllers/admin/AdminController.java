@@ -77,28 +77,6 @@ public class AdminController {
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
                     }
-//                    try {
-//                        //chi luu duoc anh trong thu muc target tuk a trui
-//                        MultipartFile img = admin.getImage();
-//                        String relativePath = "";
-//                        String targetPath;
-//                        if (img != null && !img.isEmpty()) {
-//                            try{
-//                                relativePath = "/resources/images/admin/" + admin.getUsername() + ".png";
-//                                targetPath = request.getSession().getServletContext()
-//                                        .getRealPath(String.format("/resources/images/admin/%s.png", admin.getUsername()));
-//                                img.transferTo(new File(targetPath));
-//                            }
-//                            catch (IllegalStateException | IOException ex) {
-//                                System.err.println(ex.getMessage());
-//                            }
-//                        }
-//                        iTaiKhoanService.themTaiKhoanVaAdmin(relativePath, admin);
-//                        return "redirect:/admin/admin-management";
-//                    }
-//                    catch (Exception e) {
-//                        model.addAttribute("message", e.getMessage());
-//                    }
                 }
                 else {
                     model.addAttribute("message", "Tai khoan da ton tai");
@@ -164,39 +142,6 @@ public class AdminController {
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
                     }
-//                    try {
-//                        TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
-//                        MultipartFile img = editedAdmin.getImage();
-//                        String relativePath = "/resources/images/admin/" + editedAdmin.getUsername() + ".png";
-//                        String targetPath = request.getSession().getServletContext()
-//                                .getRealPath(String.format("/resources/images/admin/%s.png", editedAdmin.getUsername()));
-//                        if (!iTaiKhoanService.checkNoChangeUsername(id, editedAdmin)) {
-//                            relativePath = "/resources/images/admin/" + editedAdmin.getUsername() + ".png";
-//                            targetPath = request.getSession().getServletContext()
-//                                    .getRealPath(String.format("/resources/images/admin/%s.png", editedAdmin.getUsername()));
-//                            String oldPath = request.getSession().getServletContext()
-//                                    .getRealPath(String.format("/resources/images/admin/%s.png", taiKhoan.getUsername()));
-//                            File file = new File(oldPath);
-//                            file.renameTo(new File(targetPath));
-//                        }
-//                        if (img != null && !img.isEmpty()) {
-//                            try {
-//                                String oldPath = request.getSession().getServletContext()
-//                                        .getRealPath(String.format("/resources/images/admin/%s.png", taiKhoan.getUsername()));
-//                                File file = new File(oldPath);
-//                                file.delete();
-//                                img.transferTo(new File(targetPath));
-//                            }
-//                            catch (IllegalStateException | IOException ex) {
-//                                System.err.println(ex.getMessage());
-//                            }
-//                        }
-//                        iTaiKhoanService.suaTaiKhoanVaAdmin(id, relativePath, editedAdmin);
-//                        return "redirect:/admin/admin-management";
-//                    }
-//                    catch (Exception e) {
-//                        model.addAttribute("message", e.getMessage());
-//                    }
                 }
                 else {
                     model.addAttribute("messages", "Tai khoan da ton tai");

@@ -16,8 +16,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BacSiService extends GenericService<BacSi> implements IBacSiService {
@@ -66,5 +69,61 @@ public class BacSiService extends GenericService<BacSi> implements IBacSiService
         doctor.setActive(taiKhoan.isActive());
 
         return doctor;
+    }
+
+    @Override
+    public int[] getTotalPrescriptionOfDoctor(String filter) {
+        List<BacSi> doctors = getAll(BacSi.class);
+        int[] result = new int[doctors.size()];
+
+        if (filter != null && !filter.isEmpty()) {
+            String temp = filter.substring(filter.indexOf("-") + 1);
+            String[] temp1 = temp.split("_");
+
+            if (filter.contains("year")) {
+                List<Integer> years = new ArrayList<>();
+                for(String s : temp1) {
+                    String[] temp2 = s.split(":");
+                    years.add(Integer.parseInt(temp2[1]));
+                }
+                int i = 0;
+                for(BacSi b : doctors) {
+                    int size = b.getDsToaThuoc().stream()
+                            .filter(t -> t.getNgayKeToa().getYear() + 1900
+                                    >= years.get(0) && t.getNgayKeToa().getYear() + 1900
+                                    < years.get(1))
+                            .collect(Collectors.toList()).size();
+                    result[i] = size;
+                    i++;
+                }
+            }
+            else if (filter.contains("month")) {
+                List<Integer> months = new ArrayList<>();
+                for(String s : temp1) {
+                    String[] temp2 = s.split(":");
+                    months.add(Integer.parseInt(temp2[1]));
+                }
+                int i = 0;
+                for(BacSi b : doctors) {
+                    int size = b.getDsToaThuoc().stream()
+                            .filter(t -> t.getNgayKeToa().getMonth() + 1
+                                    >= months.get(0) && t.getNgayKeToa().getMonth() + 1
+                                    < months.get(1) && t.getNgayKeToa().getYear() == new Date().getYear())
+                            .collect(Collectors.toList()).size();
+                    result[i] = size;
+                    i++;
+                }
+            }
+        }
+
+        else {
+            int i = 0;
+            for(BacSi b : doctors) {
+                int size = b.getDsToaThuoc().size();
+                result[i] = size;
+                i++;
+            }
+        }
+        return result;
     }
 }

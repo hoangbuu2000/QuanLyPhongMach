@@ -1,24 +1,20 @@
 package com.dhb.springapp.service.implement;
 
-import com.dhb.springapp.models.BacSi;
-import com.dhb.springapp.models.BenhNhan;
-import com.dhb.springapp.models.CaKhamBenh;
-import com.dhb.springapp.models.PhieuKhamBenh;
+import com.dhb.springapp.models.*;
 import com.dhb.springapp.modelview.AddPatient;
 import com.dhb.springapp.repository.IBenhNhanRepository;
 import com.dhb.springapp.repository.IGenericRepository;
 import com.dhb.springapp.service.IBenhNhanService;
 import com.dhb.springapp.service.ICaKhamBenhService;
+import com.dhb.springapp.service.IPhieuKhamBenhService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BenhNhanService extends GenericService<BenhNhan> implements IBenhNhanService {
@@ -26,6 +22,8 @@ public class BenhNhanService extends GenericService<BenhNhan> implements IBenhNh
 
     @Autowired
     private ICaKhamBenhService iCaKhamBenhService;
+    @Autowired
+    private IPhieuKhamBenhService iPhieuKhamBenhService;
 
     @Autowired
     public BenhNhanService(@Qualifier("benhNhanRepository")IGenericRepository<BenhNhan> iGenericRepository) {
@@ -184,5 +182,34 @@ public class BenhNhanService extends GenericService<BenhNhan> implements IBenhNh
             }
         }
         return benhNhanRepository.getBenhNhanCoLichKhamTheoThoiGianChoTruoc(date, ca);
+    }
+
+    @Override
+    public int[] getTotalPatientInMonthOfYear(int year) {
+        List<PhieuKhamBenh> ds = iPhieuKhamBenhService.getAll(PhieuKhamBenh.class).stream().
+                filter(p -> p.getNgayKham().getYear() == year).collect(Collectors.toList());
+        int[] months = new int[12];
+        for(PhieuKhamBenh p : ds) {
+            for(int i = 0; i < 12; i++) {
+                if (p.getNgayKham().getMonth() == i) {
+                    months[i] = months[i] + 1;
+                }
+            }
+        }
+        return months;
+    }
+
+    @Override
+    public int getTotalPatientOnDisease(int id, int year) {
+        List<PhieuKhamBenh> ds = iPhieuKhamBenhService.getAll(PhieuKhamBenh.class).stream().
+                filter(p -> p.getNgayKham().getYear() + 1900 == year).collect(Collectors.toList());
+        int result = 0;
+        for(PhieuKhamBenh p : ds) {
+            for(LoaiBenh l : p.getDsLoaiBenh()) {
+                if (l.getId() == id)
+                    result += 1;
+            }
+        }
+        return result;
     }
 }

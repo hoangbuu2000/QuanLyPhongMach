@@ -30,7 +30,7 @@ public class BacSi implements Serializable {
     private String email;
     @OneToMany(mappedBy = "bacSi", fetch = FetchType.LAZY)
     private Set<PhieuKhamBenh> dsPhieuKhamBenh;
-    @OneToMany(mappedBy = "bacSi", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bacSi", fetch = FetchType.EAGER)
     private Set<ToaThuoc> dsToaThuoc;
     @OneToOne
     @MapsId

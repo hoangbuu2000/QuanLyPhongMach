@@ -60,25 +60,15 @@ public class DoctorController {
             if(iTaiKhoanService.checkPassword(addDoctor)) {
                 if (iTaiKhoanService.checkExistedUsername(addDoctor)) {
                     try {
-                        //chi luu duoc anh trong thu muc target tuk a trui
                         MultipartFile img = addDoctor.getImage();
-//                        String relativePath = "";
-//                        String targetPath;
                         Map uploadResult = new HashMap();
+                        String path = "";
                         if (img != null && !img.isEmpty()) {
-                            try{
-//                                relativePath = "/resources/images/bacsi/" + addDoctor.getUsername() + ".png";
-//                                targetPath = request.getSession().getServletContext()
-//                                        .getRealPath(String.format("/resources/images/bacsi/%s.png", addDoctor.getUsername()));
-//                                img.transferTo(new File(targetPath));
-                                uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
+                            uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
                                         "public_id", "my_folder/" + addDoctor.getUsername()));
-                            }
-                            catch (IllegalStateException | IOException ex) {
-                                System.err.println(ex.getMessage());
-                            }
+                            path = uploadResult.get("url").toString();
                         }
-                        iTaiKhoanService.themTaiKhoanVaBacSi(uploadResult.get("url").toString(), addDoctor);
+                        iTaiKhoanService.themTaiKhoanVaBacSi(path, addDoctor);
                         return "redirect:/admin/doctor";
                     }
                     catch (Exception e) {
@@ -131,17 +121,10 @@ public class DoctorController {
                         try {
                             TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
                             MultipartFile img = editedDoctor.getImage();
-//                            String relativePath = "/resources/images/bacsi/" + editedDoctor.getUsername() + ".png";
-//                            String targetPath = request.getSession().getServletContext()
-//                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", editedDoctor.getUsername()));
-//                            String oldPath = request.getSession().getServletContext()
-//                                    .getRealPath(String.format("/resources/images/bacsi/%s.png", taiKhoan.getUsername()));
                             String path = "";
                             Map uploadResult = new HashMap();
                             if (img != null && !img.isEmpty()) {
                                 if (!iTaiKhoanService.checkNoChangeUsername(id, editedDoctor)) {
-//                                    File file = new File(oldPath);
-//                                    file.delete();
                                     cloudinary.uploader().destroy("my_folder/"+taiKhoan.getUsername(),
                                             ObjectUtils.emptyMap());
                                 }
@@ -149,7 +132,6 @@ public class DoctorController {
                                     uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
                                             "public_id", "my_folder/" + editedDoctor.getUsername()));
                                     path = uploadResult.get("url").toString();
-//                                    img.transferTo(new File(targetPath));
                                 }
                                 catch (IllegalStateException | IOException ex) {
                                     System.err.println(ex.getMessage());
@@ -162,8 +144,6 @@ public class DoctorController {
                                             "my_folder/"+editedDoctor.getUsername(),
                                             ObjectUtils.emptyMap());
                                     path = uploadResult.get("url").toString();
-//                                    File file = new File(oldPath);
-//                                    file.renameTo(new File(targetPath));
                                 }
                             }
                             iTaiKhoanService.suaTaiKhoanVaBacSi(id, path, editedDoctor);

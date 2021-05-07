@@ -16,4 +16,5 @@ public interface IBacSiService extends IGenericService<BacSi> {
     Set<ToaThuoc> getToaThuocTheoBacSi(BacSi bacSi);
     Set<BenhNhan> getBenhNhanTheoBacSi(BacSi bacSi);
     AddDoctor castDoctorToModelView(BacSi bacSi, TaiKhoan taiKhoan, SimpleDateFormat format);
+    int[] getTotalPrescriptionOfDoctor(String filter);
 }

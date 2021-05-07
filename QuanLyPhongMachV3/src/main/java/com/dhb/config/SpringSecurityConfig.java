@@ -45,7 +45,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/**/admin-management/**").access("hasRole('ROLE_ADMIN')")
         .antMatchers("/**/doctor/**").access("hasAnyRole('ROLE_ADMIN')")
                 .antMatchers("/**/patient/**").access("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_EMPLOYEE')")
-                .antMatchers("**/employee/**").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers("/**/employee/**").access("hasAnyRole('ROLE_ADMIN')")
                 .antMatchers("/**/appointment/**").access("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR', 'ROLE_EMPLOYEE')")
         .antMatchers("/**/schedule/**")
                 .access("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
@@ -57,7 +57,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .access("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')")
         .antMatchers("/**/invoice/**")
                 .access("hasAnyRole('ROLE_ADMIN', 'ROLE_EMPLOYEE')")
-        ;
+        .antMatchers("/**/chart/**")
+                .access("hasAnyRole('ROLE_ADMIN', 'ROLE_DOCTOR')");
         http.csrf().disable();
     }
 }

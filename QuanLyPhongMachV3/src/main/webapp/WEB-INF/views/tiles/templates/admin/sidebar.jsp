@@ -9,6 +9,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <c:set var="url" value="${requestScope['javax.servlet.forward.request_uri']}" />
+<c:set var="display" value="" />
+<c:set var="subdrop" value="" />
+<c:if test='${url.contains("/chart")}'>
+    ${display = "block"}
+    ${subdrop = "subdrop"}
+</c:if>
+<c:if test='${!url.contains("/chart")}'>
+    ${display = "none"}
+    ${subdrop = ""}
+</c:if>
 <div class="sidebar" id="sidebar">
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
@@ -19,10 +29,10 @@
                 <c:if test='${url.contains("admin-management")}'>
                     <c:set value="active" var="admin"/>
                 </c:if>
-                <c:if test='${url.contains("doctor")}'>
+                <c:if test='${url.contains("doctor") && !url.contains("/chart/doctor")}'>
                     <c:set value="active" var="doctor"/>
                 </c:if>
-                <c:if test='${url.contains("patient")}'>
+                <c:if test='${url.contains("patient") && !url.contains("/chart/patient")}'>
                     <c:set value="active" var="patient"/>
                 </c:if>
                 <c:if test='${url.contains("appointment")}'>
@@ -45,6 +55,15 @@
                 </c:if>
                 <c:if test='${url.contains("employee")}'>
                     <c:set value="active" var="employee"/>
+                </c:if>
+                <c:if test='${url.contains("chart/patients")}'>
+                    <c:set value="active" var="chart_patients"/>
+                </c:if>
+                <c:if test='${url.contains("chart/doctors")}'>
+                    <c:set value="active" var="chart_doctors"/>
+                </c:if>
+                <c:if test='${url.contains("chart/profit")}'>
+                    <c:set value="active" var="chart_profit"/>
                 </c:if>
                 <c:choose>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
@@ -81,6 +100,14 @@
                         </li>
                         <li class="${employee}">
                             <a href="<c:url value="/admin/employee" />"><i class="fa fa-user-plus"></i> <span><spring:message code="ul.employee" /></span></a>
+                        </li>
+                        <li class="submenu">
+                            <a class="${subdrop}" href="#"><i class="fa fa-area-chart"></i> <span> Statistical </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: ${display}">
+                                <li class="${chart_doctors}"><a href="<c:url value="/admin/chart/doctors" />">Doctors</a></li>
+                                <li class="${chart_patients}"><a href="<c:url value="/admin/chart/patients" />">Patients</a></li>
+                                <li class="${chart_profit}"><a href="<c:url value="/admin/chart/profit" />">Profit</a></li>
+                            </ul>
                         </li>
 <%--                        <li class="submenu">--%>
 <%--                            <a href="#"><i class="fa fa-money"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>--%>
@@ -226,6 +253,14 @@
                         </li>
                         <li class="${prescription}">
                             <a href="<c:url value="/admin/prescription" />"><i class="fa fa-paypal"></i> <span><spring:message code="ul.prescription" /></span></a>
+                        </li>
+                        <li class="submenu">
+                            <a class="${subdrop}" href="#"><i class="fa fa-area-chart"></i> <span> Statistical </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: ${display}">
+                                <li class="${chart_doctors}"><a href="<c:url value="/admin/chart/doctors" />">Doctors</a></li>
+                                <li class="${chart_patients}"><a href="<c:url value="/admin/chart/patients" />">Patients</a></li>
+                                <li class="${chart_profit}"><a href="<c:url value="/admin/chart/profit" />">Profit</a></li>
+                            </ul>
                         </li>
                     </c:when>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_EMPLOYEE')}">

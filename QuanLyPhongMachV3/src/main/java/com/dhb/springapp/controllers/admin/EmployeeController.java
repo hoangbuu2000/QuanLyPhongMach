@@ -64,41 +64,20 @@ public class EmployeeController {
             if(iTaiKhoanService.checkPassword(addEmployee)) {
                 if (iTaiKhoanService.checkExistedUsername(addEmployee)) {
                     try {
-                        //chi luu duoc anh trong thu muc target tuk a trui
                         MultipartFile img = addEmployee.getImage();
                         Map uploadResult = new HashMap();
+                        String path = "";
                         if (img != null && !img.isEmpty()) {
                             uploadResult = cloudinary.uploader().upload(img.getBytes(), ObjectUtils.asMap(
                                         "public_id", "my_folder/" + addEmployee.getUsername()));
+                            path = uploadResult.get("url").toString();
                         }
-                        iTaiKhoanService.themTaiKhoanVaNhanVien(uploadResult.get("url").toString(), addEmployee);
+                        iTaiKhoanService.themTaiKhoanVaNhanVien(path, addEmployee);
                         return "redirect:/admin/employee";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
                     }
-//                    try {
-//                        //chi luu duoc anh trong thu muc target tuk a trui
-//                        MultipartFile img = addEmployee.getImage();
-//                        String relativePath = "";
-//                        String targetPath;
-//                        if (img != null && !img.isEmpty()) {
-//                            try{
-//                                relativePath = "/resources/images/nhanvien/" + addEmployee.getUsername() + ".png";
-//                                targetPath = request.getSession().getServletContext()
-//                                        .getRealPath(String.format("/resources/images/nhanvien/%s.png", addEmployee.getUsername()));
-//                                img.transferTo(new File(targetPath));
-//                            }
-//                            catch (IllegalStateException | IOException ex) {
-//                                System.err.println(ex.getMessage());
-//                            }
-//                        }
-//                        iTaiKhoanService.themTaiKhoanVaNhanVien(relativePath, addEmployee);
-//                        return "redirect:/admin/employee";
-//                    }
-//                    catch (Exception e) {
-//                        model.addAttribute("message", e.getMessage());
-//                    }
                 }
                 else {
                     model.addAttribute("message", "Tai khoan da ton tai");
@@ -162,46 +141,12 @@ public class EmployeeController {
                                 path = uploadResult.get("url").toString();
                             }
                         }
-                        iTaiKhoanService.suaTaiKhoanVaAdmin(id, path, editedEmployee);
+                        iTaiKhoanService.suaTaiKhoanVaNhanVien(id, path, editedEmployee);
                         return "redirect:/admin/employee";
                     }
                     catch (Exception e) {
                         model.addAttribute("message", e.getMessage());
                     }
-
-//                    try {
-//                        TaiKhoan taiKhoan = iTaiKhoanService.getById(TaiKhoan.class, id);
-//                        MultipartFile img = editedEmployee.getImage();
-//                        String relativePath = "/resources/images/nhanvien/" + editedEmployee.getUsername() + ".png";
-//                        String targetPath = request.getSession().getServletContext()
-//                                .getRealPath(String.format("/resources/images/nhanvien/%s.png", editedEmployee.getUsername()));
-//                        if (!iTaiKhoanService.checkNoChangeUsername(id, editedEmployee)) {
-//                            relativePath = "/resources/images/nhanvien/" + editedEmployee.getUsername() + ".png";
-//                            targetPath = request.getSession().getServletContext()
-//                                    .getRealPath(String.format("/resources/images/nhanvien/%s.png", editedEmployee.getUsername()));
-//                            String oldPath = request.getSession().getServletContext()
-//                                    .getRealPath(String.format("/resources/images/nhanvien/%s.png", taiKhoan.getUsername()));
-//                            File file = new File(oldPath);
-//                            file.renameTo(new File(targetPath));
-//                        }
-//                        if (img != null && !img.isEmpty()) {
-//                            try {
-//                                String oldPath = request.getSession().getServletContext()
-//                                        .getRealPath(String.format("/resources/images/nhanvien/%s.png", taiKhoan.getUsername()));
-//                                File file = new File(oldPath);
-//                                file.delete();
-//                                img.transferTo(new File(targetPath));
-//                            }
-//                            catch (IllegalStateException | IOException ex) {
-//                                System.err.println(ex.getMessage());
-//                            }
-//                        }
-//                        iTaiKhoanService.suaTaiKhoanVaNhanVien(id, relativePath, editedEmployee);
-//                        return "redirect:/admin/employee";
-//                    }
-//                    catch (Exception e) {
-//                        model.addAttribute("message", e.getMessage());
-//                    }
                 }
                 else {
                     model.addAttribute("messages", "Tai khoan da ton tai");
