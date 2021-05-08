@@ -41,7 +41,7 @@ public class HomeController {
         model.addAttribute("soLuongBacSi", iBacSiService.getAll(BacSi.class).size());
         model.addAttribute("soLuongBenhNhan", iBenhNhanService.getAll(BenhNhan.class).size());
         model.addAttribute("danhSachBacSi", iBacSiService.getAll(BacSi.class));
-        model.addAttribute("danhSachBenhNhanMoi", PatientUtil.getNewPatients(iBenhNhanService.getTopNewBenhNhan(10)));
+        model.addAttribute("danhSachBenhNhanMoi", PatientUtil.getNewPatients(iBenhNhanService.getTopNewBenhNhan(4)));
         return "dashboard.index";
     }
 }

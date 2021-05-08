@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,18 +25,12 @@ public class ChartController {
     }
 
     @GetMapping("/doctors")
-    public String doctors(ModelMap model) {
-        List<LoaiBenh> loaiBenhs = iLoaiBenhService.getAll(LoaiBenh.class);
-        Map<Integer, String> diseases = new HashMap<>();
-        loaiBenhs.forEach(l -> {
-            diseases.put(l.getId(), l.getTenBenh());
-        });
-        model.addAttribute("diseasesKK", diseases);
+    public String doctors() {
         return "chart.doctors";
     }
 
-    @GetMapping("/profit")
+    @GetMapping("/sales")
     public String profit() {
-        return "chart.profit";
+        return "chart.sales";
     }
 }

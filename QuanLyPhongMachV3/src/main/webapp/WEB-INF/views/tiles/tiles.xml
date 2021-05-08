@@ -289,5 +289,9 @@
         <put-attribute name="title" value="Chart Doctors" />
         <put-attribute name="body" value="/WEB-INF/views/jsp/admin/chart/patients.jsp" />
     </definition>
+    <definition name="chart.sales" extends="admin.definition">
+        <put-attribute name="title" value="Chart Sales" />
+        <put-attribute name="body" value="/WEB-INF/views/jsp/admin/chart/sales.jsp" />
+    </definition>
 
 </tiles-definitions>

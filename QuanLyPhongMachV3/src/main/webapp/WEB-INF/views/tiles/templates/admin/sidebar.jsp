@@ -62,8 +62,8 @@
                 <c:if test='${url.contains("chart/doctors")}'>
                     <c:set value="active" var="chart_doctors"/>
                 </c:if>
-                <c:if test='${url.contains("chart/profit")}'>
-                    <c:set value="active" var="chart_profit"/>
+                <c:if test='${url.contains("chart/sales")}'>
+                    <c:set value="active" var="chart_sales"/>
                 </c:if>
                 <c:choose>
                     <c:when test="${pageContext.request.isUserInRole('ROLE_ADMIN')}">
@@ -93,7 +93,7 @@
                             <a href="<c:url value="/admin/medicine" />"><i class="fa fa-eject"></i> <span><spring:message code="ul.medicine" /></span></a>
                         </li>
                         <li class="${prescription}">
-                            <a href="<c:url value="/admin/prescription" />"><i class="fa fa-paypal"></i> <span><spring:message code="ul.prescription" /></span></a>
+                            <a href="<c:url value="/admin/prescription" />"><i class="fa fa-heartbeat"></i> <span><spring:message code="ul.prescription" /></span></a>
                         </li>
                         <li class="${invoice}">
                             <a href="<c:url value="/admin/invoice" />"><i class="fa fa-hospital-o"></i> <span><spring:message code="ul.invoice" /></span></a>
@@ -102,11 +102,11 @@
                             <a href="<c:url value="/admin/employee" />"><i class="fa fa-user-plus"></i> <span><spring:message code="ul.employee" /></span></a>
                         </li>
                         <li class="submenu">
-                            <a class="${subdrop}" href="#"><i class="fa fa-area-chart"></i> <span> Statistical </span> <span class="menu-arrow"></span></a>
+                            <a class="${subdrop}" href="#"><i class="fa fa-area-chart"></i> <span> <spring:message code="ul.statistical"/> </span> <span class="menu-arrow"></span></a>
                             <ul style="display: ${display}">
-                                <li class="${chart_doctors}"><a href="<c:url value="/admin/chart/doctors" />">Doctors</a></li>
-                                <li class="${chart_patients}"><a href="<c:url value="/admin/chart/patients" />">Patients</a></li>
-                                <li class="${chart_profit}"><a href="<c:url value="/admin/chart/profit" />">Profit</a></li>
+                                <li class="${chart_doctors}"><a href="<c:url value="/admin/chart/doctors" />"><spring:message code="ul.doctor" /></a></li>
+                                <li class="${chart_patients}"><a href="<c:url value="/admin/chart/patients" />"><spring:message code="ul.patient" /></a></li>
+                                <li class="${chart_sales}"><a href="<c:url value="/admin/chart/sales" />"><spring:message code="ul.sales" /></a></li>
                             </ul>
                         </li>
 <%--                        <li class="submenu">--%>
@@ -252,14 +252,14 @@
                             <a href="<c:url value="/admin/schedule" />"><i class="fa fa-calendar-check-o"></i> <span><spring:message code="ul.schedule" /></span></a>
                         </li>
                         <li class="${prescription}">
-                            <a href="<c:url value="/admin/prescription" />"><i class="fa fa-paypal"></i> <span><spring:message code="ul.prescription" /></span></a>
+                            <a href="<c:url value="/admin/prescription" />"><i class="fa fa-heartbeat"></i> <span><spring:message code="ul.prescription" /></span></a>
                         </li>
                         <li class="submenu">
-                            <a class="${subdrop}" href="#"><i class="fa fa-area-chart"></i> <span> Statistical </span> <span class="menu-arrow"></span></a>
+                            <a class="${subdrop}" href="#"><i class="fa fa-area-chart"></i> <span> <spring:message code="ul.statistical"/> </span> <span class="menu-arrow"></span></a>
                             <ul style="display: ${display}">
-                                <li class="${chart_doctors}"><a href="<c:url value="/admin/chart/doctors" />">Doctors</a></li>
-                                <li class="${chart_patients}"><a href="<c:url value="/admin/chart/patients" />">Patients</a></li>
-                                <li class="${chart_profit}"><a href="<c:url value="/admin/chart/profit" />">Profit</a></li>
+                                <li class="${chart_doctors}"><a href="<c:url value="/admin/chart/doctors" />"><spring:message code="ul.doctor"/></a></li>
+                                <li class="${chart_patients}"><a href="<c:url value="/admin/chart/patients" />"><spring:message code="ul.patient"/></a></li>
+                                <li class="${chart_sales}"><a href="<c:url value="/admin/chart/sales" />"><spring:message code="ul.sales"/></a></li>
                             </ul>
                         </li>
                     </c:when>
@@ -280,7 +280,7 @@
                     </c:when>
                 </c:choose>
                 <li>
-                    <a href="<c:url value="/logout" />"><i class="fa fa-sign-out"><spring:message code="ul.logout" /></i></a>
+                    <a href="<c:url value="/logout" />"><i class="fa fa-sign-out"></i> <span><spring:message code="ul.logout" /></span></a>
                 </li>
             </ul>
         </div>

@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class HoaDonService extends GenericService<HoaDon> implements IHoaDonService {
@@ -92,5 +93,28 @@ public class HoaDonService extends GenericService<HoaDon> implements IHoaDonServ
     @Override
     public List<HoaDon> getHoaDonFromTo(String from, String to) throws ParseException {
         return hoaDonRepository.getHoaDonFromTo(from, to);
+    }
+
+    @Override
+    public BigDecimal getTotalSales(int year) {
+        List<HoaDon> hoaDonList = hoaDonRepository.getAll(HoaDon.class);
+        List<HoaDon> result = hoaDonList.stream().filter(h -> h.getNgayXuat().getYear() + 1900 == year)
+                .collect(Collectors.toList());
+        BigDecimal tong = new BigDecimal(0);
+        for(HoaDon h : result) {
+            tong = tong.add(h.getTongTien());
+        }
+        return tong;
+    }
+
+    @Override
+    public BigDecimal[] getTotalSalesFromTo(String from, String to) {
+        int f = Integer.parseInt(from);
+        int t = Integer.parseInt(to);
+        BigDecimal[] result = new BigDecimal[t - f + 1];
+        for(int i = f; i <= t; i++) {
+            result[i - f] = getTotalSales(i);
+        }
+        return result;
     }
 }

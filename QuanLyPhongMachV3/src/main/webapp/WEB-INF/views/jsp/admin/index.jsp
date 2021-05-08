@@ -80,7 +80,7 @@
             <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="appointments.html" class="btn btn-primary float-right">View all</a>
+                        <h4 class="card-title d-inline-block">Upcoming Appointments</h4> <a href="<c:url value="/admin/appointment" />" class="btn btn-primary float-right">View all</a>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -208,7 +208,7 @@
                         </ul>
                     </div>
                     <div class="card-footer text-center bg-white">
-                        <a href="doctors.html" class="text-muted">View all Doctors</a>
+                        <a href="<c:url value="/admin/doctor" />" class="text-muted">View all Doctors</a>
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
             <div class="col-12 col-md-6 col-lg-8 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+                        <h4 class="card-title d-inline-block">New Patients </h4> <a href="<c:url value="/admin/patient" />" class="btn btn-primary float-right">View all</a>
                     </div>
                     <div class="card-block">
                         <div class="table-responsive">
@@ -232,7 +232,7 @@
                                         <td>${newPatient.dienThoai}</td>
                                         <td>
                                             <c:forEach items="${newPatient.loaiBenh}" var="benh">
-                                                <button class="btn btn-primary btn-primary-one float-right">${benh}</button>
+                                                <button class="btn btn-outline-secondary float-right">${benh}</button>
                                             </c:forEach>
 
                                         </td>

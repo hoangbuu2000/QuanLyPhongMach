@@ -24,22 +24,34 @@ $(document).ready(function () {
             }
             // console.log("datas: ", datas);
             // console.log("is array: ", Array.isArray(datas));
-            let a1 = datas[0];
-            let a2 = datas[1];
-            let a3 = datas[2];
-            let a4 = datas[3];
+            // let a1 = datas[0];
+            // let a2 = datas[1];
+            // let a3 = datas[2];
+            // let a4 = datas[3];
             // console.log("a: ", a1, a2, a3, a4);
-            let obj = {
-                label: names[i],
-                data: [a1, a2, a3, a4]
-            }
-            datasets.push(obj);
+            // let obj = {
+            //     label: names[i],
+            //     data: [a1, a2, a3, a4]
+            // }
+            // datasets.push(obj);
 
         }
         // console.log(datasets);
         let barChartData = {
             labels: years,
-            datasets: datasets
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: 'rgba(0, 158, 251, 0.5)',
+                borderColor: 'rgba(0, 158, 251, 1)',
+                borderWidth: 1,
+                data: [35, 59, 80, 81]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: 'rgba(255, 188, 53, 0.5)',
+                borderColor: 'rgba(255, 188, 53, 1)',
+                borderWidth: 1,
+                data: [28, 48, 40, 19]
+            }]
         };
 
         let ctx = document.getElementById('bargraph').getContext('2d');

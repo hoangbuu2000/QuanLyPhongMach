@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -24,6 +25,8 @@ public class ApiController {
     ILoaiBenhService iLoaiBenhService;
     @Autowired
     IBacSiService iBacSiService;
+    @Autowired
+    IHoaDonService iHoaDonService;
 
     @GetMapping("/ajax")
     public @ResponseBody
@@ -190,6 +193,22 @@ public class ApiController {
         String ajaxResponse = "";
 
         int[] result = iBacSiService.getTotalPrescriptionOfDoctor(filter);
+        try {
+            ajaxResponse = mapper.writeValueAsString(result);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return ajaxResponse;
+    }
+
+    @GetMapping("/getTotalSales")
+    public @ResponseBody String getTotalSales(@RequestParam("from")String from,
+                                              @RequestParam("to")String to) {
+        ObjectMapper mapper = new ObjectMapper();
+        String ajaxResponse = "";
+
+        BigDecimal[] result = iHoaDonService.getTotalSalesFromTo(from, to);
         try {
             ajaxResponse = mapper.writeValueAsString(result);
         } catch (JsonProcessingException e) {

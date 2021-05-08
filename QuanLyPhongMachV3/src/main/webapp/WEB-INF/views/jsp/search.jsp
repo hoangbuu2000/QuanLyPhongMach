@@ -9,13 +9,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<div class="page-wrapper" style="padding-top: 155px">
+<div class="page-wrapper" style="padding-top: 155px; margin-left: 0; background: white">
     <div class="content">
         <c:if test="${patient == null}">
             <h3 class="alert alert-danger">Khong co benh nhan phu hop</h3>
         </c:if>
         <c:if test="${patient != null}">
-            <table class="table table-responsive-md">
+            <table class="table table-responsive-md table-bordered">
                 <thead>
                 <tr>
                     <th><spring:message code="patient.details.table.fullname" /></th>
@@ -41,7 +41,7 @@
         </c:if>
 
         <c:if test="${diseases.size() > 0}">
-            <table class="table table-response-md" style="margin-top: 100px">
+            <table class="table table-response-md table-bordered" style="margin-top: 100px">
                 <thead>
                 <tr>
                     <!--Model chi tiet toa thuoc -->

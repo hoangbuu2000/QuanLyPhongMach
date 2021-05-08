@@ -18,7 +18,12 @@
 					<span class="login100-form-title">
 						Member Login
 					</span>
-
+                <c:if test="${param.error != null}">
+                    <small class="text-danger">Invalid username or password</small>
+                </c:if>
+                <c:if test="${param.accessDenied != null}">
+                    <small class="text-danger">AccessDenied</small>
+                </c:if>
                 <div class="wrap-input100 validate-input" data-validate = "Username is required">
                     <input class="input100" type="text" name="username" placeholder="Username">
                     <span class="focus-input100"></span>

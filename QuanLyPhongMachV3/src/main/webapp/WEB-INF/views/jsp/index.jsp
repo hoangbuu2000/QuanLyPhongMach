@@ -49,7 +49,7 @@
                                             <div class="col-xs-12 col-sm-12 col-md-12">
                                                 <div class="form-group">
                                                     <label for="id">ID</label>
-                                                    <input name="id" id="id" class="form-control" />
+                                                    <input name="id" id="id" class="form-control" required />
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="submit" value="Submit" class="btn btn-primary" />

@@ -26,7 +26,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="<c:url value="/" />">
                 <img src="<c:url value="/resources/client/img/logo.png" />" alt="" width="150" height="40">
             </a>
         </div>
@@ -40,11 +40,11 @@
                 <li class=""><a href="#facilities">Facilities</a></li>
                 <li><a href="#pricing">Pricing</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge custom-badge red pull-right">Extra</span>More <b class="caret"></b></a>
-                    <ul class="dropdown-menu" style="margin-top: 16px;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="badge custom-badge red pull-right">Extra</span>Search <b class="caret"></b></a>
+                    <ul class="dropdown-menu" style="width: 300px; margin-top: 16px;">
                         <form action="/search">
-                            <li><input name="q" class="form-control" placeholder="Enter ID" /></li>
-                            <li class="text-right"><input type="submit" value="Search" class="btn btn-primary" /></li>
+                            <li><input name="q" class="form-control" placeholder="Enter ID" required /></li>
+                            <li class="text-right"><input type="submit" value="Submit" class="btn btn-primary" /></li>
                         </form>
 <%--                        <li><a href="index-video.html">Home video</a></li>--%>
 <%--                        <li><a href="index-cta.html">Home CTA</a></li>--%>
