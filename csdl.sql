@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `admin`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admin` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ho` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ten` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `GioiTinh` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ho` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ten` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `DienThoai` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `QueQuan` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `Email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `NgayVaoLam` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_admin_taikhoan` FOREIGN KEY (`id`) REFERENCES `taikhoan` (`id`)
@@ -56,15 +56,15 @@ DROP TABLE IF EXISTS `bacsi`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `bacsi` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ho` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ten` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `GioiTinh` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ho` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ten` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `DienThoai` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Image` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `QueQuan` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Image` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `QueQuan` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_bacsi_taikhoan` FOREIGN KEY (`id`) REFERENCES `taikhoan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -88,14 +88,14 @@ DROP TABLE IF EXISTS `benhnhan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `benhnhan` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ho` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ten` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ho` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ten` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Tuoi` int DEFAULT NULL,
-  `GioiTinh` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `DienThoai` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -119,8 +119,8 @@ DROP TABLE IF EXISTS `cakhambenh`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cakhambenh` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `TenCa` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MoTa` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TenCa` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MoTa` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -144,7 +144,7 @@ DROP TABLE IF EXISTS `chitietcakhambenh`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `chitietcakhambenh` (
   `MaCa` int NOT NULL,
-  `MaBacSi` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaBacSi` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgayKhamBenh` date NOT NULL,
   PRIMARY KEY (`MaCa`,`MaBacSi`,`NgayKhamBenh`),
   KEY `fk_chitietcakhambenh_bacsi` (`MaBacSi`),
@@ -198,7 +198,7 @@ DROP TABLE IF EXISTS `chitiettoathuoc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `chitiettoathuoc` (
-  `MaToaThuoc` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaToaThuoc` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `MaThuoc` int NOT NULL,
   `SoLuong` int NOT NULL,
   `DonGia` decimal(10,0) NOT NULL,
@@ -216,7 +216,7 @@ CREATE TABLE `chitiettoathuoc` (
 
 LOCK TABLES `chitiettoathuoc` WRITE;
 /*!40000 ALTER TABLE `chitiettoathuoc` DISABLE KEYS */;
-INSERT INTO `chitiettoathuoc` VALUES ('8b0e2395-701a-4d8a-891e-46934fd70e24',2,4,25000,100000),('b474981b-69ee-4ea7-b35f-f565c4c89bfe',4,2,225000,450000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',1,2,35000,70000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',2,4,25000,100000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',3,1,30000,30000),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219',1,50,35000,1750000);
+INSERT INTO `chitiettoathuoc` VALUES ('b474981b-69ee-4ea7-b35f-f565c4c89bfe',4,2,225000,450000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',1,2,35000,70000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',2,9,25000,225000),('cfc45e18-718a-402b-8cf2-b3769f6406bb',3,1,30000,30000),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219',1,50,35000,1750000);
 /*!40000 ALTER TABLE `chitiettoathuoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,9 +228,9 @@ DROP TABLE IF EXISTS `hoadon`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hoadon` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaToaThuoc` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaNhanVien` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaToaThuoc` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaNhanVien` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgayXuat` datetime NOT NULL,
   `TongTien` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`),
@@ -247,7 +247,7 @@ CREATE TABLE `hoadon` (
 
 LOCK TABLES `hoadon` WRITE;
 /*!40000 ALTER TABLE `hoadon` DISABLE KEYS */;
-INSERT INTO `hoadon` VALUES ('d6de45fc-ed8f-4c16-9df4-6827180569c5','d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','4023e5e5-2e07-4be2-8363-33919cbae9eb','2021-04-24 00:00:00',1750000),('d87ff452-bbac-4cf2-8337-9ccb947587d8','b474981b-69ee-4ea7-b35f-f565c4c89bfe','1851050105','2021-05-02 00:00:00',450000),('e51266c8-2626-461d-974b-e4195cbc99eb','8b0e2395-701a-4d8a-891e-46934fd70e24','a5bf37da-aa43-47d8-a114-55dead327dda','2021-05-07 00:00:00',100000),('e912245c-a603-4f94-bf33-230969be5f8b','cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050105','2021-04-23 00:00:00',200000);
+INSERT INTO `hoadon` VALUES ('d6de45fc-ed8f-4c16-9df4-6827180569c5','d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','4023e5e5-2e07-4be2-8363-33919cbae9eb','2021-04-24 00:00:00',1750000),('d87ff452-bbac-4cf2-8337-9ccb947587d8','b474981b-69ee-4ea7-b35f-f565c4c89bfe','1851050105','2020-05-02 00:00:00',450000),('e912245c-a603-4f94-bf33-230969be5f8b','cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050105','2021-04-23 00:00:00',200000);
 /*!40000 ALTER TABLE `hoadon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,8 +260,8 @@ DROP TABLE IF EXISTS `loaibenh`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loaibenh` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `TenBenh` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MoTa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TenBenh` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MoTa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `DonGia` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -285,16 +285,16 @@ DROP TABLE IF EXISTS `nhanvien`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nhanvien` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ho` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Ten` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `GioiTinh` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ho` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ten` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `DienThoai` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Image` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Email` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `NgayVaoLam` date DEFAULT NULL,
-  `QueQuan` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `QueQuan` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_nhanvien_taikhoan` FOREIGN KEY (`id`) REFERENCES `taikhoan` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -306,7 +306,7 @@ CREATE TABLE `nhanvien` (
 
 LOCK TABLES `nhanvien` WRITE;
 /*!40000 ALTER TABLE `nhanvien` DISABLE KEYS */;
-INSERT INTO `nhanvien` VALUES ('097cf12e-5a01-43d2-8e40-d07816fafeb5','v1','v1','Nam','2021-05-03','0768107704','http://res.cloudinary.com/dk5jgf3xj/image/upload/v1620021847/my_folder/v1v1v1.jpg','v1v1v1@gmail.com','2021-05-03','Tien Giang'),('1851050105','Nguyen','Phuc','Nam','2000-01-01','0768107704',NULL,'1851050010buu@ou.edu.vn','2021-03-18','Tien Giang'),('385f4117-0752-4bfd-b325-331d6386113c','Nguyen','Phuc','Nam','2021-04-27','0768107704','','ntphuc@gmail.com','2021-04-27','Tien Giang'),('4023e5e5-2e07-4be2-8363-33919cbae9eb','Nguyễn','Thị Nho','Nữ','2003-02-26','0768107704','/resources/images/nhanvien/nhoxanh123.png','nhoxanh@gmail.com','2021-04-14','Dong Thap'),('61470d85-159c-44bb-8e85-556ad6ce7b26','111','111','Nam','2021-04-27','0768107704','/resources/images/nhanvien/111.png','111@gmail.com','2021-04-27','Tien Giang'),('a5bf37da-aa43-47d8-a114-55dead327dda','Binh','Bao','Nam','2000-01-10','0768107704','/resources/images/nhanvien/baobinh1.png','baobinh@gmail.com','2021-04-25','Tien Giang');
+INSERT INTO `nhanvien` VALUES ('097cf12e-5a01-43d2-8e40-d07816fafeb5','v1','v1','Nam','2021-05-03','0768107704','http://res.cloudinary.com/dk5jgf3xj/image/upload/v1620021847/my_folder/v1v1v1.jpg','v1v1v1@gmail.com','2021-05-03','Tien Giang'),('1851050105','Nguyen','Phuc','Nam','2000-01-01','0768107704',NULL,'1851050010buu@ou.edu.vn','2021-03-18','Tien Giang'),('385f4117-0752-4bfd-b325-331d6386113c','Nguyen','Phuc','Nam','2021-04-27','0768107704','','ntphuc@gmail.com','2021-04-27','Tien Giang'),('4023e5e5-2e07-4be2-8363-33919cbae9eb','Nguyễn','Thị Nho','Nữ','2003-02-26','0768107704','/resources/images/nhanvien/nhoxanh123.png','nhoxanh@gmail.com','2021-04-14','Dong Thap'),('61470d85-159c-44bb-8e85-556ad6ce7b26','111','111','Nam','2021-04-27','0768107704','/resources/images/nhanvien/111.png','111@gmail.com','2021-04-27','Tien Giang'),('a5bf37da-aa43-47d8-a114-55dead327dda','Binh','Bao','Nam','2000-01-10','0768107704','/resources/images/nhanvien/baobinh1.png','baobinh@gmail.com','2021-04-25','Tien Giang'),('df08056b-e41e-4e10-ad90-ccb550c37e31','Khùng','Trọng','Nam','2021-05-08','0768107704','http://res.cloudinary.com/dk5jgf3xj/image/upload/v1620436875/my_folder/trongkhung.jpg','trongkhung@gmail.com','2021-05-08','An Giang');
 /*!40000 ALTER TABLE `nhanvien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,12 +319,12 @@ DROP TABLE IF EXISTS `phieukhambenh`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `phieukhambenh` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `MaBenhNhan` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaBenhNhan` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgayKham` date NOT NULL,
-  `DiaChi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DiaChi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ThanhToan` bit(1) NOT NULL,
   `MaCaKham` int NOT NULL,
-  `MaBacSi` varchar(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `MaBacSi` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_phieukhambenh_cakhambenh_idx` (`MaCaKham`),
   KEY `fk_phieukhambenh_benhnhan` (`MaBenhNhan`),
@@ -354,7 +354,7 @@ DROP TABLE IF EXISTS `role`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `Ten` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Ten` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -377,9 +377,9 @@ DROP TABLE IF EXISTS `taikhoan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `taikhoan` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `TaiKhoan` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MatKhau` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TaiKhoan` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MatKhau` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `Active` bit(1) DEFAULT b'1',
   `MaRole` int DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -394,7 +394,7 @@ CREATE TABLE `taikhoan` (
 
 LOCK TABLES `taikhoan` WRITE;
 /*!40000 ALTER TABLE `taikhoan` DISABLE KEYS */;
-INSERT INTO `taikhoan` VALUES ('097cf12e-5a01-43d2-8e40-d07816fafeb5','v1v1v1','$2a$10$CLrNEGlPWuIgZwap7YhVSeZSS49ShaYUX0BgUL7bVMLe/rMyFZWym',_binary '',3),('0b645856-3f3b-461e-b5ac-ee7c91f4ffd3','miquangg2','123',_binary '',2),('1035e7f6-c971-4125-80be-632ee3241a77','0305v4','$2a$10$tNv00Asvn1hTLlZtm62GBO5Y9x2Z7oCElh90XlEjXdVygn2mUiYOW',_binary '',2),('1611276f-27b1-4df3-95ed-490f6b0b0de3','baobinh','123',_binary '',3),('1851050010','hoangbuu','123',_binary '',1),('1851050105','thienphuc','123',_binary '',3),('1851050169','phanhuy1','$2a$10$9Sw4G8c/HmtBD87N5lRY5.kDhjUVDSo5Boj3ehrAFZM89g8SCGiF.',_binary '',2),('1dd56d41-06b4-4de9-9aa1-8a522c156866','tuyetngoc12','123',_binary '',2),('21520e40-a02b-408c-b396-2caf61d38325','badoithong','123',_binary '',2),('294e0097-82d7-46f0-9a2a-41cc72ac07dd','nobita','123',_binary '',2),('307fc8f6-0814-48ba-840e-2356552addc9','xucana123','123',_binary '',2),('385f4117-0752-4bfd-b325-331d6386113c','ntphuc','$2a$10$gnWKg5kmfzOxrF226q2W0OG.q26q9FRDSqcILJvQyd5PMTHviYDsG',_binary '',3),('3bda9f4f-1a09-45a7-aa82-54e2c02390ad','123','123',_binary '\0',1),('4023e5e5-2e07-4be2-8363-33919cbae9eb','nhoxanh123','1234',_binary '',3),('42fd4664-21f3-4901-8ed7-ffb27548391e','thanhdh','123',_binary '',1),('48a7ca08-532a-4be9-9979-26395cf2d8f8','trongnd123','123',_binary '',2),('49d6a71d-b602-42d2-a74b-e787bab9d597','v2v2v2','$2a$10$RBm5dkxn7WEQ3H4Cub73f.yYMLJ26HDJumFmOGL7Q5d0NtgCtpo1S',_binary '',1),('4acc8f5a-cfbf-4e70-8b6a-90b09446a065','vidu1','123',_binary '',2),('5ae9a432-0d93-4996-bdd4-49d37bc8dfaa','test','123',_binary '',2),('5aee0eec-9c0c-49da-a5b3-63f729d6b141','bidao','123',_binary '',2),('61470d85-159c-44bb-8e85-556ad6ce7b26','111','$2a$10$Jqn0tc6F07ELWwIY.Kcq1OoCwQIOMljIuuvyV5ZOYh7Am9qTzFM/i',_binary '',3),('74b46ffa-f87a-44cb-a841-9682c330744c','tester2','123456',_binary '',3),('7b8cdfad-7538-471e-84ea-8241939d9076','toilacongan113','1234',_binary '',2),('7e51e415-1d11-4bf9-8c48-a27194f9da25','doraemon123','123',_binary '',2),('7e85f21e-f0e8-4855-99bf-774c92336032','0305v5','$2a$10$uwD1CmkWe5TJ4vpYfvzAbOlxnRQeubejs1z3OMdmdbl16yZ8VSefK',_binary '',2),('7fc1dce1-ad05-4f96-b85f-5eb5d8ac3730','0305v3','$2a$10$p3oEJjIy8/6o747dV8Vkz.Xk5Rb9G.Sy3EryZ1uPr.8gFYzM34cxK',_binary '',2),('86bf2f24-5eff-45ed-bc91-5207dcf31e51','hutieunamvang','',_binary '',2),('870fe48e-7d4e-44ab-81f9-3a9334212336','shizuka123','123',_binary '',2),('8afecf5e-4c1a-44d1-be7b-3c168069c998','suneo','123',_binary '',2),('8beb69d3-f7f6-411a-880c-a376c160f660','0305v2','$2a$10$y8K5TfJLCO7DsoxQ8LqD5u7HeIrzuBT8ZQyZe9eV4WP9cE4il343m',_binary '',2),('91d6039a-2ba3-4254-8aa3-92a226c8a67f','0305v667','$2a$10$ZPH8mce.SGRCVk1ZSXf.eOgjVx9ZzV4ndLW69KDXGP.zVrNBxeC12',_binary '',2),('98d44248-7fe6-4ca8-a1ab-a7d1b20d3cc1','lol123','123',_binary '',2),('a5bf37da-aa43-47d8-a114-55dead327dda','baobinh1','123',_binary '',3),('a831455e-c0a6-4f89-b7e0-46c58ac6812a','tester3','123456',_binary '',3),('ad434e89-2dd8-493a-a1b7-29184f810c0f','ximuoi123','123',_binary '',2),('b8fafee7-ad34-4cdb-915a-b18a93d7e09b','behaicute','123',_binary '',2),('bcd6ab88-0a8f-4671-b454-9fe4c39a4a87','buu','123',_binary '',1),('bef47dae-4279-4433-bb22-47c89a41988d','deki','123',_binary '',2),('c60e825d-8ba3-4dd1-aab1-58be6f262351','dhthanh','$2a$10$t55vuyJT19p9m2PuVl9P8uZSveIDveQgyD40IglaKjoyktiO2cKXq',_binary '',2),('c6a03e67-9e55-4b85-8c6e-d0b46401c941','456','$2a$10$sAz7W4wTHRkZe.I2f1FhpO60DUi/DT7wjlXN.RC2W3wG823tblntu',_binary '\0',1),('d75380ea-c35e-47a8-ba42-694f25b0d137','banhtet','123',_binary '',2),('e199c1e5-4599-4c97-a268-cb46083f9b17','admin','123',_binary '\0',1),('f257ab84-7d86-431b-a3b6-5ae8c73018c6','chaolong','123',_binary '',2),('fa4444c6-bd2f-4e7c-81cd-4a6c7c9a94ce','comsuon','123',_binary '',2),('fb23ae17-5629-4715-bfb1-d4d88ad5f406','0305','$2a$10$wHu6a5zFFdrbBqBuiyYj/.O1r1NYKb7S1Kt2X1KjtvZ4AkL9AWL/a',_binary '',2);
+INSERT INTO `taikhoan` VALUES ('097cf12e-5a01-43d2-8e40-d07816fafeb5','v1v1v1','$2a$10$CLrNEGlPWuIgZwap7YhVSeZSS49ShaYUX0BgUL7bVMLe/rMyFZWym',_binary '',3),('0b645856-3f3b-461e-b5ac-ee7c91f4ffd3','miquangg2','123',_binary '',2),('1035e7f6-c971-4125-80be-632ee3241a77','0305v4','$2a$10$tNv00Asvn1hTLlZtm62GBO5Y9x2Z7oCElh90XlEjXdVygn2mUiYOW',_binary '',2),('1611276f-27b1-4df3-95ed-490f6b0b0de3','baobinh','123',_binary '',3),('1851050010','hoangbuu','123',_binary '',1),('1851050105','thienphuc','123',_binary '',3),('1851050169','phanhuy1','$2a$10$9Sw4G8c/HmtBD87N5lRY5.kDhjUVDSo5Boj3ehrAFZM89g8SCGiF.',_binary '',2),('1dd56d41-06b4-4de9-9aa1-8a522c156866','tuyetngoc12','123',_binary '',2),('21520e40-a02b-408c-b396-2caf61d38325','badoithong','123',_binary '',2),('294e0097-82d7-46f0-9a2a-41cc72ac07dd','nobita','123',_binary '',2),('307fc8f6-0814-48ba-840e-2356552addc9','xucana123','123',_binary '',2),('385f4117-0752-4bfd-b325-331d6386113c','ntphuc','$2a$10$gnWKg5kmfzOxrF226q2W0OG.q26q9FRDSqcILJvQyd5PMTHviYDsG',_binary '',3),('3bda9f4f-1a09-45a7-aa82-54e2c02390ad','123','123',_binary '\0',1),('4023e5e5-2e07-4be2-8363-33919cbae9eb','nhoxanh123','1234',_binary '',3),('42fd4664-21f3-4901-8ed7-ffb27548391e','thanhdh','123',_binary '',1),('48a7ca08-532a-4be9-9979-26395cf2d8f8','trongnd123','123',_binary '',2),('49d6a71d-b602-42d2-a74b-e787bab9d597','v2v2v2','$2a$10$RBm5dkxn7WEQ3H4Cub73f.yYMLJ26HDJumFmOGL7Q5d0NtgCtpo1S',_binary '',1),('4acc8f5a-cfbf-4e70-8b6a-90b09446a065','vidu1','123',_binary '',2),('5ae9a432-0d93-4996-bdd4-49d37bc8dfaa','test','123',_binary '',2),('5aee0eec-9c0c-49da-a5b3-63f729d6b141','bidao','123',_binary '',2),('61470d85-159c-44bb-8e85-556ad6ce7b26','111','$2a$10$Jqn0tc6F07ELWwIY.Kcq1OoCwQIOMljIuuvyV5ZOYh7Am9qTzFM/i',_binary '',3),('74b46ffa-f87a-44cb-a841-9682c330744c','tester2','123456',_binary '',3),('7b8cdfad-7538-471e-84ea-8241939d9076','toilacongan113','1234',_binary '',2),('7e51e415-1d11-4bf9-8c48-a27194f9da25','doraemon123','123',_binary '',2),('7e85f21e-f0e8-4855-99bf-774c92336032','0305v5','$2a$10$uwD1CmkWe5TJ4vpYfvzAbOlxnRQeubejs1z3OMdmdbl16yZ8VSefK',_binary '',2),('7fc1dce1-ad05-4f96-b85f-5eb5d8ac3730','0305v3','$2a$10$p3oEJjIy8/6o747dV8Vkz.Xk5Rb9G.Sy3EryZ1uPr.8gFYzM34cxK',_binary '',2),('86bf2f24-5eff-45ed-bc91-5207dcf31e51','hutieunamvang','',_binary '',2),('870fe48e-7d4e-44ab-81f9-3a9334212336','shizuka123','123',_binary '',2),('8afecf5e-4c1a-44d1-be7b-3c168069c998','suneo','123',_binary '',2),('8beb69d3-f7f6-411a-880c-a376c160f660','0305v2','$2a$10$y8K5TfJLCO7DsoxQ8LqD5u7HeIrzuBT8ZQyZe9eV4WP9cE4il343m',_binary '',2),('91d6039a-2ba3-4254-8aa3-92a226c8a67f','0305v667','$2a$10$ZPH8mce.SGRCVk1ZSXf.eOgjVx9ZzV4ndLW69KDXGP.zVrNBxeC12',_binary '',2),('98d44248-7fe6-4ca8-a1ab-a7d1b20d3cc1','lol123','123',_binary '',2),('a5bf37da-aa43-47d8-a114-55dead327dda','baobinh1','123',_binary '',3),('a831455e-c0a6-4f89-b7e0-46c58ac6812a','tester3','123456',_binary '',3),('ad434e89-2dd8-493a-a1b7-29184f810c0f','ximuoi123','123',_binary '',2),('b8fafee7-ad34-4cdb-915a-b18a93d7e09b','behaicute','123',_binary '',2),('bcd6ab88-0a8f-4671-b454-9fe4c39a4a87','buu','123',_binary '',1),('bef47dae-4279-4433-bb22-47c89a41988d','deki','123',_binary '',2),('c60e825d-8ba3-4dd1-aab1-58be6f262351','dhthanh','$2a$10$t55vuyJT19p9m2PuVl9P8uZSveIDveQgyD40IglaKjoyktiO2cKXq',_binary '',2),('c6a03e67-9e55-4b85-8c6e-d0b46401c941','456','$2a$10$sAz7W4wTHRkZe.I2f1FhpO60DUi/DT7wjlXN.RC2W3wG823tblntu',_binary '\0',1),('d75380ea-c35e-47a8-ba42-694f25b0d137','banhtet','123',_binary '',2),('df08056b-e41e-4e10-ad90-ccb550c37e31','trongkhung','$2a$10$Np2qQf0LLMaNOJXE3tX21OET5N5EScPgB6NTDV/wpjV.guusYShTe',_binary '\0',3),('e199c1e5-4599-4c97-a268-cb46083f9b17','admin','123',_binary '\0',1),('f257ab84-7d86-431b-a3b6-5ae8c73018c6','chaolong','123',_binary '',2),('fa4444c6-bd2f-4e7c-81cd-4a6c7c9a94ce','comsuon','123',_binary '',2),('fb23ae17-5629-4715-bfb1-d4d88ad5f406','0305','$2a$10$wHu6a5zFFdrbBqBuiyYj/.O1r1NYKb7S1Kt2X1KjtvZ4AkL9AWL/a',_binary '',2);
 /*!40000 ALTER TABLE `taikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -407,10 +407,10 @@ DROP TABLE IF EXISTS `thuoc`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `thuoc` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `TenThuoc` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MoTa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `TenThuoc` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MoTa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `DonGia` decimal(10,0) NOT NULL,
-  `DonVi` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `DonVi` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -433,9 +433,9 @@ DROP TABLE IF EXISTS `toathuoc`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `toathuoc` (
-  `id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaBacSi` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `MaBenhNhan` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaBacSi` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `MaBenhNhan` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `NgayKeToa` datetime NOT NULL,
   `MaLoaiBenh` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -454,7 +454,7 @@ CREATE TABLE `toathuoc` (
 
 LOCK TABLES `toathuoc` WRITE;
 /*!40000 ALTER TABLE `toathuoc` DISABLE KEYS */;
-INSERT INTO `toathuoc` VALUES ('8b0e2395-701a-4d8a-891e-46934fd70e24','1851050169','2f59ee78-902d-4de5-9ce1-9fb474e41b5f','2021-05-07 00:00:00',2),('b474981b-69ee-4ea7-b35f-f565c4c89bfe','c60e825d-8ba3-4dd1-aab1-58be6f262351','2ffe6fac-c3a8-4873-b2e3-a598389b6b4c','2021-05-02 00:00:00',2),('cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050169','2f59ee78-902d-4de5-9ce1-9fb474e41b5f','2021-04-20 00:00:00',2),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','1dd56d41-06b4-4de9-9aa1-8a522c156866','487c07e9-762c-4b4b-9985-8103586ccd5c','2021-04-21 00:00:00',3);
+INSERT INTO `toathuoc` VALUES ('b474981b-69ee-4ea7-b35f-f565c4c89bfe','c60e825d-8ba3-4dd1-aab1-58be6f262351','2ffe6fac-c3a8-4873-b2e3-a598389b6b4c','2021-05-02 00:00:00',2),('cfc45e18-718a-402b-8cf2-b3769f6406bb','1851050169','2f59ee78-902d-4de5-9ce1-9fb474e41b5f','2021-04-20 00:00:00',2),('d05c4d4d-50d4-43d2-b085-6e8c8e2f2219','1dd56d41-06b4-4de9-9aa1-8a522c156866','487c07e9-762c-4b4b-9985-8103586ccd5c','2021-04-21 00:00:00',3);
 /*!40000 ALTER TABLE `toathuoc` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -860,4 +860,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-07 13:55:19
+-- Dump completed on 2021-05-09 10:56:24
