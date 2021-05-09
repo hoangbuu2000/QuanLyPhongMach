@@ -10,7 +10,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="header">
     <div class="header-left">
-        <a href="index-2.html" class="logo">
+        <a href="<c:url value="/admin" />" class="logo">
             <img src="<c:url value="/resources/assets/img/logo.png" />" width="35" height="35" alt=""> <span>Preclinic</span>
         </a>
     </div>

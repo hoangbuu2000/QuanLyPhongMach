@@ -125,7 +125,8 @@ public class PrescriptionController {
             try {
                 ToaThuoc toaThuoc = iToaThuocService.getById(ToaThuoc.class, id);
                 HoaDon hoaDon = iHoaDonService.getHoaDonTheoToaThuoc(id);
-                iHoaDonService.delete(hoaDon);
+                if (hoaDon != null)
+                    iHoaDonService.delete(hoaDon);
                 iToaThuocService.delete(toaThuoc);
                 return "redirect:/admin/prescription";
             }

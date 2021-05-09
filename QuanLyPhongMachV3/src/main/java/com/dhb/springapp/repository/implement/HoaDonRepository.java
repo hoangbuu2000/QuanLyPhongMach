@@ -32,9 +32,9 @@ public class HoaDonRepository extends GenericRepository<HoaDon> implements IHoaD
     @Override
     @Transactional(readOnly = true)
     public HoaDon getHoaDonTheoToaThuoc(String maToaThuoc) {
-        HoaDon result = (HoaDon) currentSession().createQuery("FROM HoaDon where toaThuoc.id = :id")
-                .setParameter("id", maToaThuoc).getResultList().get(0);
-        return result;
+        List<HoaDon> result = currentSession().createQuery("FROM HoaDon where toaThuoc.id = :id")
+                .setParameter("id", maToaThuoc).getResultList();
+        return result.isEmpty() ? null : result.get(0);
     }
 
     @Override

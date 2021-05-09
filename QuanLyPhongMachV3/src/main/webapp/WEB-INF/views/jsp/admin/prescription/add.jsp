@@ -165,7 +165,7 @@
                                         </select>
                                     </td>
                                     <td id="td_quantity1">
-                                        <input id="quantity1" name="quantity" onchange="tinhTien(this)" class="quantity" type="number" class="form-control" />
+                                        <input id="quantity1" name="quantity" onchange="tinhTien(this)" class="quantity" type="number" min="1" class="form-control" />
                                     </td>
                                     <td class="unit"></td>
                                     <td class="price"></td>
@@ -496,7 +496,7 @@
             '</select>' +
             '</td>' +
             '<td id="td_quantity'+ newStt +'">' +
-            '<input id="quantity'+ newStt +'" name="quantity" onchange="tinhTien(this)" class="quantity" type="number" class="form-control" />' +
+            '<input id="quantity'+ newStt +'" name="quantity" onchange="tinhTien(this)" class="quantity" type="number" min="1" class="form-control" />' +
             '</td>' +
             '<td class="unit"></td>' +
             '<td class="price"></td>' +

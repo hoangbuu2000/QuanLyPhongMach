@@ -13,10 +13,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.function.BiConsumer;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
 public class ToaThuocService extends GenericService<ToaThuoc> implements IToaThuocService {
@@ -78,16 +77,24 @@ public class ToaThuocService extends GenericService<ToaThuoc> implements IToaThu
 
     private List<ChiTietToaThuoc> setUpChiTietToaThuoc(AddPrescription addPrescription, ToaThuoc toaThuoc) {
         List<ChiTietToaThuoc> chiTietToaThuocList = new ArrayList<>();
+        AtomicBoolean duplicated = new AtomicBoolean(false);
         addPrescription.getMedicines().forEach((thuoc, soLuong) -> {
             Thuoc th = iThuocRepository.getById(Thuoc.class, thuoc.getId());
-            ChiTietToaThuoc chiTietToaThuoc = new ChiTietToaThuoc();
-            chiTietToaThuoc.setToaThuoc(toaThuoc);
-            chiTietToaThuoc.setThuoc(th);
-            chiTietToaThuoc.setDonGia(th.getDonGia());
-            chiTietToaThuoc.setSoLuong(soLuong);
-            chiTietToaThuoc.setThanhTien(th.getDonGia().multiply(new BigDecimal(soLuong)));
+            chiTietToaThuocList.stream().filter(ct -> ct.getToaThuoc().getId().equals(toaThuoc.getId()) &&
+                    ct.getThuoc().getId() == th.getId()).forEach(ct -> {
+                ct.setSoLuong(ct.getSoLuong() + soLuong);
+                duplicated.set(true);
+            });
+            if (!duplicated.get()) {
+                ChiTietToaThuoc chiTietToaThuoc = new ChiTietToaThuoc();
+                chiTietToaThuoc.setToaThuoc(toaThuoc);
+                chiTietToaThuoc.setThuoc(th);
+                chiTietToaThuoc.setDonGia(th.getDonGia());
+                chiTietToaThuoc.setSoLuong(soLuong);
+                chiTietToaThuoc.setThanhTien(th.getDonGia().multiply(new BigDecimal(soLuong)));
 
-            chiTietToaThuocList.add(chiTietToaThuoc);
+                chiTietToaThuocList.add(chiTietToaThuoc);
+            }
         });
 
         return chiTietToaThuocList;
